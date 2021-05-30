@@ -1,6 +1,6 @@
-import bkgImage from '../assets/images/sport_lover_image.png'
+import bkgImage from '../../assets/images/sport_lover_image.png'
 import { ImageBackground, SafeAreaView, StyleSheet, Text, View } from "react-native"
-import { Colors } from "../theme/colors";
+import { Colors } from "../../../theme/colors";
 import React, { useState } from "react";
 import { useDispatch } from 'react-redux';
 import Joi from 'react-native-joi';

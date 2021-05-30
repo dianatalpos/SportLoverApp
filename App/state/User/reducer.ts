@@ -1,11 +1,14 @@
-import {LOGIN, LOGOUT} from "./constants";
+import { LOGIN, LOGOUT } from "./constants";
 
 const INITIAL_STATE = {
   user: null,
   token: null,
 };
 
-const authReducer = (state = INITIAL_STATE, action) => {
+const authReducer = (
+  state = INITIAL_STATE,
+  action: { type: string; payload: any }
+) => {
   const { type, payload } = action;
 
   switch (type) {

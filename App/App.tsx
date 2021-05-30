@@ -2,14 +2,13 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import { StyleSheet, Text, View, ImageBackground, SafeAreaView, Linking } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import rootReducer from "./state/User/reducer";
 import logger from 'redux-logger';
-import LoginScreen from "./screens/LoginScreen";
-import SplashScreen from "./screens/SplashScreen";
+import LoginScreen from "./auth/containers/LoginScreen/LoginScreen";
+import SplashScreen from "./core/containers/SplashScreen/SplashScreen";
 
 
 const Stack = createStackNavigator();

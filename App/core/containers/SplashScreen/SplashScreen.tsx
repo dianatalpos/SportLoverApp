@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { ImageBackground, SafeAreaView, StyleSheet, Text, View } from "react-native";
-import bkgImage from '../assets/images/sport_lover_image.png';
+import bkgImage from '../../../assets/images/sport_lover_image.png';
 import { LinearGradient } from 'expo-linear-gradient';
-import { Colors } from "../theme/colors";
+import { Colors } from "../../../theme/colors";
 
 const SplashScreen = ({ navigation }) => {
     useEffect(() => {
@@ -18,7 +18,7 @@ const SplashScreen = ({ navigation }) => {
     return (
         <ImageBackground source={bkgImage} style={styles.bkgImage}>
             <View style={styles.view}>
-                <LinearGradient colors={['#a7f5a7', '#DDFF7c']} style={styles.gradient}>
+                <LinearGradient colors={['#a7f5a7', '#DDFF7c']}>
                 </LinearGradient>
             </View>
         </ImageBackground>
