@@ -7,8 +7,8 @@ import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import rootReducer from "./state/User/reducer";
 import logger from 'redux-logger';
-import LoginScreen from "./auth/containers/LoginScreen/LoginScreen";
-import SplashScreen from "./core/containers/SplashScreen/SplashScreen";
+import { LoginScreen } from './auth';
+import { SplashScreen } from './core';
 
 
 const Stack = createStackNavigator();
