@@ -20,9 +20,11 @@ export const performLogin = (credentials: AuthCredentials) => (dispatch) => {
     return authService
         .login(credentials)
         .then((response: any) => {
-            dispatch(successLogin(response.token));
+            dispatch(successLogin(response));
         })
-        .catch((err: Error) => dispatch(errorLogin(err.message)));
+        .catch((err: Error) => {
+            dispatch(errorLogin(err.message))
+        });
 };
 
 export const performRegister = (credentials: AuthCredentials) => (dispatch) => {

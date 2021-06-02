@@ -13,7 +13,6 @@ export default class AuthService {
 
     login(credentials: AuthCredentials): Promise<any> {
         const url = `${this.baseUrl}/login`;
-        console.log(url, 'URL')
         return this.apiService.performRequest(
             url,
             HttpMethod.POST,

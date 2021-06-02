@@ -17,6 +17,7 @@
     "expo-status-bar": "~1.0.4",
     "expo-updates": "~0.5.4",
     "formik": "^2.2.8",
+    "fs": "0.0.1-security",
     "native-base": "^2.15.2",
     "react": "16.13.1",
     "react-dom": "16.13.1",
