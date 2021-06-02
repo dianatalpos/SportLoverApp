@@ -7,7 +7,7 @@ import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import rootReducer from "./state/User/reducer";
 import logger from 'redux-logger';
-import { LoginScreen } from './auth';
+import { LoginScreen, RegisterScreen } from './auth';
 import { SplashScreen } from './core';
 
 
@@ -23,8 +23,8 @@ const App = () => {
         }}>
         <Stack.Screen name="Splash" component={SplashScreen} />
         <Stack.Screen name="Login" component={LoginScreen} />
-        {/* <Stack.Screen name="Register" component={RegisterScreen} />
-        <Stack.Screen name="Main" component={MainScreen} /> */}
+        <Stack.Screen name="Register" component={RegisterScreen} />
+        {/* <Stack.Screen name="Main" component={MainScreen} /> */}
       </Stack.Navigator>
     </NavigationContainer>
   )

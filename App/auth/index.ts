@@ -1,3 +1,3 @@
-import { LoginScreen } from "./containers";
+import { LoginScreen, RegisterScreen } from "./containers";
 
-export { LoginScreen };
+export { LoginScreen, RegisterScreen };

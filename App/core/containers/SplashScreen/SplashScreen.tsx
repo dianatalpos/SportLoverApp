@@ -1,14 +1,20 @@
 import React, { useEffect } from "react";
-import { ImageBackground, SafeAreaView, StyleSheet, Text, View } from "react-native";
-import bkgImage from '../../../assets/images/sport_lover_image.png';
-import { LinearGradient } from 'expo-linear-gradient';
+import {
+    ImageBackground,
+    SafeAreaView,
+    StyleSheet,
+    Text,
+    View,
+} from "react-native";
+import bkgImage from "../../../assets/images/sport_lover_image.png";
+import { LinearGradient } from "expo-linear-gradient";
 import { Colors } from "../../../theme/colors";
 
 const SplashScreen = ({ navigation }) => {
     useEffect(() => {
-        const unsubscribe = navigation.addListener('focus', () => {
+        const unsubscribe = navigation.addListener("focus", () => {
             setTimeout(() => {
-                navigation.navigate('Login');
+                navigation.navigate("Login");
             }, 2000);
         });
 
@@ -16,40 +22,30 @@ const SplashScreen = ({ navigation }) => {
     }, [navigation]);
 
     return (
-        <ImageBackground source={bkgImage} style={styles.bkgImage}>
+        <LinearGradient colors={[Colors.gradientPrimary, Colors.gradientSecondary]}>
             <View style={styles.view}>
-                <LinearGradient colors={['#a7f5a7', '#DDFF7c']}>
-                </LinearGradient>
+                <ImageBackground
+                    source={bkgImage}
+                    style={styles.bkgImage}
+                ></ImageBackground>
             </View>
-        </ImageBackground>
+        </LinearGradient>
     );
 };
 
 const styles = StyleSheet.create({
     bkgImage: {
-        width: '100%',
-        height: '100%'
-    },
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'flex-start',
-        width: '100%',
-        paddingTop: 250,
-    },
-    text: {
-        color: Colors.colorWhite,
-        fontSize: 60,
-        fontWeight: '700',
-        textAlign: 'center',
-
+        width: 400,
+        height: 250,
     },
     view: {
-        width: '100%',
-        height: '100%',
-        display: 'flex',
-        justifyContent: 'center'
-    }
+        height: "100%",
+        width: "100%",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: Colors.secondary,
+    },
 });
 
 export default SplashScreen;
