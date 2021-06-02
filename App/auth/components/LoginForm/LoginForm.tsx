@@ -33,6 +33,7 @@ const LoginForm = ({ onLogin, redirectTo }: any) => {
                             style={styles.input}
                             placeholder="Email"
                             value={values.email}
+                            keyboardType={"email-address"}
                             onChangeText={handleChange("email")}
                         />
                         {errors.email && touched.email ? (
@@ -42,6 +43,7 @@ const LoginForm = ({ onLogin, redirectTo }: any) => {
                             style={styles.input}
                             placeholder="Password"
                             value={values.password}
+
                             secureTextEntry={true}
                             onChangeText={handleChange("password")}
                         />

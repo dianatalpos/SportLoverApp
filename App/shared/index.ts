@@ -1,3 +1,4 @@
-export * from "./components";
-export * from "./containers";
+import { Action } from "./types";
+
+export { Action };
 export * from "./services";

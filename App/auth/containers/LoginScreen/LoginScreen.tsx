@@ -1,20 +1,12 @@
 import React from "react";
 import { LoginForm } from "../../components";
 import { AuthCredentials } from "../../types";
-import AuthService from "../../services/auth.service";
+import { performLogin } from "../../actions";
+import { connect } from "react-redux";
 
-const LoginScreen = ({ navigation }) => {
+const LoginScreen = ({ navigation, state, performLogin }) => {
     const onLogin = (credentials: AuthCredentials) => {
-        const authService = new AuthService();
-        const authCreds = new AuthCredentials();
-        authCreds.email = credentials.email.toLowerCase().trim();
-        authCreds.password = credentials.password;
-        authService
-            .login(credentials)
-            .then((response) => {
-                console.log(response, "succ");
-            })
-            .catch((err: Error) => console.log(err.message, "err"));
+        performLogin(credentials);
     };
 
     const redirectTo = () => {
@@ -24,4 +16,8 @@ const LoginScreen = ({ navigation }) => {
     return <LoginForm onLogin={onLogin} redirectTo={redirectTo}></LoginForm>;
 };
 
-export default LoginScreen;
+const mapStateToProps = (state) => ({
+    state: state.auth,
+});
+
+export default connect(mapStateToProps, { performLogin })(LoginScreen);
