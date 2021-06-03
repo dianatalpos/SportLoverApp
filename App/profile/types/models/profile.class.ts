@@ -1,5 +1,5 @@
 export default class Profile {
-    sports: string[];
+    activities: string[];
     firstName: string;
     lastName: string;
     id: string;

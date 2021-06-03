@@ -1,3 +1,5 @@
 import ProfileDetails from "./ProfileDetails";
+import ProfileActivitiesList from "./ProfileActivitiesList";
+import ProfileActivityItem from "./ProfileActivityItem";
 
-export { ProfileDetails };
+export { ProfileDetails, ProfileActivitiesList, ProfileActivityItem };

@@ -11,22 +11,39 @@ import { ProfileReducer, ProfileScreen } from "./profile";
 const Stack = createStackNavigator();
 const reducers = combineReducers({
     auth: AuthReducer,
-    profile: ProfileReducer
+    profile: ProfileReducer,
 });
 const store = createStore(reducers, applyMiddleware(thunk));
+
+const SplashScreenOptions = {
+    gestureEnabled: false,
+    headerShown: false,
+};
+
+const ProfileScreenOptions = {
+    headerLeft: null,
+};
 
 const App = () => {
     return (
         <NavigationContainer>
             <Stack.Navigator
                 screenOptions={{
-                    headerShown: false,
+                    headerShown: true,
                 }}
             >
-                <Stack.Screen name="Splash" component={SplashScreen} />
+                <Stack.Screen
+                    options={SplashScreenOptions}
+                    name="Splash"
+                    component={SplashScreen}
+                />
                 <Stack.Screen name="Login" component={LoginScreen} />
                 <Stack.Screen name="Register" component={RegisterScreen} />
-                <Stack.Screen name="Profile" component={ProfileScreen} />
+                <Stack.Screen
+                    options={ProfileScreenOptions}
+                    name="Profile"
+                    component={ProfileScreen}
+                />
                 {/* <Stack.Screen name="Main" component={MainScreen} /> */}
             </Stack.Navigator>
         </NavigationContainer>
