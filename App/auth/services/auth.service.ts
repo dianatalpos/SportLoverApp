@@ -1,17 +1,20 @@
 import { ApiService } from "../../core/services";
-import { API_URL } from "@env";
+import { API_URL, API_PROTOCOL } from "@env";
 import { HttpMethod } from "../../core/types/enums";
 import { AuthCredentials } from "../types";
 
 export default class AuthService {
     private apiService: ApiService;
+    private baseUrl = `users`;
 
     constructor() {
         this.apiService = new ApiService();
     }
 
     login(credentials: AuthCredentials): Promise<any> {
-        const url = `${API_URL}/login`;
+        const url = `${this.baseUrl}/login`;
+        console.log(url, 'AUTH URL');
+        
         return this.apiService.performRequest(
             url,
             HttpMethod.POST,
@@ -21,7 +24,7 @@ export default class AuthService {
     }
 
     register(credentials: AuthCredentials): Promise<any> {
-        const url = `${API_URL}/register`;
+        const url = `${this.baseUrl}/register`;
         return this.apiService.performRequest(
             url,
             HttpMethod.POST,

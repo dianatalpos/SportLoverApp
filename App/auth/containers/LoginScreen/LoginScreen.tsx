@@ -1,33 +1,23 @@
-import bkgImage from "../../../assets/images/sport_lover_image.png";
-import { ImageBackground, StyleSheet } from "react-native";
 import React from "react";
 import { LoginForm } from "../../components";
 import { AuthCredentials } from "../../types";
-import AuthService from "../../services/auth.service";
+import { performLogin } from "../../actions";
+import { connect } from "react-redux";
 
-const LoginScreen = ({ navigation }) => {
+const LoginScreen = ({ navigation, state, performLogin }) => {
     const onLogin = (credentials: AuthCredentials) => {
-        console.log(credentials, "credentials");
-        const authService = new AuthService();
-        authService.login(credentials);
+        performLogin(credentials);
     };
 
-    const toRegister = () => {
+    const redirectTo = () => {
         navigation.navigate("Register");
     };
 
-    return (
-        <ImageBackground source={bkgImage} style={styles.bkgImage}>
-            <LoginForm onLogin={onLogin} toRegister={toRegister}></LoginForm>
-        </ImageBackground>
-    );
+    return <LoginForm onLogin={onLogin} redirectTo={redirectTo}></LoginForm>;
 };
 
-const styles = StyleSheet.create({
-    bkgImage: {
-        width: "100%",
-        height: "100%",
-    },
+const mapStateToProps = (state) => ({
+    state: state.auth,
 });
 
-export default LoginScreen;
+export default connect(mapStateToProps, { performLogin })(LoginScreen);

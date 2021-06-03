@@ -1,5 +1,5 @@
 import { HttpMethod } from "../types/enums";
-import { API_URL } from "@env";
+import { API_URL, API_PROTOCOL } from "@env";
 
 export default class ApiService {
     performRequest(
@@ -10,10 +10,11 @@ export default class ApiService {
         contentType = "application/json",
         accept = "application/json"
     ) {
-        const requestUrl = `${API_URL}/${url}`;
+        const requestUrl = `${API_PROTOCOL}://${API_URL}/${url}`;
         const token = "token";
         const headers: any = {
             "Content-Type": contentType,
+            "Access-Control-Allow-Origin": "*",
             Accept: accept,
         };
         const options: any = {

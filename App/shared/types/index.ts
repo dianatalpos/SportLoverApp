@@ -1,4 +1,2 @@
-import * from "./dtos";
-import * from "./models";
-import * from "./interfaces";
-import * from "./enums";
+import { Action } from "./models";
+export { Action };

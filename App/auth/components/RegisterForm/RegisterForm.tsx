@@ -1,11 +1,11 @@
-import React from "react";
-import { Colors } from "../../../theme/colors";
-import { StyleSheet, View, TextInput, Text } from "react-native";
-import { TouchableHighlight } from "react-native-gesture-handler";
 import { Formik } from "formik";
+import React from "react";
+import { TextInput, TouchableHighlight } from "react-native-gesture-handler";
 import * as Yup from "yup";
+import { Colors } from "../../../theme/colors";
+import { StyleSheet, Text, View } from "react-native";
 
-const LoginForm = ({ onLogin, redirectTo }: any) => {
+const RegisterForm = ({ onRegister, redirectTo }) => {
     const schema = Yup.object().shape({
         email: Yup.string()
             .required("Email is required!")
@@ -19,11 +19,11 @@ const LoginForm = ({ onLogin, redirectTo }: any) => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>Sign In</Text>
+            <Text style={styles.text}>Sign Up</Text>
             <Formik
                 initialValues={{ email: "", password: "" }}
                 onSubmit={(values) => {
-                    onLogin(values);
+                    onRegister(values);
                 }}
                 validationSchema={schema}
             >
@@ -33,7 +33,6 @@ const LoginForm = ({ onLogin, redirectTo }: any) => {
                             style={styles.input}
                             placeholder="Email"
                             value={values.email}
-                            keyboardType={"email-address"}
                             onChangeText={handleChange("email")}
                         />
                         {errors.email && touched.email ? (
@@ -43,7 +42,6 @@ const LoginForm = ({ onLogin, redirectTo }: any) => {
                             style={styles.input}
                             placeholder="Password"
                             value={values.password}
-
                             secureTextEntry={true}
                             onChangeText={handleChange("password")}
                         />
@@ -51,24 +49,21 @@ const LoginForm = ({ onLogin, redirectTo }: any) => {
                             <Text style={styles.error}>{errors.password}</Text>
                         ) : null}
                         <TouchableHighlight onPress={handleSubmit}>
-                            <Text style={styles.button}>Sign In</Text>
+                            <Text style={styles.button}>Sign Up</Text>
                         </TouchableHighlight>
                     </View>
                 )}
             </Formik>
             <Text>
-                Don't have an account?{" "}
-                <Text style={styles.link} onPress={redirectTo}>
-                    Sign up
-                </Text>
+                Do you have already an account?
+                <Text style={styles.link} onPress={redirectTo}>Sign In</Text>
             </Text>
         </View>
     );
 };
 
-
-LoginForm.defaultProps = {
-    onLogin: () => {},
+RegisterForm.defaultProps = {
+    onRegister: () => {},
     redirectTo: () => {},
 };
 
@@ -94,7 +89,7 @@ const styles = StyleSheet.create({
     },
     error: {
         color: Colors.error,
-        marginLeft: 20
+        marginLeft: 20,
     },
     input: {
         width: 250,
@@ -105,17 +100,6 @@ const styles = StyleSheet.create({
         borderColor: Colors.gradientPrimary,
         borderWidth: 1,
         borderRadius: 50,
-    },
-    forgetPassword: {
-        textAlign: "left",
-        alignSelf: "stretch",
-        paddingLeft: 45,
-        fontFamily: "Georgia",
-        marginTop: 10,
-    },
-    background: {
-        width: "100%",
-        height: "100%",
     },
     link: {
         marginTop: 40,
@@ -128,8 +112,8 @@ const styles = StyleSheet.create({
         color: "#fff",
         paddingVertical: 10,
         paddingHorizontal: 40,
-        margin: 30
+        margin: 30,
     },
 });
 
-export default LoginForm;
+export default RegisterForm;
