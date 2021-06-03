@@ -10,7 +10,7 @@ export default class ApiService {
         contentType = "application/json",
         accept = "application/json"
     ) {
-        const requestUrl = url;
+        const requestUrl = `${API_PROTOCOL}://${API_URL}/${url}`;
         const token = "token";
         const headers: any = {
             "Content-Type": contentType,

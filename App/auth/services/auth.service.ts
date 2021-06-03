@@ -5,7 +5,7 @@ import { AuthCredentials } from "../types";
 
 export default class AuthService {
     private apiService: ApiService;
-    private baseUrl = `${API_PROTOCOL}://${API_URL}/users`;
+    private baseUrl = `users`;
 
     constructor() {
         this.apiService = new ApiService();
@@ -13,6 +13,8 @@ export default class AuthService {
 
     login(credentials: AuthCredentials): Promise<any> {
         const url = `${this.baseUrl}/login`;
+        console.log(url, 'AUTH URL');
+        
         return this.apiService.performRequest(
             url,
             HttpMethod.POST,
