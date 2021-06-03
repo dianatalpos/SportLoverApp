@@ -1,16 +1,27 @@
-import React from "react";
-import { Text } from "react-native";
+import React, { useEffect } from "react";
+import { Text, View } from "react-native";
+import { connect } from "react-redux";
+import { getProfile } from "../../actions";
+import { ProfileDetails } from "../../components";
 
-const initialState = {
-    profile: {},
+const ProfileScreen = ({ state, getProfile }) => {
+    const { profile } = state;
+
+    useEffect(() => {
+        const userId = "12";
+        const profileId = "12";
+        getProfile(userId, profileId);
+    }, []);
+
+    return (
+        <View>
+            <ProfileDetails profile={profile}></ProfileDetails>
+        </View>
+    );
 };
-export default class ProfileScreen extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = initialState;
-    }
 
-    render() {
-        return <Text>Profile</Text>;
-    }
-}
+const mapStateToProps = (state) => ({
+    state: state.profile,
+});
+
+export default connect(mapStateToProps, { getProfile })(ProfileScreen);

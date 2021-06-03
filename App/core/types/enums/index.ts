@@ -1,3 +1,3 @@
 import { HttpMethod } from "./http-method.enum";
-
-export { HttpMethod };
+import { StorageKeys } from "./storage-keys.enum"
+export { HttpMethod, StorageKeys };

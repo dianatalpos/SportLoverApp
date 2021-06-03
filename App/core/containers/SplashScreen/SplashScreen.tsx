@@ -1,20 +1,27 @@
 import React, { useEffect } from "react";
 import {
     ImageBackground,
-    SafeAreaView,
     StyleSheet,
-    Text,
     View,
 } from "react-native";
 import bkgImage from "../../../assets/images/sport_lover_image.png";
 import { LinearGradient } from "expo-linear-gradient";
 import { Colors } from "../../../theme/colors";
+import { StorageKeys } from "../../types";
+import { StorageService } from "../../services";
 
 const SplashScreen = ({ navigation }) => {
     useEffect(() => {
         const unsubscribe = navigation.addListener("focus", () => {
             setTimeout(() => {
-                navigation.navigate("Login");
+                const storage = new StorageService();
+                const token = storage.getItem(StorageKeys.TOKEN);
+
+                if (token) {
+                    navigation.navigate("Profile");
+                } else {
+                    navigation.navigate("Login");
+                }
             }, 2000);
         });
 
@@ -22,7 +29,9 @@ const SplashScreen = ({ navigation }) => {
     }, [navigation]);
 
     return (
-        <LinearGradient colors={[Colors.gradientPrimary, Colors.gradientSecondary]}>
+        <LinearGradient
+            colors={[Colors.gradientPrimary, Colors.gradientSecondary]}
+        >
             <View style={styles.view}>
                 <ImageBackground
                     source={bkgImage}
@@ -44,7 +53,6 @@ const styles = StyleSheet.create({
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: Colors.secondary,
     },
 });
 

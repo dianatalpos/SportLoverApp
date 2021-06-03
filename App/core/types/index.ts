@@ -1,3 +1,3 @@
-import * as fromEnums from "./enums";
+import { StorageKeys, HttpMethod} from "./enums";
 
-export { fromEnums };
+export { StorageKeys, HttpMethod };

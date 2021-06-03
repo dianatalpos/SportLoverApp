@@ -6,7 +6,9 @@ import { connect } from "react-redux";
 
 const LoginScreen = ({ navigation, state, performLogin }) => {
     const onLogin = (credentials: AuthCredentials) => {
-        performLogin(credentials);
+        performLogin(credentials)
+            .then(() => navigation.navigate("Profile"))
+            .catch((err: Error) => console.log(err.message, "Login error"));
     };
 
     const redirectTo = () => {

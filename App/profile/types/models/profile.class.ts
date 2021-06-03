@@ -4,4 +4,5 @@ export default class Profile {
     lastName: string;
     id: string;
     birthDay: Date;
+    avatar: string;
 }

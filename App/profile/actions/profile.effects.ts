@@ -2,17 +2,16 @@ import { Action } from "../../shared";
 import { ProfileService } from "../services";
 import { Profile } from "../types";
 import {
-    PROFILE_FETCH,
     PROFILE_FETCH_ERROR,
     PROFILE_IS_FETCHED,
     PROFILE_IS_FETCHING,
 } from "./types";
 
-export const getProfile = (id: string) => (dispatch) => {
+export const getProfile = (userId: string, id: string) => (dispatch) => {
     dispatch(profileFetching());
     const profileService = new ProfileService();
     return profileService
-        .get(id)
+        .get(userId, id)
         .then((response: any) => {
             dispatch(profileFetched(response.profile));
         })

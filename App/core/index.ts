@@ -1,6 +1,12 @@
 import { SplashScreen } from "./containers";
 import * as fromComponents from "./components";
-import * as fromServices from "./services";
-import * as fromTypes from "./types";
+import { ApiService, StorageService } from "./services";
+import { StorageKeys } from "./types";
 
-export { SplashScreen, fromComponents, fromServices, fromTypes };
+export {
+    SplashScreen,
+    fromComponents,
+    ApiService,
+    StorageService,
+    StorageKeys,
+};
