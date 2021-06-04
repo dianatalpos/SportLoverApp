@@ -4,7 +4,6 @@ import { AuthCredentials } from "../types";
 
 export default class AuthService {
     private apiService: ApiService;
-    private baseUrl = `users`;
     private storage: StorageService;
     constructor() {
         this.apiService = new ApiService();
@@ -12,7 +11,7 @@ export default class AuthService {
     }
 
     login(credentials: AuthCredentials): Promise<any> {
-        const url = `${this.baseUrl}/login`;
+        const url = `/login`;
 
         return this.apiService.performRequest(
             url,
@@ -23,7 +22,7 @@ export default class AuthService {
     }
 
     register(credentials: AuthCredentials): Promise<any> {
-        const url = `${this.baseUrl}/register`;
+        const url = `/register`;
         return this.apiService.performRequest(
             url,
             HttpMethod.POST,
