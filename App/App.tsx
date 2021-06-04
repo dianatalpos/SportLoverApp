@@ -6,7 +6,7 @@ import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 import { AuthReducer, LoginScreen, RegisterScreen } from "./auth";
 import { SplashScreen } from "./core";
-import { ProfileReducer, ProfileScreen } from "./profile";
+import { ProfileReducer } from "./profile";
 import { MainScreen } from "./core/containers";
 
 const Stack = createStackNavigator();
@@ -37,13 +37,6 @@ const App = () => {
                     options={SplashScreenOptions}
                     name="Splash"
                     component={SplashScreen}
-                />
-                <Stack.Screen name="Login" component={LoginScreen} />
-                <Stack.Screen name="Register" component={RegisterScreen} />
-                <Stack.Screen
-                    options={ProfileScreenOptions}
-                    name="Profile"
-                    component={ProfileScreen}
                 />
                 <Stack.Screen name="Main" component={MainScreen} />
             </Stack.Navigator>

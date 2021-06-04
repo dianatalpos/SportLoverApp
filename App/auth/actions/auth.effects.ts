@@ -1,6 +1,6 @@
 import { StorageKeys, StorageService } from "../../core";
 import { Action } from "../../shared";
-import AuthService from "../services/auth.service";
+import AuthService from "../services";
 import { AuthCredentials } from "../types";
 import {
     LOGIN,
@@ -9,6 +9,7 @@ import {
     REGISTER,
     REGISTER_ERROR,
     REGISTER_SUCCESS,
+    LOGOUT,
 } from "./types";
 
 export const performLogin = (credentials: AuthCredentials) => (dispatch) => {
@@ -25,7 +26,7 @@ export const performLogin = (credentials: AuthCredentials) => (dispatch) => {
             storage.setItem(StorageKeys.TOKEN, response.token);
         })
         .catch((err: Error) => {
-            dispatch(errorLogin(err.message))
+            dispatch(errorLogin(err.message));
         });
 };
 
@@ -43,6 +44,18 @@ export const performRegister = (credentials: AuthCredentials) => (dispatch) => {
             storage.setItem(StorageKeys.TOKEN, response.token);
         })
         .catch((err: Error) => dispatch(errorRegister(err.message)));
+};
+
+export const performLogout = () => (dispatch) => {
+    dispatch(logout());
+    const authService = new AuthService();
+    authService.logout();
+};
+
+const logout = (): Action => {
+    return {
+        type: LOGOUT,
+    };
 };
 
 const startLogin = (): Action => {

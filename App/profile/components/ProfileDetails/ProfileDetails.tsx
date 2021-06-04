@@ -1,73 +1,36 @@
 import React from "react";
-import { StyleSheet, Text, Image, View, Button } from "react-native";
-import {
-    TouchableHighlight,
-    TouchableOpacity,
-} from "react-native-gesture-handler";
-import moment from "moment";
-import { Profile } from "../../types";
+import { StyleSheet, Text, View } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
 import { Colors } from "../../../theme/colors";
-import { NavigationRoute } from "react-navigation";
+import ProfilePersonalDetails from "../ProfilePersonalDetails";
 
-type ProfileType = {
-    profile: Profile;
-    navigation: NavigationRoute
-};
-const ProfileDetails = ({ profile, navigation }: ProfileType) => {
-    const onAvatarPress = () => {
-        console.log("avatar press");
-    };
-
-    const onAddFriend = () => {
-        console.log("add friend");
-    };
-
-    const onLogout = () => {
-        console.log("logout");
-    }
-
-    const onEdit = () => {
-        console.log("on edit");
-    }
-
-    const yearsDisplay = moment().diff(profile.birthDay, "years");
+const ProfileDetails = (props) => {
+    const { profile, onLogout, onEdit, onAddFriend, onAvatar } = props;
     return (
         <View style={styles.view}>
-            <View style={styles.detailsView}>
-                <View style={styles.profileContainer}>
-                    <TouchableOpacity onPress={onAvatarPress}>
-                        <Image
-                            source={{ uri: profile.avatar }}
-                            style={styles.avatar}
-                        ></Image>
-                    </TouchableOpacity>
-                    <Text
-                        style={styles.profileName}
-                    >{`${profile.firstName} ${profile.lastName}`}</Text>
-                    <Text>{`${yearsDisplay} yrs`}</Text>
-                </View>
-                <View style={styles.detailContainer}>
-                    <Text style={styles.detailValue}>0</Text>
-                    <Text style={styles.detail}>Friends</Text>
-                </View>
+            <ProfilePersonalDetails
+                profile={profile}
+                onAvatar={onAvatar}
+            ></ProfilePersonalDetails>
+            <Text numberOfLines={3} style={styles.description}>
+                {profile.description}
+            </Text>
+            <View>
+                <TouchableOpacity
+                    style={styles.actionBtn}
+                    onPress={onAddFriend}
+                >
+                    <Text style={styles.addFriend}>Add Friend</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={styles.actionBtn} onPress={onEdit}>
+                    <Text style={styles.addFriend}>Edit Profile</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={styles.actionBtn} onPress={onLogout}>
+                    <Text style={styles.addFriend}>Logout</Text>
+                </TouchableOpacity>
             </View>
-            <TouchableOpacity>
-                <Text onPress={onAddFriend} style={styles.addFriend}>
-                    Add Friend
-                </Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity>
-                <Text onPress={onEdit} style={styles.addFriend}>
-                    Edit Profile
-                </Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity>
-                <Text onPress={onLogout} style={styles.addFriend}>
-                    Logout
-                </Text>
-            </TouchableOpacity>
         </View>
     );
 };
@@ -79,34 +42,16 @@ const styles = StyleSheet.create({
         justifyContent: "flex-start",
         alignItems: "center",
     },
-    profileContainer: {
-        alignItems: "center",
+    actionBtn: {
+        marginVertical: 10,
     },
-    profileName: {
-        fontSize: 26,
+    description: {
+        marginVertical: 20,
+        marginHorizontal: 10,
+        color: "#bbb",
         fontStyle: "italic",
-        fontWeight: "bold",
-        margin: 10,
+        maxHeight: 100,
     },
-    detailsView: {
-        width: "100%",
-        flexDirection: "row",
-        justifyContent: "space-evenly",
-        alignItems: "center",
-    },
-    detailContainer: {
-        alignItems: "center",
-    },
-    detail: {
-        fontSize: 16,
-    },
-    detailValue: {
-        color: Colors.gradientPrimary,
-        fontSize: 30,
-        fontWeight: "bold",
-        fontStyle: "italic",
-    },
-    avatar: { width: 150, height: 150, borderRadius: 100 },
     addFriend: {
         backgroundColor: Colors.colorTextBlack,
         color: "#fff",
@@ -124,6 +69,7 @@ ProfileDetails.defaultProps = {
         lastName: "N/A",
         sports: [],
         id: "asddd",
+        description: "",
     },
 };
 

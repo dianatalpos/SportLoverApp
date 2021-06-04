@@ -1,20 +1,19 @@
-import { ApiService } from "../../core/services";
-import { API_URL, API_PROTOCOL } from "@env";
-import { HttpMethod } from "../../core/types/enums";
+import { ApiService, StorageService } from "../../core/services";
+import { HttpMethod, StorageKeys } from "../../core/types/enums";
 import { AuthCredentials } from "../types";
 
 export default class AuthService {
     private apiService: ApiService;
     private baseUrl = `users`;
-
+    private storage: StorageService;
     constructor() {
         this.apiService = new ApiService();
+        this.storage = new StorageService();
     }
 
     login(credentials: AuthCredentials): Promise<any> {
         const url = `${this.baseUrl}/login`;
-        console.log(url, 'AUTH URL');
-        
+
         return this.apiService.performRequest(
             url,
             HttpMethod.POST,
@@ -31,5 +30,9 @@ export default class AuthService {
             credentials,
             false
         );
+    }
+
+    logout(): void {
+        this.storage.removeItem(StorageKeys.TOKEN);
     }
 }

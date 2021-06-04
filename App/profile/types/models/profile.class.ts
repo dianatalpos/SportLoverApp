@@ -5,4 +5,5 @@ export default class Profile {
     id: string;
     birthDay: Date;
     avatar: string;
+    description: string;
 }

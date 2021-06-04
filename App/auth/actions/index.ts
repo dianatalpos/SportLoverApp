@@ -1,3 +1,3 @@
-import { performLogin, performRegister } from "./auth.effects";
+import { performLogin, performRegister, performLogout } from "./auth.effects";
 
-export { performLogin, performRegister };
+export { performLogin, performRegister, performLogout };

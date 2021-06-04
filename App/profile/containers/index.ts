@@ -1,4 +1,5 @@
 import ProfileScreen from "./ProfileScreen";
-import EditProfileScreen from "./EditProfileScreen"
+import EditProfileScreen from "./EditProfileScreen";
+import ProfileTab from "./ProfileTab";
 
-export { ProfileScreen, EditProfileScreen };
+export { ProfileTab };

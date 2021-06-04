@@ -1,9 +1,12 @@
 import React from "react";
-import { createStackNavigator, HeaderBackButton } from "@react-navigation/stack";
+import {
+    createStackNavigator,
+    HeaderBackButton,
+} from "@react-navigation/stack";
 import { Button } from "react-native";
-import { ProfileScreen, EditProfileScreen } from "..";
 import { Colors } from "../../../theme/colors";
-
+import EditProfileScreen from "../EditProfileScreen";
+import ProfileScreen from "../ProfileScreen";
 
 const Stack = createStackNavigator();
 
@@ -13,16 +16,22 @@ const ProfileTab = () => {
             <Stack.Screen
                 name="Profile"
                 component={ProfileScreen}
-                options={{ header: () => null }
-                }
+                options={{ header: () => null }}
             />
-            < Stack.Screen
+            <Stack.Screen
                 name="EditProfile"
                 component={EditProfileScreen}
-                options={{ headerShown: true, headerTitle: "Edit Profile Info", headerBackTitle: 'Go Back', headerBackTitleStyle: { color: Colors.colorGrey }, headerTintColor: Colors.colorGrey, headerTransparent: true }}
+                options={{
+                    headerShown: true,
+                    headerTitle: "Edit Profile Info",
+                    headerBackTitle: "Go Back",
+                    headerBackTitleStyle: { color: Colors.colorGrey },
+                    headerTintColor: Colors.colorGrey,
+                    headerTransparent: true,
+                }}
             />
         </Stack.Navigator>
-    )
+    );
 };
 
 export default ProfileTab;

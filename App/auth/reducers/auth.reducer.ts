@@ -2,6 +2,7 @@ import {
     LOGIN,
     LOGIN_ERROR,
     LOGIN_SUCCESS,
+    LOGOUT,
     REGISTER,
     REGISTER_ERROR,
     REGISTER_SUCCESS,
@@ -42,6 +43,12 @@ const AuthReducer = (
                 hasError: true,
                 errorMessage: payload.message,
             };
+        case LOGOUT: {
+            return {
+                ...state,
+                ...INITIAL_STATE,
+            };
+        }
         default:
             return state;
     }

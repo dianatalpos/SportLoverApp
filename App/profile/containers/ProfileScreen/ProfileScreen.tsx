@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
-import { Text, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { connect } from "react-redux";
 import { getProfile } from "../../actions";
+import { performLogout } from "../../../auth";
 import { ProfileActivitiesList, ProfileDetails } from "../../components";
 import { Profile } from "../../types";
 
-const ProfileScreen = ({ navigation, state, getProfile }) => {
+const ProfileScreen = ({ navigation, state, getProfile, performLogout }) => {
     const { profile } = state;
 
     const mockProfile: Profile = {
@@ -17,6 +17,8 @@ const ProfileScreen = ({ navigation, state, getProfile }) => {
         lastName: "Lst",
         activities: ["Basket", "Polo"],
         id: "asddd",
+        description:
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab eum placeat corporis nam delectus quis, dicta dolor atque sequi, ipsa fuga magni eveniet reiciendis labore quas natus. Eius, assumenda quo?",
     };
 
     useEffect(() => {
@@ -25,10 +27,32 @@ const ProfileScreen = ({ navigation, state, getProfile }) => {
         getProfile(userId, profileId);
     }, []);
 
+    const onAddFriend = () => {};
+
+    const onEditProfile = () => {
+        console.log("upd friend");
+        console.log(navigation);
+        navigation.push('EditProfile');
+    };
+
+    const onAvatarChange = () => {};
+
+    const onLogout = () => {
+        performLogout();
+        console.log("logout");
+        navigation.replace("Main");
+    };
+
     return (
         <ScrollView style={{ backgroundColor: "#fff" }}>
             <SafeAreaView style={{ alignItems: "center" }}>
-                <ProfileDetails profile={mockProfile}></ProfileDetails>
+                <ProfileDetails
+                    profile={mockProfile}
+                    onAddFriend={onAddFriend}
+                    onEdit={onEditProfile}
+                    onAvatar={onAvatarChange}
+                    onLogout={onLogout}
+                ></ProfileDetails>
                 <ProfileActivitiesList
                     activities={mockProfile.activities}
                 ></ProfileActivitiesList>
@@ -41,4 +65,8 @@ const mapStateToProps = (state) => ({
     state: state.profile,
 });
 
-export default connect(mapStateToProps, { getProfile })(ProfileScreen);
+const mapDispatchToProps = () => ({
+    getProfile,
+    performLogout,
+});
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileScreen);

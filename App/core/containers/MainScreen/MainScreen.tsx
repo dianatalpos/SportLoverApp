@@ -3,11 +3,10 @@ import {
     StyleSheet,
 } from "react-native";
 import { Colors } from "../../../theme/colors";
-import { ProfileScreen } from "../../../profile"
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { LocationScreen } from "../../../location";
-import ProfileTab from "../../../profile/containers/ProfileTab";
+import { ProfileTab } from "../../../profile/containers";
 
 const Tab = createBottomTabNavigator();
 

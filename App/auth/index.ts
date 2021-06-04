@@ -1,3 +1,4 @@
 import { LoginScreen, RegisterScreen } from "./containers";
 import AuthReducer from "./reducers";
-export { LoginScreen, RegisterScreen, AuthReducer };
+import { performLogout } from "./actions"
+export { LoginScreen, RegisterScreen, AuthReducer, performLogout };

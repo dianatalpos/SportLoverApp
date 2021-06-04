@@ -2,6 +2,7 @@ import React from "react";
 import { LoginForm } from "../../components";
 import { AuthCredentials } from "../../types";
 import { performLogin } from "../../actions";
+import { KeyboardAvoidingView, Platform } from "react-native"
 import { connect } from "react-redux";
 
 const LoginScreen = ({ navigation, state, performLogin }) => {
@@ -15,7 +16,11 @@ const LoginScreen = ({ navigation, state, performLogin }) => {
         navigation.navigate("Register");
     };
 
-    return <LoginForm onLogin={onLogin} redirectTo={redirectTo}></LoginForm>;
+    return <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+    >
+        <LoginForm onLogin={onLogin} redirectTo={redirectTo}></LoginForm>
+    </KeyboardAvoidingView>;
 };
 
 const mapStateToProps = (state) => ({

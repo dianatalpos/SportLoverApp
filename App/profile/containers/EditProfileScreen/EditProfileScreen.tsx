@@ -3,9 +3,11 @@ import { Text, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { connect } from "react-redux";
-import { getProfile } from "../../actions";
+import { getProfile, editProfile } from "../../actions";
+import { ProfileEditForm } from "../../components";
+import { Profile } from "../../types";
 
-const ProfileScreen = ({ state, getProfile }) => {
+const EditProfileScreen = ({ state, getProfile, editProfile }) => {
     const { profile } = state;
 
     useEffect(() => {
@@ -14,10 +16,14 @@ const ProfileScreen = ({ state, getProfile }) => {
         getProfile(userId, profileId);
     }, []);
 
+    const onEdit = (profile: Profile) => {
+        editProfile(profile);
+    };
+
     return (
         <ScrollView style={{ backgroundColor: "#fff" }}>
             <SafeAreaView style={{ alignItems: "center" }}>
-                <Text>Edit Profile</Text>
+                <ProfileEditForm onEdit={onEdit}></ProfileEditForm>
             </SafeAreaView>
         </ScrollView>
     );
@@ -27,4 +33,8 @@ const mapStateToProps = (state) => ({
     state: state.profile,
 });
 
-export default connect(mapStateToProps, { getProfile })(ProfileScreen);
+const mapDispatchToProps = () => ({
+    getProfile,
+    editProfile,
+});
+export default connect(mapStateToProps, mapDispatchToProps)(EditProfileScreen);
