@@ -22,7 +22,6 @@ const ProfileTab = () => {
                 name="EditProfile"
                 component={EditProfileScreen}
                 options={{
-                    headerShown: true,
                     headerTitle: "Edit Profile Info",
                     headerBackTitle: "Go Back",
                     headerBackTitleStyle: { color: Colors.colorGrey },

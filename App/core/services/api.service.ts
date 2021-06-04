@@ -1,5 +1,6 @@
-import { HttpMethod } from "../types/enums";
+import { HttpMethod, StorageKeys } from "../types/enums";
 import { API_URL, API_PROTOCOL } from "@env";
+import { StorageService } from ".";
 
 export default class ApiService {
     performRequest(
@@ -10,8 +11,9 @@ export default class ApiService {
         contentType = "application/json",
         accept = "application/json"
     ) {
+        const storage = new StorageService();
         const requestUrl = `${API_PROTOCOL}://${API_URL}/${url}`;
-        const token = "token";
+        const token = storage.getItem(StorageKeys.TOKEN);
         const headers: any = {
             "Content-Type": contentType,
             "Access-Control-Allow-Origin": "*",
