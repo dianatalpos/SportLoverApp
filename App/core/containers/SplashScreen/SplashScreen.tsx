@@ -18,7 +18,7 @@ const SplashScreen = ({ navigation }) => {
                 const token = storage.getItem(StorageKeys.TOKEN);
 
                 if (token) {
-                    navigation.navigate("Profile");
+                    navigation.navigate("Main");
                 } else {
                     navigation.navigate("Login");
                 }

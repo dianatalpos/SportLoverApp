@@ -7,6 +7,7 @@ import thunk from "redux-thunk";
 import { AuthReducer, LoginScreen, RegisterScreen } from "./auth";
 import { SplashScreen } from "./core";
 import { ProfileReducer, ProfileScreen } from "./profile";
+import { MainScreen } from "./core/containers";
 
 const Stack = createStackNavigator();
 const reducers = combineReducers({
@@ -29,7 +30,7 @@ const App = () => {
         <NavigationContainer>
             <Stack.Navigator
                 screenOptions={{
-                    headerShown: true,
+                    headerShown: false,
                 }}
             >
                 <Stack.Screen
@@ -44,7 +45,7 @@ const App = () => {
                     name="Profile"
                     component={ProfileScreen}
                 />
-                {/* <Stack.Screen name="Main" component={MainScreen} /> */}
+                <Stack.Screen name="Main" component={MainScreen} />
             </Stack.Navigator>
         </NavigationContainer>
     );

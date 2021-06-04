@@ -7,11 +7,13 @@ import {
 import moment from "moment";
 import { Profile } from "../../types";
 import { Colors } from "../../../theme/colors";
+import { NavigationRoute } from "react-navigation";
 
 type ProfileType = {
     profile: Profile;
+    navigation: NavigationRoute
 };
-const ProfileDetails = ({ profile }: ProfileType) => {
+const ProfileDetails = ({ profile, navigation }: ProfileType) => {
     const onAvatarPress = () => {
         console.log("avatar press");
     };
@@ -19,6 +21,14 @@ const ProfileDetails = ({ profile }: ProfileType) => {
     const onAddFriend = () => {
         console.log("add friend");
     };
+
+    const onLogout = () => {
+        console.log("logout");
+    }
+
+    const onEdit = () => {
+        console.log("on edit");
+    }
 
     const yearsDisplay = moment().diff(profile.birthDay, "years");
     return (
@@ -46,6 +56,18 @@ const ProfileDetails = ({ profile }: ProfileType) => {
                     Add Friend
                 </Text>
             </TouchableOpacity>
+
+            <TouchableOpacity>
+                <Text onPress={onEdit} style={styles.addFriend}>
+                    Edit Profile
+                </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity>
+                <Text onPress={onLogout} style={styles.addFriend}>
+                    Logout
+                </Text>
+            </TouchableOpacity>
         </View>
     );
 };
@@ -54,7 +76,7 @@ const styles = StyleSheet.create({
     view: {
         height: "100%",
         width: "100%",
-        justifyContent: "center",
+        justifyContent: "flex-start",
         alignItems: "center",
     },
     profileContainer: {

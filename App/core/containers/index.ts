@@ -1,3 +1,4 @@
 import SplashScreen from "./SplashScreen";
+import MainScreen from "./MainScreen";
 
-export { SplashScreen };
+export { SplashScreen, MainScreen };

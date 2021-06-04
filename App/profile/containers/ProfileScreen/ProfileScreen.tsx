@@ -7,7 +7,7 @@ import { getProfile } from "../../actions";
 import { ProfileActivitiesList, ProfileDetails } from "../../components";
 import { Profile } from "../../types";
 
-const ProfileScreen = ({ state, getProfile }) => {
+const ProfileScreen = ({ navigation, state, getProfile }) => {
     const { profile } = state;
 
     const mockProfile: Profile = {
