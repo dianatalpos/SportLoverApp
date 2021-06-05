@@ -2,29 +2,30 @@ import React from "react";
 import { LoginForm } from "../../components";
 import { AuthCredentials } from "../../types";
 import { performLogin } from "../../actions";
-import { KeyboardAvoidingView, Platform } from "react-native"
 import { connect } from "react-redux";
+import { StorageKeys, StorageService } from "../../../core";
 
 const LoginScreen = ({ navigation, state, performLogin }) => {
     const onLogin = (credentials: AuthCredentials) => {
         performLogin(credentials)
-            .then(() => navigation.navigate("Profile"))
+            .then((data) => {
+                const storage = new StorageService();
+                storage.setItem(StorageKeys.TOKEN, data.token);
+                storage.setItem(StorageKeys.ROLES, data.role);
+                navigation.navigate("Main");
+            })
             .catch((err: Error) => console.log(err.message, "Login error"));
     };
 
     const redirectTo = () => {
         navigation.navigate("Register");
     };
-
-    return <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-    >
-        <LoginForm onLogin={onLogin} redirectTo={redirectTo}></LoginForm>
-    </KeyboardAvoidingView>;
+    return <LoginForm onLogin={onLogin} redirectTo={redirectTo}></LoginForm>;
 };
 
 const mapStateToProps = (state) => ({
     state: state.auth,
+    performLogin,
 });
 
 export default connect(mapStateToProps, { performLogin })(LoginScreen);

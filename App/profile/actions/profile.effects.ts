@@ -13,6 +13,7 @@ import {
 export const getProfile = (id: string) => (dispatch) => {
     dispatch(profileFetching());
     const profileService = new ProfileService();
+    console.log('GET PROFILE')
     return profileService
         .get(id)
         .then((response: any) => {

@@ -40,14 +40,9 @@ const App = () => {
                     name="Splash"
                     component={SplashScreen}
                 />
-
-                <Stack.Screen 
-                    options={SplashScreenOptions}
-                    name="Login"
-                    component={LoginScreen}
-                />
-                
                 <Stack.Screen name="Main" component={MainScreen} />
+                <Stack.Screen name="Login" component={LoginScreen}/>
+                <Stack.Screen name="Register" component={RegisterScreen}/>
             </Stack.Navigator>
         </NavigationContainer>
     );

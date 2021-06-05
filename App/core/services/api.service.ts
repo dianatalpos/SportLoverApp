@@ -3,7 +3,7 @@ import { API_URL, API_PROTOCOL } from "@env";
 import { StorageService } from ".";
 
 export default class ApiService {
-    performRequest(
+    async performRequest(
         url: string,
         method = HttpMethod.GET,
         body: any = null,
@@ -13,7 +13,7 @@ export default class ApiService {
     ) {
         const storage = new StorageService();
         const requestUrl = `${API_PROTOCOL}://${API_URL}/${url}`;
-        const token = storage.getItem(StorageKeys.TOKEN);
+        const token = await storage.getItem(StorageKeys.TOKEN);
         const headers: any = {
             "Content-Type": contentType,
             "Access-Control-Allow-Origin": "*",

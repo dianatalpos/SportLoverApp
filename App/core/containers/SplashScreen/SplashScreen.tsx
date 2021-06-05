@@ -1,9 +1,5 @@
 import React, { useEffect } from "react";
-import {
-    ImageBackground,
-    StyleSheet,
-    View,
-} from "react-native";
+import { ImageBackground, StyleSheet, View } from "react-native";
 import bkgImage from "../../../assets/images/sport_lover_image.png";
 import { LinearGradient } from "expo-linear-gradient";
 import { Colors } from "../../../theme/colors";
@@ -13,11 +9,9 @@ import { StorageService } from "../../services";
 const SplashScreen = ({ navigation }) => {
     useEffect(() => {
         const unsubscribe = navigation.addListener("focus", () => {
-            setTimeout(() => {
+            setTimeout(async () => {
                 const storage = new StorageService();
-                const token = storage.getItem(StorageKeys.TOKEN);
-                 //const token = null;
-
+                const token = await storage.getItem(StorageKeys.TOKEN);
                 if (token) {
                     navigation.navigate("Main");
                 } else {

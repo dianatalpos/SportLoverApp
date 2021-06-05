@@ -3,27 +3,24 @@ import { StorageKeys } from "../types";
 
 export default class StorageService {
     async getItem(key: StorageKeys): Promise<any> {
+        const value = await AsyncStorage.getItem(key);
         try {
-            const value = await AsyncStorage.getItem(key);
             return JSON.parse(value);
         } catch (e) {
-            return new Error(e);
+            return value;
         }
     }
 
-    async setItem(key: StorageKeys, value: any) {
-        try {
-            await AsyncStorage.setItem(key, value);
-        } catch (e) {
-            return new Error(e);
-        }
+    setItem(key: StorageKeys, value: any) {
+        return AsyncStorage.setItem(key, value);
+        // try {
+        //     await AsyncStorage.setItem(key, value);
+        // } catch (e) {
+        //     return new Error(e);
+        // }
     }
 
     async removeItem(key: StorageKeys): Promise<any> {
-        try {
-            await AsyncStorage.removeItem(key);
-        } catch (e) {
-            return new Error(e);
-        }
+        return AsyncStorage.removeItem(key);
     }
 }

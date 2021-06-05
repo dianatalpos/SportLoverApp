@@ -1,7 +1,9 @@
 import React from "react";
 import { Colors } from "../../../theme/colors";
 import { StyleSheet, View, TextInput, Text } from "react-native";
-import { TouchableHighlight } from "react-native-gesture-handler";
+import {
+    TouchableOpacity,
+} from "react-native-gesture-handler";
 import { Formik } from "formik";
 import * as Yup from "yup";
 
@@ -43,16 +45,18 @@ const LoginForm = ({ onLogin, redirectTo }: any) => {
                             style={styles.input}
                             placeholder="Password"
                             value={values.password}
-
                             secureTextEntry={true}
                             onChangeText={handleChange("password")}
                         />
                         {errors.password && touched.password ? (
                             <Text style={styles.error}>{errors.password}</Text>
                         ) : null}
-                        <TouchableHighlight onPress={handleSubmit}>
-                            <Text style={styles.button}>Sign In</Text>
-                        </TouchableHighlight>
+                        <TouchableOpacity
+                            style={styles.button}
+                            onPress={handleSubmit}
+                        >
+                            <Text style={styles.buttonLabel}>Sign In</Text>
+                        </TouchableOpacity>
                     </View>
                 )}
             </Formik>
@@ -65,7 +69,6 @@ const LoginForm = ({ onLogin, redirectTo }: any) => {
         </View>
     );
 };
-
 
 LoginForm.defaultProps = {
     onLogin: () => {},
@@ -94,7 +97,7 @@ const styles = StyleSheet.create({
     },
     error: {
         color: Colors.error,
-        marginLeft: 20
+        marginLeft: 20,
     },
     input: {
         width: 250,
@@ -128,7 +131,11 @@ const styles = StyleSheet.create({
         color: "#fff",
         paddingVertical: 10,
         paddingHorizontal: 40,
-        margin: 30
+        margin: 30,
+        borderRadius: 30,
+    },
+    buttonLabel: {
+        color: "#fff",
     },
 });
 

@@ -16,7 +16,6 @@ const ProfileTab = () => {
             <Stack.Screen
                 name="Profile"
                 component={ProfileScreen}
-                options={{ header: () => null }}
             />
             <Stack.Screen
                 name="EditProfile"

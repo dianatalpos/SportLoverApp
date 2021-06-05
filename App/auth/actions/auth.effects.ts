@@ -21,12 +21,11 @@ export const performLogin = (credentials: AuthCredentials) => (dispatch) => {
     return authService
         .login(credentials)
         .then((response: any) => {
-            dispatch(successLogin(response));
-            const storage = new StorageService();
-            storage.setItem(StorageKeys.TOKEN, response.token);
+            dispatch(successLogin(response.token, response.owner));
+            return response;
         })
-        .catch((err: Error) => {
-            dispatch(errorLogin(err.message));
+        .catch((err: string) => {
+            dispatch(errorLogin(err));
         });
 };
 
@@ -41,7 +40,7 @@ export const performRegister = (credentials: AuthCredentials) => (dispatch) => {
         .then((response: any) => {
             dispatch(successRegister(response.token));
             const storage = new StorageService();
-            storage.setItem(StorageKeys.TOKEN, response.token);
+            return storage.setItem(StorageKeys.TOKEN, response.token);
         })
         .catch((err: Error) => dispatch(errorRegister(err.message)));
 };
@@ -64,10 +63,13 @@ const startLogin = (): Action => {
     };
 };
 
-const successLogin = (token: string): Action => {
+const successLogin = (token: string, owner: string): Action => {
     return {
         type: LOGIN_SUCCESS,
-        payload: token,
+        payload: {
+            token,
+            owner,
+        },
     };
 };
 

@@ -11,8 +11,7 @@ export default class AuthService {
     }
 
     login(credentials: AuthCredentials): Promise<any> {
-        const url = `/login`;
-
+        const url = `login`;
         return this.apiService.performRequest(
             url,
             HttpMethod.POST,
@@ -22,7 +21,7 @@ export default class AuthService {
     }
 
     register(credentials: AuthCredentials): Promise<any> {
-        const url = `/register`;
+        const url = `register`;
         return this.apiService.performRequest(
             url,
             HttpMethod.POST,
@@ -31,7 +30,7 @@ export default class AuthService {
         );
     }
 
-    logout(): void {
-        this.storage.removeItem(StorageKeys.TOKEN);
+    async logout(): Promise<void> {        
+        await this.storage.removeItem(StorageKeys.TOKEN);
     }
 }
