@@ -24,10 +24,10 @@ const ProfileScreen = ({ navigation, state, getProfile, performLogout }) => {
     useEffect(() => {
         const userId = "12";
         const profileId = "12";
-        getProfile(userId, profileId);
+        getProfile(profileId);
     }, []);
 
-    const onAddFriend = () => {};
+    const onAddFriend = () => { };
 
     const onEditProfile = () => {
         console.log("upd friend");
@@ -35,7 +35,7 @@ const ProfileScreen = ({ navigation, state, getProfile, performLogout }) => {
         navigation.push('EditProfile');
     };
 
-    const onAvatarChange = () => {};
+    const onAvatarChange = () => { };
 
     const onLogout = () => {
         performLogout();

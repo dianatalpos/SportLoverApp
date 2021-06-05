@@ -1,3 +1,3 @@
-import EventScreen from "./EventScreen";
+import EventsTab from "./EventsTab";
 
-export { EventScreen };
+export { EventsTab };

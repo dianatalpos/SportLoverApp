@@ -16,6 +16,7 @@ const SplashScreen = ({ navigation }) => {
             setTimeout(() => {
                 const storage = new StorageService();
                 const token = storage.getItem(StorageKeys.TOKEN);
+                 //const token = null;
 
                 if (token) {
                     navigation.navigate("Main");

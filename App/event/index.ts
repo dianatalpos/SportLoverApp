@@ -1,3 +1,4 @@
-import { EventScreen } from "./containers";
+import { EventScreen, EventsScreen } from "./containers";
 import EventReducer from "./reducers"
-export { EventScreen, EventReducer };
+
+export { EventScreen, EventsScreen, EventReducer };

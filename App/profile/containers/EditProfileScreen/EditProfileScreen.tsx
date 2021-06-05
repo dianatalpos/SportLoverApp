@@ -11,9 +11,8 @@ const EditProfileScreen = ({ state, getProfile, editProfile }) => {
     const { profile } = state;
 
     useEffect(() => {
-        const userId = "12";
         const profileId = "12";
-        getProfile(userId, profileId);
+        getProfile(profileId);
     }, []);
 
     const onEdit = (profile: Profile) => {

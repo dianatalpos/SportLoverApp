@@ -1,3 +1,3 @@
-import { ProfileScreen } from "./containers";
+import { ProfileTab } from "./containers";
 import ProfileReducer from "./reducers"
-export { ProfileScreen, ProfileReducer };
+export { ProfileTab, ProfileReducer };

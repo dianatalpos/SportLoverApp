@@ -7,12 +7,14 @@ import thunk from "redux-thunk";
 import { AuthReducer, LoginScreen, RegisterScreen } from "./auth";
 import { SplashScreen } from "./core";
 import { ProfileReducer } from "./profile";
+import { EventReducer } from "./event";
 import { MainScreen } from "./core/containers";
 
 const Stack = createStackNavigator();
 const reducers = combineReducers({
     auth: AuthReducer,
     profile: ProfileReducer,
+    events: EventReducer,
 });
 const store = createStore(reducers, applyMiddleware(thunk));
 
@@ -38,6 +40,13 @@ const App = () => {
                     name="Splash"
                     component={SplashScreen}
                 />
+
+                <Stack.Screen 
+                    options={SplashScreenOptions}
+                    name="Login"
+                    component={LoginScreen}
+                />
+                
                 <Stack.Screen name="Main" component={MainScreen} />
             </Stack.Navigator>
         </NavigationContainer>

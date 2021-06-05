@@ -10,11 +10,11 @@ import {
     PROFILE_IS_FETCHING,
 } from "./types";
 
-export const getProfile = (userId: string, id: string) => (dispatch) => {
+export const getProfile = (id: string) => (dispatch) => {
     dispatch(profileFetching());
     const profileService = new ProfileService();
     return profileService
-        .get(userId, id)
+        .get(id)
         .then((response: any) => {
             dispatch(profileFetched(response.profile));
         })
@@ -22,11 +22,11 @@ export const getProfile = (userId: string, id: string) => (dispatch) => {
 };
 
 export const editProfile =
-    (userId: string, id: string, profile: Profile) => (dispatch) => {
+    (id: string, profile: Profile) => (dispatch) => {
         dispatch(startEditProfile());
         const profileService = new ProfileService();
         return profileService
-            .put(userId, id, profile)
+            .put(id, profile)
             .then((response) => {
                 dispatch(successEditProfile(response.profile));
             })

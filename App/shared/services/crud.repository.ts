@@ -18,37 +18,37 @@ export default abstract class CrudRepository<M, D, C = D, U = C> {
         this.apiService = new ApiService();
     }
 
-    protected abstract endpoint(userId: string): string;
+    protected abstract endpoint(): string;
 
-    protected urlDetails(userId: string, resourceId: string): string {
-        return `${this.endpoint(userId)}/${resourceId}`;
+    protected urlDetails(resourceId: string): string {
+        return resourceId ? `${this.endpoint()}/${resourceId}` : this.endpoint();
     }
 
-    get(userId: string, resourceId: string): Promise<any> {
+    get(resourceId?: string): Promise<any> {
         return this.apiService.performRequest(
-            this.urlDetails(userId, resourceId)
+            this.urlDetails(resourceId)
         );
     }
 
-    post(userId: string, resourceId: string, dto: D): Promise<any> {
+    post(resourceId: string, dto: D): Promise<any> {
         return this.apiService.performRequest(
-            this.urlDetails(userId, resourceId),
+            this.urlDetails(resourceId),
             HttpMethod.POST,
             dto
         );
     }
 
-    put(userId: string, resourceId: string, dto: D): Promise<any> {
+    put(resourceId: string, dto: D): Promise<any> {
         return this.apiService.performRequest(
-            this.urlDetails(userId, resourceId),
+            this.urlDetails(resourceId),
             HttpMethod.PUT,
             dto
         );
     }
 
-    delete(userId: string, resourceId: string): Promise<any> {
+    delete(resourceId: string): Promise<any> {
         return this.apiService.performRequest(
-            this.urlDetails(userId, resourceId),
+            this.urlDetails(resourceId),
             HttpMethod.DELETE
         );
     }

@@ -7,6 +7,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { LocationScreen } from "../../../location";
 import { ProfileTab } from "../../../profile/containers";
+import { EventsTab } from "../../../event/containers"
 
 const Tab = createBottomTabNavigator();
 
@@ -37,6 +38,16 @@ const MainScreen = () => {
                 />
                 : null
             }
+            <Tab.Screen
+                name='Events'
+                component={EventsTab}
+                options={{
+                    tabBarLabel: 'Events',
+                    tabBarIcon: ({ color, size }) => (
+                        <MaterialCommunityIcons name="format-list-text" color={color} size={size} />
+                    ),
+                }}
+            />
 
             <Tab.Screen
                 name='My Profile'
