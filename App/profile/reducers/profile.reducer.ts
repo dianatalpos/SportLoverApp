@@ -22,7 +22,7 @@ const ProfileReducer = (state = INITIAL_STATE, action: Action) => {
         case PROFILE_IS_FETCHED:
             return {
                 ...state,
-                profile: payload.profile,
+                profile: payload,
                 isFetching: false,
                 isFetched: true,
             };
@@ -32,7 +32,7 @@ const ProfileReducer = (state = INITIAL_STATE, action: Action) => {
                 isFetching: false,
                 isFetched: false,
                 hasError: true,
-                errorMessage: payload.message,
+                errorMessage: payload,
             };
         default:
             return state;

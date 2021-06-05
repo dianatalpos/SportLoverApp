@@ -15,17 +15,18 @@ const ProfileTab = () => {
         <Stack.Navigator>
             <Stack.Screen
                 name="Profile"
+                options={{ headerLeft: null }}
                 component={ProfileScreen}
             />
             <Stack.Screen
                 name="EditProfile"
                 component={EditProfileScreen}
                 options={{
-                    headerTitle: "Edit Profile Info",
-                    headerBackTitle: "Go Back",
-                    headerBackTitleStyle: { color: Colors.colorGrey },
-                    headerTintColor: Colors.colorGrey,
-                    headerTransparent: true,
+                    // headerTitle: "Edit Profile Info",
+                    // headerBackTitle: "Go Back",
+                    // headerBackTitleStyle: { color: Colors.colorGrey },
+                    // headerTintColor: Colors.colorGrey,
+                    // headerTransparent: true,
                 }}
             />
         </Stack.Navigator>

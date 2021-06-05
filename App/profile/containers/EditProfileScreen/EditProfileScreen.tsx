@@ -16,15 +16,17 @@ const EditProfileScreen = ({ state, getProfile, editProfile }) => {
     }, []);
 
     const onEdit = (profile: Profile) => {
+        console.log(profile, "PROFILE");
         editProfile(profile);
     };
 
     return (
-        <ScrollView style={{ backgroundColor: "#fff" }}>
-            <SafeAreaView style={{ alignItems: "center" }}>
-                <ProfileEditForm onEdit={onEdit}></ProfileEditForm>
-            </SafeAreaView>
-        </ScrollView>
+        <SafeAreaView style={{ alignItems: "center" }}>
+            <ProfileEditForm
+                profile={profile}
+                onEdit={onEdit}
+            ></ProfileEditForm>
+        </SafeAreaView>
     );
 };
 

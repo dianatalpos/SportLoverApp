@@ -1,4 +1,4 @@
 import { Action } from "./types";
-
-export { Action };
+import { Datepicker } from "./components";
+export { Action, Datepicker };
 export * from "./services";

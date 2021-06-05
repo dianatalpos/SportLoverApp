@@ -13,11 +13,20 @@ import {
 export const getProfile = (id: string) => (dispatch) => {
     dispatch(profileFetching());
     const profileService = new ProfileService();
-    console.log('GET PROFILE')
     return profileService
         .get(id)
         .then((response: any) => {
-            dispatch(profileFetched(response.profile));
+            const mockProfile: Profile = {
+                activities: ["Basket"],
+                avatar: "https://i.pinimg.com/736x/4d/8e/cc/4d8ecc6967b4a3d475be5c4d881c4d9c.jpg",
+                birthDay:new Date("2000-01-01"),
+                description: "aaaaaaaaaa aaaaa aaaaa aaaaaaaaaaaaaaaaaaaa aaaaaaaaaa aaaaaaaaaa aaaaa",
+                firstName:"Marus",
+                id:'sss',
+                lastName:"Martus"
+            }
+            // dispatch(profileFetched(response.profile));
+            dispatch(profileFetched(mockProfile));
         })
         .catch((err: Error) => dispatch(profileFetchError(err.message)));
 };
