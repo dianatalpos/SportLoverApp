@@ -12,7 +12,7 @@ import BaseFactory from "./base-factory";
  */
 export default abstract class CrudRepository<M, D, C = D, U = C> {
     private baseFactory: BaseFactory<M, D>;
-    private apiService: ApiService;
+    protected apiService: ApiService;
 
     constructor() {
         this.apiService = new ApiService();

@@ -1,15 +1,15 @@
 import { Button } from "native-base";
 import React, { useEffect } from "react";
-import { Text, View, StyleSheet, TouchableOpacity} from "react-native";
+import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { connect } from "react-redux";
-import { getEvent } from "../../actions";
 import { EventDetails } from "../../components";
 import { Colors } from "../../../theme/colors";
 
 const EventScreen = (props) => {
-    const { navigation, state, getEvent } = props
+    const { state } = props
+    const event = state.event;
 
     const mockEvent: Event = {
         sport: "Football",
@@ -26,25 +26,20 @@ const EventScreen = (props) => {
         users: ["user1", "user2"],
     };
 
-    useEffect(() => {
-        const eventId = "1";
-        getEvent(eventId);
-    }, []);
-    
     const onJoin = () => {
         console.log("Join Event pressed")
     }
     return (
         <ScrollView style={{ backgroundColor: "#fff" }}>
             <SafeAreaView style={{ alignItems: "center" }}>
-                <EventDetails 
-                    event={mockEvent}
+                <EventDetails
+                    event={event}
                 ></EventDetails>
 
                 <TouchableOpacity style={styles.actionBtn} onPress={onJoin}>
                     <Text style={styles.joinEvent}>Join Event</Text>
                 </TouchableOpacity>
-                
+
             </SafeAreaView>
         </ScrollView>
     );
@@ -78,7 +73,7 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => ({
-    state: state.event,
+    state: state.events,
 });
 
-export default connect(mapStateToProps, { getEvent })(EventScreen);
+export default connect(mapStateToProps, {})(EventScreen);

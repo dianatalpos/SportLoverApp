@@ -6,6 +6,7 @@ import {
     EVENTS_FETCH_ERROR,
     EVENTS_ARE_FETCHED,
     EVENTS_ARE_FETCHING,
+    SET_EVENT,
 } from "../actions/types";
 
 const INITIAL_STATE = {
@@ -43,7 +44,7 @@ const EventReducer = (state = INITIAL_STATE, action: Action) => {
         case EVENTS_ARE_FETCHED:
             return {
                 ...state,
-                events: payload.events,
+                events: payload,
                 isFetching: false,
                 isFetchedL: true,
             };
@@ -55,6 +56,11 @@ const EventReducer = (state = INITIAL_STATE, action: Action) => {
                 hasError: true,
                 errorMessage: payload.message,
             };
+        case SET_EVENT:
+            return {
+                ...state,
+                event: payload,
+            }
         default:
             return state;
     }

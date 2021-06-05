@@ -8,6 +8,7 @@ import Moment from 'moment';
 
 const EventDetails = (props) => {
     const { event } = props;
+
     return (
         <View style={styles.view}>
 

@@ -8,6 +8,7 @@ import {
     EVENTS_FETCH_ERROR,
     EVENTS_ARE_FETCHED,
     EVENTS_ARE_FETCHING,
+    SET_EVENT,
 } from "./types";
 
 export const getEvent = (id: string) => (dispatch) => {
@@ -16,7 +17,7 @@ export const getEvent = (id: string) => (dispatch) => {
     return eventService
         .get(id)
         .then((response: any) => {
-            dispatch(eventFetched(response.profile));
+            dispatch(eventFetched(response));
         })
         .catch((err: Error) => dispatch(eventFetchError(err.message)));
 };
@@ -26,7 +27,7 @@ export const getEvents = () => (dispatch) => {
     dispatch(eventsFetching());
     const eventService = new EventService();
     return eventService
-        .get()
+        .getEvents()
         .then((response: any) => {
             console.log(response, 'BBBB')
             dispatch(eventsFetched(response));
@@ -59,6 +60,7 @@ const eventFetchError = (message: string): Action => {
 };
 
 const eventsFetched = (events: Event[]): Action => {
+    console.log(events, "FETCHED")
     return {
         type: EVENTS_ARE_FETCHED,
         payload: events,
@@ -76,5 +78,12 @@ const eventsFetchError = (message: string): Action => {
 const eventsFetching = (): Action => {
     return {
         type: EVENTS_ARE_FETCHING,
+    };
+};
+
+export const setEvent = (event: Event): Action => {
+    return {
+        type: SET_EVENT,
+        payload: event,
     };
 };

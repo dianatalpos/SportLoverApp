@@ -1,5 +1,5 @@
 export default class Event {
-    eventId: string;
+    id: string;
     sport: string;
     level: string;
     location: string;
