@@ -12,7 +12,7 @@ import BaseFactory from "./base-factory";
  */
 export default abstract class CrudRepository<M, D, C = D, U = C> {
     private baseFactory: BaseFactory<M, D>;
-    protected apiService: ApiService;
+    apiService: ApiService;
 
     constructor() {
         this.apiService = new ApiService();
@@ -20,7 +20,7 @@ export default abstract class CrudRepository<M, D, C = D, U = C> {
 
     protected abstract endpoint(): string;
 
-    protected urlDetails(resourceId: string): string {
+    protected urlDetails(resourceId?: string): string {
         return resourceId ? `${this.endpoint()}/${resourceId}` : this.endpoint();
     }
 

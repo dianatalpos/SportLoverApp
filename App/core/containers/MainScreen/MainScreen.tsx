@@ -63,18 +63,4 @@ const MainScreen = () => {
     );
 };
 
-const styles = StyleSheet.create({
-    bkgImage: {
-        width: 400,
-        height: 250,
-    },
-    view: {
-        height: "100%",
-        width: "100%",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-    },
-});
-
 export default MainScreen;

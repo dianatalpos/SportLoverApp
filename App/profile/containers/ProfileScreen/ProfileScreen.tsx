@@ -4,24 +4,24 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { connect } from "react-redux";
 import { getProfile } from "../../actions";
 import { ProfileActivitiesList, ProfileDetails } from "../../components";
-import { Profile } from "../../types";
 import AuthService from "../../../auth/services";
 import { Text, View } from "react-native";
 
 const ProfileScreen = (props) => {
-    const { navigation, state, getProfile, performLogout } = props;
-    const { profileRed, authRed } = state;
+    const { navigation, state, getProfile } = props;
+    const { profile, isFetched } = state;
 
     useEffect(() => {
-        const userId = "12";
         const profileId = "12";
         getProfile(profileId);
     }, []);
 
-    const onAddFriend = () => {};
+    const onAddFriend = () => {
+        navigation.navigate("Add Friend");
+    };
 
     const onEditProfile = () => {
-        navigation.navigate("EditProfile");
+        navigation.navigate("Edit Profile");
     };
 
     const onAvatarChange = () => {};
@@ -35,17 +35,17 @@ const ProfileScreen = (props) => {
     return (
         <ScrollView style={{ backgroundColor: "#fff" }}>
             <SafeAreaView style={{ alignItems: "center" }}>
-                {profileRed.isFetched ? (
+                {isFetched ? (
                     <View>
                         <ProfileDetails
-                            profile={profileRed.profile}
+                            profile={profile}
                             onAddFriend={onAddFriend}
                             onEdit={onEditProfile}
                             onAvatar={onAvatarChange}
                             onLogout={onLogout}
                         ></ProfileDetails>
                         <ProfileActivitiesList
-                            activities={profileRed.profile.activities}
+                            activities={profile.activities}
                         ></ProfileActivitiesList>
                     </View>
                 ) : (
@@ -57,10 +57,7 @@ const ProfileScreen = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-    state: {
-        profileRed: state.profile,
-        authRed: state.auth,
-    },
+    state: state.profile,
 });
 
 const mapDispatchToProps = {

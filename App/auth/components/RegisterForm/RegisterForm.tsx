@@ -33,6 +33,7 @@ const RegisterForm = ({ onRegister, redirectTo }) => {
                             style={styles.input}
                             placeholder="Email"
                             value={values.email}
+                            keyboardType={"email-address"}
                             onChangeText={handleChange("email")}
                         />
                         {errors.email && touched.email ? (
@@ -56,7 +57,9 @@ const RegisterForm = ({ onRegister, redirectTo }) => {
             </Formik>
             <Text>
                 Do you have already an account?
-                <Text style={styles.link} onPress={redirectTo}>Sign In</Text>
+                <Text style={styles.link} onPress={redirectTo}>
+                    Sign In
+                </Text>
             </Text>
         </View>
     );

@@ -1,6 +1,4 @@
 import React, { useEffect } from "react";
-import { Text, View } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { connect } from "react-redux";
 import { getProfile, editProfile } from "../../actions";
@@ -21,7 +19,7 @@ const EditProfileScreen = ({ state, getProfile, editProfile }) => {
     };
 
     return (
-        <SafeAreaView style={{ alignItems: "center" }}>
+        <SafeAreaView style={{ alignItems: "center",  backgroundColor:"#fff" }}>
             <ProfileEditForm
                 profile={profile}
                 onEdit={onEdit}
@@ -34,8 +32,8 @@ const mapStateToProps = (state) => ({
     state: state.profile,
 });
 
-const mapDispatchToProps = () => ({
+const mapDispatchToProps = {
     getProfile,
     editProfile,
-});
+};
 export default connect(mapStateToProps, mapDispatchToProps)(EditProfileScreen);

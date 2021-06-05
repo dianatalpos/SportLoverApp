@@ -61,7 +61,6 @@ const ProfileEditForm = ({ profile, onEdit }) => {
 
     return (
         <SafeAreaView style={styles.view}>
-            <Text style={styles.title}>Edit profile</Text>
             <TouchableOpacity onPress={onAvatar}>
                 <Image source={{ uri: imgUri }} style={styles.avatar}></Image>
             </TouchableOpacity>
