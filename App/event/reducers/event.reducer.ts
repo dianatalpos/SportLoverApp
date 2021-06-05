@@ -12,8 +12,8 @@ import {
 const INITIAL_STATE = {
     event: null,
     events: null,
-    isFetching: false,
-    isFetched: false,
+    areFetching: false,
+    areFetched: false,
     hasError: false,
     errorMessage: null,
 };
@@ -23,19 +23,19 @@ const EventReducer = (state = INITIAL_STATE, action: Action) => {
 
     switch (type) {
         case EVENT_IS_FETCHING:
-            return { ...state, isFetching: true };
+            return { ...state, areFetching: true };
         case EVENT_IS_FETCHED:
             return {
                 ...state,
                 event: payload.event,
-                isFetching: false,
-                isFetched: true,
+                areFetching: false,
+                areFetched: true,
             };
         case EVENT_FETCH_ERROR:
             return {
                 ...state,
-                isFetching: false,
-                isFetched: false,
+                areFetching: false,
+                areFetched: false,
                 hasError: true,
                 errorMessage: payload.message,
             };
@@ -45,14 +45,14 @@ const EventReducer = (state = INITIAL_STATE, action: Action) => {
             return {
                 ...state,
                 events: payload,
-                isFetching: false,
-                isFetchedL: true,
+                areFetching: false,
+                areFetchedL: true,
             };
         case EVENTS_FETCH_ERROR:
             return {
                 ...state,
-                isFetching: false,
-                isFetched: false,
+                areFetching: false,
+                areFetched: false,
                 hasError: true,
                 errorMessage: payload.message,
             };

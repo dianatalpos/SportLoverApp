@@ -4,28 +4,45 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { Event } from "../../types";
 import { Colors } from "../../../theme/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import Moment from 'moment';
+import moment from "moment";
+import MapView, { Marker } from 'react-native-maps';
+import ParticipantsList from "../ParticipantsList";
+
 
 const EventDetails = (props) => {
     const { event } = props;
 
+    const displayEventDate = moment(event.dateTime).format("LLLL")
     return (
         <View style={styles.view}>
 
+            <MapView
+                initialRegion={{
+                    latitude: event.locationLatitude,
+                    longitude: event.locationLongitude,
+                    latitudeDelta: 0.01,
+                    longitudeDelta: 0.01,
+                }}
+                style={styles.map}
+            >
 
-            <View>
-                <Text style={styles.primaryText}>{event.sport} Event - {event.level}</Text>
-                <Text numberOfLines={1} style={styles.primaryText}>{event.location}</Text>
-                <Text numberOfLines={1} style={styles.primaryText}>{event.location}</Text>
-                <Text numberOfLines={1} style={styles.primaryText}>{Moment(event.dateTime).format('d MMM hh:ss')}</Text>
-                <Text></Text>
-            </View>
+                <Marker
+                    coordinate={{
+                        latitude: event.locationLatitude,
+                        longitude: event.locationLongitude,
+                    }}
+                    title={event.location}
+                />
+            </MapView>
+
 
             <View style={styles.content}>
-                <View >
-                    <Text style={styles.primaryText}>{event.sport} Event - {event.level}</Text>
-                    <Text numberOfLines={1} style={styles.secondaryText}>{event.location}</Text>
-                    <Text numberOfLines={1} style={styles.secondaryText}>{Moment(event.dateTime).format('d MMM hh:ss')}</Text>
+                <View>
+                    <Text style={styles.titleText}>{event.sport} Event - {event.level}</Text>
+                    <Text numberOfLines={1} style={styles.primaryText}>{event.location}</Text>
+                    <Text numberOfLines={1} style={styles.primaryText}>{event.locationFieldName}</Text>
+                    <Text numberOfLines={1} style={styles.primaryText}>{displayEventDate}</Text>
+                    <Text style={styles.primaryText}>{event.duration} min</Text>
                     <Text></Text>
                 </View>
                 <View>
@@ -35,9 +52,12 @@ const EventDetails = (props) => {
                         color={Colors.colorGrey}
                         size={24}
                     />
-                    <Text style={styles.peopleNumber}>{event.users.length}/{event.maxNoPlayers}</Text>
+                    <Text style={styles.peopleNumber}>{event.participants.length}/{event.maxNoPlayers}</Text>
                 </View>
             </View>
+
+
+            <ParticipantsList participants={event.participants}></ParticipantsList>
         </View>
     );
 };
@@ -85,6 +105,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         width: '100%',
+        marginTop: 15,
     },
     primaryText: {
         color: Colors.colorTextBlack,
@@ -92,12 +113,15 @@ const styles = StyleSheet.create({
         fontSize: 16,
         marginBottom: 8,
     },
-    secondaryText: {
-        color: Colors.colorText,
-        marginBottom: 4,
+    titleText: {
+        color: Colors.colorTextBlack,
+        fontWeight: '700',
+        fontSize: 20,
+        marginBottom: 8,
     },
+    avatar: { width: 150, height: 150, borderRadius: 100 },
     peopleNumber: {
-        color: Colors.gradientSecondary,
+        color: Colors.colorGrey,
         fontSize: 25,
         fontWeight: '700',
     }

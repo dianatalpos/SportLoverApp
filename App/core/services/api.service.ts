@@ -33,7 +33,7 @@ export default class ApiService {
             options["body"] = JSON.stringify(body);
         }
 
-        return fetch(requestUrl, options).then(this.handleRequestStatus);
+        return fetch(requestUrl, options).then(this.handleRequestStatus).catch(err => console.log(err, 'errrrr'));
     }
 
     private handleRequestStatus(response: Response) {

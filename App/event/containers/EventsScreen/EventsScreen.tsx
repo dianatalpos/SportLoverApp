@@ -9,7 +9,7 @@ import { getEvents, setEvent } from "../../actions";
 
 const EventsScreen = (props) => {
     const { navigation, state, getEvents, setEvent } = props
-    const { events } = state;
+    const { events, areFetching } = state;
     // console.log(state, 'state')
 
     const mockedEvents: Event[]= [ 
@@ -53,6 +53,7 @@ const EventsScreen = (props) => {
         <ScrollView style={{ backgroundColor: "#fff" }}>
             <SafeAreaView style={{ alignItems: "center" }}>
                 <EventList
+                    loading={areFetching}
                     events={events}
                     onAdd={onAddEvent}
                     onItemPressed={onItemPressed}

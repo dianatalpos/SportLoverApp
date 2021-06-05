@@ -1,3 +1,5 @@
+import { Participant } from ".";
+
 export default class Event {
     id: string;
     sport: string;
@@ -14,4 +16,5 @@ export default class Event {
     maxNoPlayers: number;
     isPublic: boolean;
     users: string[];
+    participants: Participant[];
 }

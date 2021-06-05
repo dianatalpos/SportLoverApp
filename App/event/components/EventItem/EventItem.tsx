@@ -5,15 +5,19 @@ import MapView, { Marker } from 'react-native-maps';
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Event } from "../../types";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import Moment from 'moment';
-
+import moment from "moment"
 
 type EventItemProps = {
     event: Event;
     onPress: any;
 };
 
-const EventItem = ({ event, onPress}: EventItemProps) => {
+const EventItem = ({ event, onPress }: EventItemProps) => {
+
+    console.log(event, "EVENT")
+    console.log(event.dateTime)
+    const displayEventDate = moment(event.dateTime).format("LL")
+    console.log(displayEventDate)
     return (
         <TouchableOpacity style={styles.container} onPress={onPress}>
             <MapView
@@ -39,7 +43,7 @@ const EventItem = ({ event, onPress}: EventItemProps) => {
                 <View style={styles.leftContent}>
                     <Text style={styles.primaryText}>{event.sport} Event - {event.level}</Text>
                     <Text numberOfLines={1} style={styles.secondaryText}>{event.location}</Text>
-                    <Text numberOfLines={1} style={styles.secondaryText}>{Moment(event.dateTime).format('d MMM hh:ss')}</Text>
+                    <Text numberOfLines={1} style={styles.secondaryText}>{displayEventDate}</Text>
                     <Text></Text>
                 </View>
                 <View style={styles.rightContent}>
@@ -49,7 +53,7 @@ const EventItem = ({ event, onPress}: EventItemProps) => {
                         color={Colors.colorGrey}
                         size={24}
                     />
-                    <Text style={styles.peopleNumber}>{event.users.length}/{event.maxNoPlayers}</Text>
+                    <Text style={styles.peopleNumber}>{event.participants.length}/{event.maxNoPlayers}</Text>
                 </View>
             </View>
         </TouchableOpacity>

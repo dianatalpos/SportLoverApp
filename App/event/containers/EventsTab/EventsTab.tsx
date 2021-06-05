@@ -15,7 +15,7 @@ const EventsTab = () => {
     return (
         <Stack.Navigator>
             <Stack.Screen
-                name="EventsScreen"
+                name="Events"
                 component={EventsScreen}
                 options={{ header: () => null }}
             />
@@ -24,12 +24,12 @@ const EventsTab = () => {
                 name="EventDetails"
                 component={EventScreen}
                 options={{ 
-                    headerShown: true,
-                    headerTitle: "Event Details",
-                    headerBackTitle: "Back",
-                    headerBackTitleStyle: { color: Colors.colorGrey },
-                    headerTintColor: Colors.colorGrey,
-                    headerTransparent: true,
+                    // headerShown: true,
+                    // headerTitle: "Event Details",
+                    // headerBackTitle: "Back",
+                    // headerBackTitleStyle: { color: Colors.colorGrey },
+                    // headerTintColor: Colors.colorGrey,
+                    // headerTransparent: true,
                  }}
             />
 

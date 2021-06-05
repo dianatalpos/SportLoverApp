@@ -1,15 +1,16 @@
 import { ActivityIndicator, Button, FlatList, FlatListProps, ImageBackground, ListRenderItem, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React, { useEffect, useState } from 'react';
 import { Colors } from "../../../theme/colors";
-import { EventItem } from "..";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import EventItem from "../EventItem"
 import { Event } from "../../types";
+import { Spinner } from "native-base";
 
 
 
 const EventList = (props) => {
-    const { events, onAdd, onItemPressed } = props
-    const [loading, setLoading] = useState(false);
+    const { loading, events, onAdd, onItemPressed } = props
+    console.log(events);
 
     const renderListItem = (flatListProp) => {
         const { item } = flatListProp;
@@ -20,7 +21,7 @@ const EventList = (props) => {
     return (
         <SafeAreaView style={{ backgroundColor: Colors.colorWhite }}>
             <View style={styles.container}>
-                <View style={{ flexDirection: 'row', width: '80%', justifyContent: 'space-between'}}>
+                <View style={{ flexDirection: 'row', width: '80%', justifyContent: 'space-between' }}>
                     <Text style={styles.text}>Upcomming Events</Text>
                     <TouchableOpacity
                         style={styles.actionBtn}
@@ -31,29 +32,27 @@ const EventList = (props) => {
                 </View>
                 <Text style={{ color: Colors.colorGrey, letterSpacing: 3, fontWeight: 'bold', marginBottom: 20, marginTop: 10 }}>Help us build a great sport community!</Text>
 
-                {loading && <ActivityIndicator />}
+                {loading ?
+                    <Spinner color={Colors.gradientPrimary} /> :
+                    (events && events.length !== 0 ? <FlatList
+                        data={events}
+                        renderItem={renderListItem}
+                        keyExtractor={event => event.id}
+                        style={styles.listStyle}
+                    /> : events && events.length === 0 ? (
+                        <View style={styles.addContainer}>
+                            <MaterialCommunityIcons
+                                style={{}}
+                                name="home-search"
+                                color={Colors.colorTextBlack}
+                                size={80}
+                            />
+                            <Text style={styles.addTextTwo}>
+                                We couldn't find any future events
+                    </Text>
+                        </View>
+                    ) : null)}
 
-                {events && events.length !== 0 ? <FlatList
-                    data={events}
-                    renderItem={renderListItem}
-                    keyExtractor={event => event.id}
-                    style={styles.listStyle}
-                /> : null}
-
-
-                {events && events.length === 0 && (
-                    <View style={styles.addContainer}>
-                        <MaterialCommunityIcons
-                            style={{}}
-                            name="home-search"
-                            color={Colors.colorTextBlack}
-                            size={80}
-                        />
-                        <Text style={styles.addTextTwo}>
-                            We couldn't find any future events
-                            </Text>
-                    </View>
-                )}
             </View>
         </SafeAreaView>
     );
@@ -106,12 +105,19 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     listStyle: {
-        width: '80%',
+        width: '90%',
         padding: 12,
     },
     emptyListIcon: {
 
     }
 });
+
+EventList.defaultProps = {
+    loading: false,
+    events: [],
+    onAdd: () => { },
+    onItemPressed: () => { }
+}
 
 export default EventList;
