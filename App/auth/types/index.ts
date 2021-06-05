@@ -1,5 +1,5 @@
 import { AuthCredentials } from "./models";
 import * as interfaces from "./interfaces";
-import * as enums from "./enums";
+import { Roles } from "./enums";
 
-export { AuthCredentials, interfaces, enums };
+export { AuthCredentials, interfaces, Roles };

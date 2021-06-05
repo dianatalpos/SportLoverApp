@@ -11,9 +11,19 @@ export const getLocation = (locationId: string, id: string) => (dispatch) => {
     dispatch(locationFetching());
     const locationService = new LocationService();
     return locationService
-        .get(locationId, id)
+        .get(id)
         .then((response: any) => {
-            dispatch(locationFetched(response.profile));
+            const mockLocation: Location = {
+                id: "1",
+                name: "Baza Sportiva Gheorgheni",
+                latitude: "",
+                longitute: "",
+                startTime: "10:00",
+                endTime: "19:00",
+                sports: ["Football", "Dance"],
+            };
+            dispatch(locationFetched(mockLocation));
+            // dispatch(locationFetched(response.profile));
         })
         .catch((err: Error) => dispatch(locationFetchError(err.message)));
 };

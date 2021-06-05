@@ -40,8 +40,7 @@ export const performRegister = (credentials: AuthCredentials) => (dispatch) => {
         .register(credentials)
         .then((response: any) => {
             dispatch(successRegister(response.token));
-            const storage = new StorageService();
-            return storage.setItem(StorageKeys.TOKEN, response.token);
+            return response;
         })
         .catch((err: Error) => dispatch(errorRegister(err.message)));
 };

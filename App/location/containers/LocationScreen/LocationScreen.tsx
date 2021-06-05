@@ -1,24 +1,11 @@
-import { StyleProvider } from "native-base";
 import React, { useEffect } from "react";
-import { Text, View } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
+import { Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { connect } from "react-redux";
 import { getLocation } from "../../actions";
-import { Location } from "../../types";
 
 const LocationScreen = ({ state, getLocation }) => {
-    const { location } = state;
-
-    const mockEvent: Location = {
-        id: "1",
-        name: "Baza Sportiva Gheorgheni",
-        latitude: "",
-        longitute: "",
-        startTime: "10:00",
-        endTime: "19:00",
-        sports: ["Football", "Dance"],
-    };
+    const { locations } = state;
 
     useEffect(() => {
         const locationId = "1";
@@ -27,16 +14,20 @@ const LocationScreen = ({ state, getLocation }) => {
     }, []);
 
     return (
-        <ScrollView style={{ backgroundColor: "#fff" }}>
-            <SafeAreaView style={{ alignItems: "center" }}>
-
-            </SafeAreaView>
-        </ScrollView>
+        <SafeAreaView>
+            <Text>TTT</Text>
+        </SafeAreaView>
     );
 };
 
+
+
 const mapStateToProps = (state) => ({
-    state: state.event,
+    state: state.locations,
 });
 
-export default connect(mapStateToProps, { getLocation })(LocationScreen);
+const mapDispatchToProps = {
+    getLocation,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(LocationScreen);

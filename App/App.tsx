@@ -9,22 +9,20 @@ import { SplashScreen } from "./core";
 import { ProfileReducer } from "./profile";
 import { EventReducer } from "./event";
 import { MainScreen } from "./core/containers";
+import { LocationReducer } from "./location";
 
 const Stack = createStackNavigator();
 const reducers = combineReducers({
     auth: AuthReducer,
     profile: ProfileReducer,
     events: EventReducer,
+    locations: LocationReducer,
 });
 const store = createStore(reducers, applyMiddleware(thunk));
 
 const SplashScreenOptions = {
     gestureEnabled: false,
     headerShown: false,
-};
-
-const ProfileScreenOptions = {
-    headerLeft: null,
 };
 
 const App = () => {

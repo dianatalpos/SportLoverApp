@@ -8,10 +8,11 @@ import { StorageKeys, StorageService } from "../../../core";
 const LoginScreen = ({ navigation, state, performLogin }) => {
     const onLogin = (credentials: AuthCredentials) => {
         performLogin(credentials)
-            .then((data) => {
+            .then(async (data) => {
                 const storage = new StorageService();
-                storage.setItem(StorageKeys.TOKEN, data.token);
-                storage.setItem(StorageKeys.ROLES, data.role);
+                console.log(data, 'LOGIN DATA')
+                await storage.setItem(StorageKeys.TOKEN, data.token);
+                await storage.setItem(StorageKeys.ROLES, data.role);
                 navigation.navigate("Main");
             })
             .catch((err: Error) => console.log(err.message, "Login error"));
