@@ -4,10 +4,9 @@ import {
     HeaderBackButton,
 } from "@react-navigation/stack";
 import { Button } from "react-native";
-import { Colors } from "../../../theme/colors";
 import AddEventScreen from "../AddEventScreen";
 import EventsScreen from "../EventsScreen";
-import EventScreen from "../EventScreen"
+import EventScreen from "../EventScreen";
 
 const Stack = createStackNavigator();
 
@@ -20,31 +19,9 @@ const EventsTab = () => {
                 options={{ header: () => null }}
             />
 
-            <Stack.Screen
-                name="EventDetails"
-                component={EventScreen}
-                options={{ 
-                    // headerShown: true,
-                    // headerTitle: "Event Details",
-                    // headerBackTitle: "Back",
-                    // headerBackTitleStyle: { color: Colors.colorGrey },
-                    // headerTintColor: Colors.colorGrey,
-                    // headerTransparent: true,
-                 }}
-            />
+            <Stack.Screen name="EventDetails" component={EventScreen} />
 
-            <Stack.Screen
-                name="AddEvent"
-                component={AddEventScreen}
-                options={{
-                    headerShown: true,
-                    headerTitle: "Add a New Event",
-                    headerBackTitle: "Back",
-                    headerBackTitleStyle: { color: Colors.colorGrey },
-                    headerTintColor: Colors.colorGrey,
-                    headerTransparent: true,
-                }}
-            />
+            <Stack.Screen name="AddEvent" component={AddEventScreen} />
         </Stack.Navigator>
     );
 };

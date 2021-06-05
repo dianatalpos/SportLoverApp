@@ -1,4 +1,4 @@
-import { Participant } from ".";
+import Participant from "./participant.class";
 
 export default class Event {
     id: string;

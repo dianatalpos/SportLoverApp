@@ -1,4 +1,4 @@
 import { Event } from "./models";
 import { EventDTO } from "./dtos";
-
-export { Event, EventDTO };
+import { ActivityType, activityTypes, activityIcons } from "./enums";
+export { Event, EventDTO, ActivityType, activityTypes, activityIcons };
