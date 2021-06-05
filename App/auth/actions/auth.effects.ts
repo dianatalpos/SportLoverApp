@@ -35,6 +35,7 @@ export const performRegister = (credentials: AuthCredentials) => (dispatch) => {
     const authCreds = new AuthCredentials();
     authCreds.email = credentials.email.toLowerCase().trim();
     authCreds.password = credentials.password;
+    authCreds.isOwner = credentials.isOwner;
     return authService
         .register(credentials)
         .then((response: any) => {

@@ -1,11 +1,13 @@
 import { Formik } from "formik";
-import React from "react";
-import { TextInput, TouchableHighlight } from "react-native-gesture-handler";
+import React, { useState } from "react";
+import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import * as Yup from "yup";
+import { CheckBox } from "react-native-elements";
 import { Colors } from "../../../theme/colors";
 import { StyleSheet, Text, View } from "react-native";
 
 const RegisterForm = ({ onRegister, redirectTo }) => {
+    const [isOwner, setIsOwner] = useState(false);
     const schema = Yup.object().shape({
         email: Yup.string()
             .required("Email is required!")
@@ -17,13 +19,15 @@ const RegisterForm = ({ onRegister, redirectTo }) => {
             .label("Password"),
     });
 
+    const initialValues = { email: "", password: "" };
+
     return (
         <View style={styles.container}>
             <Text style={styles.text}>Sign Up</Text>
             <Formik
-                initialValues={{ email: "", password: "" }}
+                initialValues={initialValues}
                 onSubmit={(values) => {
-                    onRegister(values);
+                    onRegister({ ...values, isOwner });
                 }}
                 validationSchema={schema}
             >
@@ -49,9 +53,23 @@ const RegisterForm = ({ onRegister, redirectTo }) => {
                         {errors.password && touched.password ? (
                             <Text style={styles.error}>{errors.password}</Text>
                         ) : null}
-                        <TouchableHighlight onPress={handleSubmit}>
+
+                        <View style={styles.checkbox}>
+                            <CheckBox
+                                center
+                                checkedColor={Colors.gradientPrimary}
+                                title="Do you want to promote your location ?"
+                                checked={isOwner}
+                                containerStyle={{
+                                    backgroundColor: "#fff",
+                                    borderWidth: 0,
+                                }}
+                                onPress={() => setIsOwner(!isOwner)}
+                            />
+                        </View>
+                        <TouchableOpacity onPress={handleSubmit}>
                             <Text style={styles.button}>Sign Up</Text>
-                        </TouchableHighlight>
+                        </TouchableOpacity>
                     </View>
                 )}
             </Formik>
@@ -75,9 +93,15 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: "center",
         justifyContent: "flex-start",
+        backgroundColor: "#fff",
         height: "100%",
         width: "100%",
         paddingTop: 250,
+    },
+    checkbox: {
+        marginTop: 30,
+        flexDirection: "row",
+        width: 250,
     },
     form: {
         alignItems: "center",

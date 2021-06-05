@@ -1,9 +1,7 @@
 import React from "react";
 import { Colors } from "../../../theme/colors";
 import { StyleSheet, View, TextInput, Text } from "react-native";
-import {
-    TouchableOpacity,
-} from "react-native-gesture-handler";
+import { TouchableOpacity } from "react-native-gesture-handler";
 import { Formik } from "formik";
 import * as Yup from "yup";
 
@@ -77,12 +75,12 @@ LoginForm.defaultProps = {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         alignItems: "center",
         justifyContent: "flex-start",
         height: "100%",
         width: "100%",
         paddingTop: 250,
+        backgroundColor: "#fff",
     },
     form: {
         alignItems: "center",

@@ -18,6 +18,7 @@ const LoginScreen = ({ navigation, state, performLogin }) => {
     };
 
     const redirectTo = () => {
+        console.log("redir");
         navigation.navigate("Register");
     };
     return <LoginForm onLogin={onLogin} redirectTo={redirectTo}></LoginForm>;
