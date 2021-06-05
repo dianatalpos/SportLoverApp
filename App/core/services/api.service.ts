@@ -13,6 +13,7 @@ export default class ApiService {
     ) {
         const storage = new StorageService();
         const requestUrl = `${API_PROTOCOL}://${API_URL}/${url}`;
+
         const token = await storage.getItem(StorageKeys.TOKEN);
         const headers: any = {
             "Content-Type": contentType,
@@ -32,10 +33,15 @@ export default class ApiService {
             options["body"] = JSON.stringify(body);
         }
 
-        return fetch(requestUrl, options).then(this.handleRequestStatus);
+        return fetch(requestUrl, options)
+            .then(this.handleRequestStatus)
+            .catch((error) => {
+                console.log(error, "EROAREEE");
+            });
     }
 
     private handleRequestStatus(response: Response) {
+        console.log(response, "AAAAAAAAAA")
         if (response.ok) {
             return response.json();
         }

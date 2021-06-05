@@ -11,13 +11,10 @@ const EventList = (props) => {
     const { events, onAdd, onItemPressed } = props
     const [loading, setLoading] = useState(false);
 
-    console.log(events, 'EVENTS')
-
-
     const renderListItem = (flatListProp) => {
         const { item } = flatListProp;
         console.log(item);
-        return <EventItem event={item} onPress={() => onItemPressed(item.eventId)} />;
+        return <EventItem event={item} onPress={() => onItemPressed(item)} />;
     };
 
     return (
@@ -39,7 +36,7 @@ const EventList = (props) => {
                 {events && events.length !== 0 ? <FlatList
                     data={events}
                     renderItem={renderListItem}
-                    keyExtractor={event => event.eventId}
+                    keyExtractor={event => event.id}
                     style={styles.listStyle}
                 /> : null}
 

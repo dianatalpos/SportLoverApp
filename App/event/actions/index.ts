@@ -1,3 +1,3 @@
-import { getEvent, getEvents } from "./event.effects";
+import { getEvent, getEvents, setEvent } from "./event.effects";
 
-export { getEvent, getEvents };
+export { getEvent, getEvents, setEvent };

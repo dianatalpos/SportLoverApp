@@ -4,11 +4,11 @@ import { ScrollView } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { connect } from "react-redux";
 import { EventList } from "../../components";
-import { getEvents, getEvent } from "../../actions";
+import { getEvents, setEvent } from "../../actions";
 
 
 const EventsScreen = (props) => {
-    const { navigation, state, getEvents } = props
+    const { navigation, state, getEvents, setEvent } = props
     const { events } = state;
     // console.log(state, 'state')
 
@@ -39,14 +39,14 @@ const EventsScreen = (props) => {
 
     const onAddEvent = () => {
         console.log("Press Add Event");
-        navigation.push("AddEvent");
+        navigation.navigate("AddEvent");
     }
 
 
-    const onItemPressed = (eventId: string) => {
-        console.log("Press Add Event");
-        getEvent(eventId);
-        navigation.push("EventDetails");
+    const onItemPressed = (event: Event) => {
+        console.log("Press Item");
+        setEvent(event);
+        navigation.navigate("EventDetails");
     }
 
     return (
@@ -66,4 +66,4 @@ const mapStateToProps = (state) => ({
     state: state.events,
 });
 
-export default connect(mapStateToProps, { getEvents })(EventsScreen);
+export default connect(mapStateToProps, { getEvents, setEvent })(EventsScreen);

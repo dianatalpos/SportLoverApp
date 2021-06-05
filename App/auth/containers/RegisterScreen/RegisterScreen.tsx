@@ -6,7 +6,7 @@ import { performRegister } from "../../actions";
 const RegisterScreen = ({ navigation, state, performRegister }) => {
     const onRegister = (user: any) => {
         performRegister(user)
-            .then(() => navigation.navigate("Profile"))
+            .then(() => navigation.navigate("Main"))
             .catch((err: Error) => console.log(err.message, "Register error!"));
     };
 

@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     },
     peopleNumber: {
         color: Colors.colorTextBlack,
-        fontSize: 25,
+        fontSize: 15,
         fontWeight: '700',
     }
 });
