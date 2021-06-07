@@ -33,10 +33,10 @@ const ProfileEditForm = ({ profile, onEdit }) => {
         lastName: Yup.string()
             .required("Last Name is required!")
             .label("Last Name"),
-        birthDay: Yup.date()
+        birthday: Yup.date()
             .required("Birth day is required")
-            .label("Birth Day"),
-        avatar: Yup.string().label("Avatar"),
+            .label("Birthday"),
+        image: Yup.string().label("Image"),
         activities: Yup.array().label("Activities"),
     });
     const noImg =
@@ -48,11 +48,10 @@ const ProfileEditForm = ({ profile, onEdit }) => {
         const profile = new Profile();
         profile.firstName = values.firstName;
         profile.lastName = values.lastName;
-        profile.birthDay = values.birthDay;
-        profile.description = values.description;
-        profile.avatar = values.avatar;
+        profile.birthday = values.birthDay;
+        profile.shortDescription = values.shortDescription;
+        profile.image = values.avatar;
         profile.activities = values.activities;
-        profile.description = values.description;
 
         onEdit(values);
     };
@@ -69,10 +68,10 @@ const ProfileEditForm = ({ profile, onEdit }) => {
                     firstName: profile?.firstName || "",
                     lastName: profile?.lastName || "",
                     activities: profile?.activities || [],
-                    avatar: profile?.avatar || noImg,
-                    description: profile?.description || "",
-                    birthDay:
-                        profile?.birthDay ||
+                    image: profile?.image || noImg,
+                    shortDescription: profile?.shortDescription || "",
+                    birthday:
+                        profile?.birthday ||
                         moment(new Date()).format("YYYY-MM-DD"),
                 }}
                 onSubmit={(values) => handleSubmit(values)}
@@ -114,25 +113,25 @@ const ProfileEditForm = ({ profile, onEdit }) => {
                                 multiline={true}
                                 numberOfLines={5}
                                 placeholder="Description"
-                                value={values.description}
-                                onChangeText={handleChange("description")}
+                                value={values.shortDescription}
+                                onChangeText={handleChange("shortDescription")}
                             />
-                            {errors.description && touched.description ? (
+                            {errors.shortDescription && touched.shortDescription ? (
                                 <Text style={styles.error}>
-                                    {errors.description}
+                                    {errors.shortDescription}
                                 </Text>
                             ) : null}
                         </View>
 
                         <View>
                             <Datepicker
-                                date={values.birthDay}
-                                onChange={handleChange("birthDay")}
+                                date={values.birthday}
+                                onChange={handleChange("birthday")}
                                 placeholder={"Select birth day"}
                             />
-                            {errors.birthDay && touched.birthDay ? (
+                            {errors.birthday && touched.birthday ? (
                                 <Text style={styles.error}>
-                                    {errors.birthDay}
+                                    {errors.birthday}
                                 </Text>
                             ) : null}
                         </View>

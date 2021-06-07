@@ -15,7 +15,7 @@ const ParticipantItem = (props) => {
                 source={{ uri: participant ? participant.image : noImg }}
                 style={styles.avatar}
             ></Image>
-            <Text>{`${participant.lastName} ${participant.firstName}`}</Text>
+            <Text style={styles.textStyle}>{`${participant.lastName} ${participant.firstName}`}</Text>
         </View>
     )
 
@@ -30,10 +30,16 @@ const styles = StyleSheet.create({
     view: {
         flexDirection: "row",
         flexWrap: "wrap",
-        margin: 10,
+        alignItems: "center",
+        margin: 2,
         borderRadius: 10,
         shadowColor: Colors.colorLightGrey,
         shadowOffset: { width: 5, height: 5 },
+    },
+    textStyle: {
+        fontSize: 13,
+        fontWeight: '600',
+        paddingStart: 15,
     }
 })
 

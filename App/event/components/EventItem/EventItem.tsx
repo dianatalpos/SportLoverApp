@@ -14,18 +14,15 @@ type EventItemProps = {
 
 const EventItem = ({ event, onPress }: EventItemProps) => {
 
-    console.log(event, "EVENT")
-    console.log(event.dateTime)
     const displayEventDate = moment(event.dateTime).format("LL")
-    console.log(displayEventDate)
     return (
         <TouchableOpacity style={styles.container} onPress={onPress}>
             <MapView
                 initialRegion={{
                     latitude: event.locationLatitude,
                     longitude: event.locationLongitude,
-                    latitudeDelta: 0.1922,
-                    longitudeDelta: 0.045,
+                    latitudeDelta: 0.01,
+                    longitudeDelta: 0.01,
                 }}
                 style={styles.map}
             >

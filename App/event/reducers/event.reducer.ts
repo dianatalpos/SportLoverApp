@@ -1,4 +1,5 @@
 import { Action } from "../../shared";
+import { Event } from "../types"
 import {
     EVENT_FETCH_ERROR,
     EVENT_IS_FETCHED,
@@ -7,7 +8,9 @@ import {
     EVENTS_ARE_FETCHED,
     EVENTS_ARE_FETCHING,
     SET_EVENT,
+    JOIN_EVENT,
 } from "../actions/types";
+import { LOGOUT } from "../../auth/actions/types";
 
 const INITIAL_STATE = {
     event: null,
@@ -27,7 +30,7 @@ const EventReducer = (state = INITIAL_STATE, action: Action) => {
         case EVENT_IS_FETCHED:
             return {
                 ...state,
-                event: payload.event,
+                event: payload,
                 areFetching: false,
                 areFetched: true,
             };
@@ -37,7 +40,7 @@ const EventReducer = (state = INITIAL_STATE, action: Action) => {
                 areFetching: false,
                 areFetched: false,
                 hasError: true,
-                errorMessage: payload.message,
+                errorMessage: payload,
             };
         case EVENTS_ARE_FETCHING:
             return { ...state, isFetching: true };
@@ -54,12 +57,26 @@ const EventReducer = (state = INITIAL_STATE, action: Action) => {
                 areFetching: false,
                 areFetched: false,
                 hasError: true,
-                errorMessage: payload.message,
+                errorMessage: payload,
             };
         case SET_EVENT:
             return {
                 ...state,
                 event: payload,
+            }
+        case JOIN_EVENT:
+            return {
+                ...state,
+                areFetched: true,
+                isFetching: false,
+                areFetching: false,
+                events: state.events.filter((event: Event) => event.id != payload.id),
+                event: payload,
+            }
+        case LOGOUT:
+            return {
+                ...state,
+                ...INITIAL_STATE,
             }
         default:
             return state;

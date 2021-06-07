@@ -4,10 +4,10 @@ import { Profile, ProfileDTO } from "../types";
 
 export default class ProfileService extends CrudRepository<
     Profile,
-    ProfileDTO
+    Profile
 > {
     protected endpoint(): string {
-        return `profile`;
+        return `profiles`;
     }
 
     searchProfile(email: string): Promise<Profile> {

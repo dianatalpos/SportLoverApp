@@ -10,6 +10,7 @@ import { ProfileReducer } from "./profile";
 import { EventReducer } from "./event";
 import { MainScreen } from "./core/containers";
 import { LocationReducer } from "./location";
+import { CompleteProfileScreen } from "./profile";
 
 const Stack = createStackNavigator();
 const reducers = combineReducers({
@@ -41,6 +42,7 @@ const App = () => {
                 <Stack.Screen name="Main" component={MainScreen} />
                 <Stack.Screen name="Login" component={LoginScreen}/>
                 <Stack.Screen name="Register" component={RegisterScreen}/>
+                <Stack.Screen name="CompleteProfile" component={CompleteProfileScreen}/>
             </Stack.Navigator>
         </NavigationContainer>
     );

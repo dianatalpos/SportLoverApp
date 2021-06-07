@@ -9,12 +9,10 @@ import { Spinner } from "native-base";
 
 
 const EventList = (props) => {
-    const { loading, events, onAdd, onItemPressed } = props
-    console.log(events);
+    const { loading, events, onAdd, onItemPressed, title, message, shouldShowAddButton} = props
 
     const renderListItem = (flatListProp) => {
         const { item } = flatListProp;
-        console.log(item);
         return <EventItem event={item} onPress={() => onItemPressed(item)} />;
     };
 
@@ -22,7 +20,7 @@ const EventList = (props) => {
         <SafeAreaView style={{ backgroundColor: Colors.colorWhite }}>
             <View style={styles.container}>
                 <View style={{ flexDirection: 'row', width: '80%', justifyContent: 'space-between' }}>
-                    <Text style={styles.text}>Upcomming Events</Text>
+                    <Text style={styles.text}>{title}</Text>
                     <TouchableOpacity
                         style={styles.actionBtn}
                         onPress={onAdd}
@@ -30,7 +28,7 @@ const EventList = (props) => {
                         <MaterialCommunityIcons name="plus" color={Colors.colorGrey} size={26} />
                     </TouchableOpacity>
                 </View>
-                <Text style={{ color: Colors.colorGrey, letterSpacing: 3, fontWeight: 'bold', marginBottom: 20, marginTop: 10 }}>Help us build a great sport community!</Text>
+                <Text style={{ color: Colors.colorGrey, letterSpacing: 3, fontWeight: 'bold', marginBottom: 20, marginTop: 10 }}>{message}</Text>
 
                 {loading ?
                     <Spinner color={Colors.gradientPrimary} /> :

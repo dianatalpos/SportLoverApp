@@ -8,11 +8,25 @@ export default class EventService extends CrudRepository<Event, Event> {
         return `events`;
     }
 
-    getEvents(): Promise<any> {
+    getEvents(userId: string): Promise<any> {
         return this.apiService.performRequest(
-            this.endpoint() + "/all",
+            this.urlDetails(userId) + "/all",
             HttpMethod.POST
         );
+    }
+
+    joinEvent(eventId:  string, userId: string) {
+        return this.apiService.performRequest(
+            this.urlDetails(eventId) + "/join/" + userId,
+            HttpMethod.POST 
+        );
+    }
+
+    getNextEvents(userId: string): Promise<any> {
+        return this.apiService.performRequest(
+            this.endpoint() + "/next/" + userId,
+            HttpMethod.GET
+        )
     }
 
 }

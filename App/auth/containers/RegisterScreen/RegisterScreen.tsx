@@ -12,13 +12,14 @@ const RegisterScreen = ({ navigation, state, performRegister }) => {
                 const storage = new StorageService();
                 await storage.setItem(StorageKeys.TOKEN, data.token);
                 await storage.setItem(StorageKeys.ROLES, data.role);
-                navigation.navigate("Main");
+                await storage.setItem(StorageKeys.ID, data.id)
+                navigation.navigate("CompleteProfile");
             })
             .catch((err: Error) => console.log(err.message, "Register error!"));
     };
 
     const redirectTo = () => {
-        navigation.navigate("Login");
+        navigation.navigate("Main");
     };
 
     return (

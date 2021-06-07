@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { ScrollView } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { connect } from "react-redux";
@@ -11,10 +11,28 @@ const ProfileScreen = (props) => {
     const { navigation, state, getProfile } = props;
     const { profile, isFetched } = state;
 
+    const [userId, setUserId] = useState(null);
+    const [isIdLoaded, setIsIdLoaded] = useState(false);
+
+
     useEffect(() => {
-        const profileId = "12";
-        getProfile(profileId);
+        loadId();
     }, []);
+
+    const loadId = async () => {
+        const authService = new AuthService();
+        authService.getId().then((data) => {
+            setUserId(data);
+            setIsIdLoaded(true);
+        });
+    };
+
+    useEffect(() => {
+        console.log("Get profile from Profile screen")
+        if (isIdLoaded) {
+            getProfile(userId);
+        }
+    }, [userId, isIdLoaded]);
 
     const onAddFriend = () => {
         navigation.navigate("Add Friend");
@@ -24,7 +42,7 @@ const ProfileScreen = (props) => {
         navigation.navigate("Edit Profile");
     };
 
-    const onAvatarChange = () => {};
+    const onAvatarChange = () => { };
 
     const onLogout = () => {
         const auth = new AuthService();
@@ -44,9 +62,6 @@ const ProfileScreen = (props) => {
                             onAvatar={onAvatarChange}
                             onLogout={onLogout}
                         ></ProfileDetails>
-                        <ProfileActivitiesList
-                            activities={profile.activities}
-                        ></ProfileActivitiesList>
                     </View>
                 ) : (
                     <Text>No profile</Text>

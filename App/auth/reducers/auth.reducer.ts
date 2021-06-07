@@ -10,6 +10,7 @@ import {
 
 const INITIAL_STATE = {
     token: null,
+    id: null,
     isFetching: false,
     isFetched: false,
     hasError: false,
@@ -31,6 +32,7 @@ const AuthReducer = (
             return {
                 ...state,
                 token: payload.token,
+                id: payload.id,
                 isFetching: false,
                 isFetched: true,
             };

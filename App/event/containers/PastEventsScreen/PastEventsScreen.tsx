@@ -4,15 +4,15 @@ import { ScrollView } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { connect, useStore } from "react-redux";
 import { EventList } from "../../components";
-import { getEvents, setEvent } from "../../actions";
+import { getEvents, setEvent, getNextEvents } from "../../actions";
 import { getProfile } from "../../../profile";
 import { Spinner } from "native-base";
 import { Colors } from "../../../theme/colors";
 import { AuthService } from "../../../auth";
 
 
-const EventsScreen = (props) => {
-    const { navigation, state, getEvents, getProfile, setEvent } = props
+const NextEventsScreen = (props) => {
+    const { navigation, state, getEvents, getProfile, setEvent, getNextEvents } = props
     const { eventsRed, profileRed } = state;
     const { events, areFetching, hasError: eventsErr, areFetched } = eventsRed;
     const { isFetched, isFetching, hasError: profileError } = profileRed
@@ -36,16 +36,16 @@ const EventsScreen = (props) => {
     useEffect(() => {
         if (isIdLoaded) {
             console.log("In Events Screen, getting events", userId)
-            getEvents(userId);
+            getNextEvents(userId);
         }
     }, [userId, isIdLoaded]);
 
-    // useEffect(() => {
-    //     if (isIdLoaded) {
-    //         console.log("In Events Screen, getting profile", userId)
-    //         getProfile(userId);
-    //     }
-    // }, [userId, isIdLoaded])
+    useEffect(() => {
+        if (isIdLoaded) {
+            console.log("In Events Screen, getting profile", userId)
+            getProfile(userId);
+        }
+    }, [userId, isIdLoaded])
 
 
     const onAddEvent = () => {
@@ -54,8 +54,9 @@ const EventsScreen = (props) => {
 
 
     const onItemPressed = (event: Event) => {
-        setEvent(event);
-        navigation.navigate("EventDetails");
+        //setEvent(event);
+        //navigation.navigate("EventDetails");
+        console.log("Item pressed");
     }
 
     return (
@@ -66,8 +67,8 @@ const EventsScreen = (props) => {
                     events={events}
                     onAdd={onAddEvent}
                     onItemPressed={onItemPressed}
-                    title={"Upcomming events"}
-                    message={"Help us build a great sport community!"}
+                    title={"My Events"}
+                    message={"Click on one event to chat with your team!"}
                 ></EventList>}
             </SafeAreaView>
         </ScrollView>
@@ -81,5 +82,5 @@ const mapStateToProps = (state) => ({
     },
 });
 
-const mapDispatchToProps = { getEvents, setEvent, getProfile }
-export default connect(mapStateToProps, mapDispatchToProps)(EventsScreen);
+const mapDispatchToProps = { getEvents, setEvent, getProfile, getNextEvents }
+export default connect(mapStateToProps, mapDispatchToProps)(NextEventsScreen);

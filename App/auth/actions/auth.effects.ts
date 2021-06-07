@@ -13,6 +13,7 @@ import {
 } from "./types";
 
 export const performLogin = (credentials: AuthCredentials) => (dispatch) => {
+    console.log(credentials)
     dispatch(startLogin());
     const authService = new AuthService();
     const authCreds = new AuthCredentials();
@@ -21,7 +22,8 @@ export const performLogin = (credentials: AuthCredentials) => (dispatch) => {
     return authService
         .login(credentials)
         .then((response: any) => {
-            dispatch(successLogin(response.token, response.owner));
+            console.log("After call")
+            dispatch(successLogin(response.token, response.role, response.id));
             return response;
         })
         .catch((err: string) => {
@@ -39,7 +41,7 @@ export const performRegister = (credentials: AuthCredentials) => (dispatch) => {
     return authService
         .register(credentials)
         .then((response: any) => {
-            dispatch(successRegister(response.token));
+            dispatch(successRegister(response.token, response.role, response.id));
             return response;
         })
         .catch((err: Error) => dispatch(errorRegister(err.message)));
@@ -63,12 +65,13 @@ const startLogin = (): Action => {
     };
 };
 
-const successLogin = (token: string, owner: string): Action => {
+const successLogin = (token: string, role: string, id: string): Action => {
     return {
         type: LOGIN_SUCCESS,
         payload: {
             token,
-            owner,
+            role,
+            id,
         },
     };
 };
@@ -86,10 +89,14 @@ const startRegister = (): Action => {
     };
 };
 
-const successRegister = (token: string): Action => {
+const successRegister = (token: string, role: string, id: string): Action => {
     return {
         type: REGISTER_SUCCESS,
-        payload: token,
+        payload: {
+            token,
+            role,
+            id,
+        },
     };
 };
 

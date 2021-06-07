@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import  ProfileActivitiesList  from "../ProfileActivitiesList";
 import { Colors } from "../../../theme/colors";
 import ProfilePersonalDetails from "../ProfilePersonalDetails";
 
@@ -31,6 +32,9 @@ const ProfileDetails = (props) => {
                     <Text style={styles.addFriend}>Logout</Text>
                 </TouchableOpacity>
             </View>
+            <ProfileActivitiesList
+                activities={profile.activities}
+            ></ProfileActivitiesList>
         </View>
     );
 };

@@ -9,6 +9,7 @@ import {
     EVENTS_ARE_FETCHED,
     EVENTS_ARE_FETCHING,
     SET_EVENT,
+    JOIN_EVENT,
 } from "./types";
 
 export const getEvent = (id: string) => (dispatch) => {
@@ -23,13 +24,12 @@ export const getEvent = (id: string) => (dispatch) => {
 };
 
 
-export const getEvents = () => (dispatch) => {
+export const getEvents = (userId: string) => (dispatch) => {
     dispatch(eventsFetching());
     const eventService = new EventService();
     return eventService
-        .getEvents()
+        .getEvents(userId)
         .then((response: any) => {
-            console.log(response, 'BBBB')
             dispatch(eventsFetched(response));
         })
         .catch((err: Error) => {
@@ -38,6 +38,36 @@ export const getEvents = () => (dispatch) => {
             dispatch(eventsFetchError(err.message))
         });
 };
+
+export const getNextEvents = (userId: string) => (dispatch) => {
+    dispatch(eventsFetching());
+    const eventService = new EventService();
+    return eventService
+        .getNextEvents(userId)
+        .then((response: any) => {
+            dispatch(eventsFetched(response));
+        })
+        .catch((err: Error) => {
+            console.log(err, 'er');
+
+            dispatch(eventsFetchError(err.message))
+        });
+}
+
+export const joinEvent = (eventId, userId) => (dispatch) => {
+    dispatch(eventFetching());
+    const eventService = new EventService();
+    return eventService
+        .joinEvent(eventId, userId)
+        .then((response: any) => {
+            dispatch(joinEventAction(response));
+        })
+        .catch((err: Error) => {
+            console.log(err, 'er');
+
+            dispatch(eventFetchError(err.message))
+        });
+}
 
 const eventFetching = (): Action => {
     return {
@@ -60,7 +90,6 @@ const eventFetchError = (message: string): Action => {
 };
 
 const eventsFetched = (events: Event[]): Action => {
-    console.log(events, "FETCHED")
     return {
         type: EVENTS_ARE_FETCHED,
         payload: events,
@@ -84,6 +113,13 @@ const eventsFetching = (): Action => {
 export const setEvent = (event: Event): Action => {
     return {
         type: SET_EVENT,
+        payload: event,
+    };
+};
+
+export const joinEventAction = (event: Event): Action => {
+    return {
+        type: JOIN_EVENT,
         payload: event,
     };
 };

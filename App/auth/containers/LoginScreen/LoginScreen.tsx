@@ -4,22 +4,23 @@ import { AuthCredentials } from "../../types";
 import { performLogin } from "../../actions";
 import { connect } from "react-redux";
 import { StorageKeys, StorageService } from "../../../core";
+import { getProfile } from "../../../profile/actions";
 
-const LoginScreen = ({ navigation, state, performLogin }) => {
+const LoginScreen = ({ navigation, state, performLogin, getProfile }) => {
     const onLogin = (credentials: AuthCredentials) => {
+        console.log(credentials , "Before Login")
         performLogin(credentials)
             .then(async (data) => {
                 const storage = new StorageService();
-                console.log(data, 'LOGIN DATA')
                 await storage.setItem(StorageKeys.TOKEN, data.token);
                 await storage.setItem(StorageKeys.ROLES, data.role);
+                await storage.setItem(StorageKeys.ID, data.id)
                 navigation.navigate("Main");
             })
             .catch((err: Error) => console.log(err.message, "Login error"));
     };
 
     const redirectTo = () => {
-        console.log("redir");
         navigation.navigate("Register");
     };
     return <LoginForm onLogin={onLogin} redirectTo={redirectTo}></LoginForm>;
@@ -27,7 +28,11 @@ const LoginScreen = ({ navigation, state, performLogin }) => {
 
 const mapStateToProps = (state) => ({
     state: state.auth,
-    performLogin,
 });
 
-export default connect(mapStateToProps, { performLogin })(LoginScreen);
+const mapDispatchToProps = {
+    performLogin,
+    getProfile
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);

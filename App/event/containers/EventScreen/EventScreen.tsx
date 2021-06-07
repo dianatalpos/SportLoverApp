@@ -1,50 +1,71 @@
-import { Button } from "native-base";
-import React, { useEffect } from "react";
+import { Button, Spinner } from "native-base";
+import React, { useEffect, useState } from "react";
 import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { connect } from "react-redux";
 import { EventDetails } from "../../components";
 import { Colors } from "../../../theme/colors";
+import { joinEvent } from "../../actions"
+import { getProfile } from "../../../profile";
+import { AuthService } from "../../../auth";
 
 const EventScreen = (props) => {
-    const { state } = props
-    const event = state.event;
+    const { state, joinEvent } = props
+    const { eventsRed, profileRed } = state;
+    const { profile, isFetched, isFetching, hasError } = profileRed;
+    const { event, areFetching } = eventsRed;
 
-    const mockEvent: Event = {
-        sport: "Football",
-        level: "Beginner",
-        location: "Baza Sportiva Gheorgheni",
-        locationFieldName: "Football Field 1",
-        locationId: "",
-        locationFieldId: "",
-        dateTime: new Date(),
-        duration: 60,
-        createdBy: "admin",
-        maxNoPlayers: 22,
-        isPublic: true,
-        users: ["user1", "user2"],
+    const [isInEvent, setIsInEvent] = useState(false);
+
+    const [userId, setUserId] = useState(null);
+
+    const [isIdLoaded, setIsIdLoaded] = useState(false); 
+    const loading = isFetching || areFetching || !isIdLoaded;
+
+    useEffect(() => {
+        loadId();
+    }, []);
+
+    const loadId = async () => {
+        const authService = new AuthService();
+        authService.getId().then((data) => {
+            setUserId(data);
+            setIsIdLoaded(true);
+        });
     };
 
-    const onJoin = () => {
-        console.log("Join Event pressed")
-    }
-    return (
-        <ScrollView style={{ backgroundColor: "#fff" }}>
-            <SafeAreaView style={{ alignItems: "center" }}>
-                <EventDetails
-                    event={event}
-                ></EventDetails>
 
+    useEffect(() => {
+        if (!(isFetching || areFetching)) {
+            console.log("In use effect to set participants")
+            console.log(event);
+            setIsInEvent(! event.participants.find((participant) => participant.id === profile?.id))
+        }
+    }, [isFetching, areFetching])
+
+    const onJoin = () => {
+        console.log(event.id, userId, "In event Details");
+        joinEvent(event.id, userId);
+    }
+
+    const spinner = <Spinner color={Colors.gradientPrimary} />
+    const component = <ScrollView style={{ backgroundColor: "#fff" }}>
+        <SafeAreaView style={{ alignItems: "center" }}>
+           <EventDetails
+                event={event}
+            ></EventDetails>
+            {isInEvent ?
                 <TouchableOpacity style={styles.actionBtn} onPress={onJoin}>
                     <Text style={styles.joinEvent}>Join Event</Text>
                 </TouchableOpacity>
+                : null
+            }
+        </SafeAreaView>
+    </ScrollView>
+    return loading ? spinner : component
 
-            </SafeAreaView>
-        </ScrollView>
-    );
 };
-
 
 const styles = StyleSheet.create({
     view: {
@@ -73,7 +94,10 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => ({
-    state: state.events,
+    state: {
+        eventsRed: state.events,
+        profileRed: state.profile,
+    }
 });
 
-export default connect(mapStateToProps, {})(EventScreen);
+export default connect(mapStateToProps, { joinEvent, getProfile })(EventScreen);

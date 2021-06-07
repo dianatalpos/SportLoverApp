@@ -1,8 +1,12 @@
+import { LOGOUT } from "../../auth/actions/types";
 import { Action } from "../../shared";
 import {
     PROFILE_FETCH_ERROR,
     PROFILE_IS_FETCHED,
     PROFILE_IS_FETCHING,
+    PROFILE_EDIT,
+    PROFILE_EDIT_ERROR,
+    PROFILE_EDIT_SUCCESS
 } from "../actions/types";
 
 const INITIAL_STATE = {
@@ -34,6 +38,31 @@ const ProfileReducer = (state = INITIAL_STATE, action: Action) => {
                 hasError: true,
                 errorMessage: payload,
             };
+        case PROFILE_EDIT:
+            return {
+                ...state,
+                isFetching: true
+            }
+        case PROFILE_EDIT_SUCCESS:
+            return {
+                ...state,
+                profile: payload,
+                isFetching: false,
+                isFetched: true,
+            };
+        case PROFILE_EDIT_ERROR:
+            return {
+                ...state,
+                isFetching: false,
+                isFetched: false,
+                hasError: true,
+                errorMessage: payload,
+            };
+        case LOGOUT:
+            return {
+                ...state,
+                ...INITIAL_STATE,
+            }
         default:
             return state;
     }

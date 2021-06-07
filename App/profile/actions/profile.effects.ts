@@ -10,35 +10,31 @@ import {
     PROFILE_IS_FETCHING,
 } from "./types";
 
-export const getProfile = (id: string) => (dispatch) => {
+export const getProfile = (userId: string) => (dispatch) => {
     dispatch(profileFetching());
     const profileService = new ProfileService();
     return profileService
-        .get(id)
+        .get(userId)
         .then((response: any) => {
-            const mockProfile: Profile = {
-                activities: ["Basket"],
-                avatar: "https://i.pinimg.com/736x/4d/8e/cc/4d8ecc6967b4a3d475be5c4d881c4d9c.jpg",
-                birthDay:new Date("2000-01-01"),
-                description: "aaaaaaaaaa aaaaa aaaaa aaaaaaaaaaaaaaaaaaaa aaaaaaaaaa aaaaaaaaaa aaaaa",
-                firstName:"Marus",
-                id:'sss',
-                lastName:"Martus"
-            }
-            // dispatch(profileFetched(response.profile));
-            dispatch(profileFetched(mockProfile));
+            dispatch(profileFetched(response));
         })
-        .catch((err: Error) => dispatch(profileFetchError(err.message)));
+        .catch((err: Error) => {
+            dispatch(profileFetchError(err.message))
+        });
 };
 
 export const editProfile =
-    (id: string, profile: Profile) => (dispatch) => {
+    (userId: string, profile: Profile) => (dispatch) => {
+        console.log(profile, "From editProfile action")
+
         dispatch(startEditProfile());
         const profileService = new ProfileService();
         return profileService
-            .put(id, profile)
+            .put(userId, profile)
             .then((response) => {
-                dispatch(successEditProfile(response.profile));
+                console.log(profile, "After getting response from be")
+
+                dispatch(successEditProfile(response));
             })
             .catch((err: Error) => dispatch(errorEditProfile(err.message)));
     };

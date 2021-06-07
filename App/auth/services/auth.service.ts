@@ -33,11 +33,17 @@ export default class AuthService {
     async logout(): Promise<void> {
         await this.storage.removeItem(StorageKeys.TOKEN);
         await this.storage.removeItem(StorageKeys.ROLES);
+        await this.storage.removeItem(StorageKeys.ID);
     }
 
     async getRole(): Promise<string> {
         const role = await this.storage.getItem(StorageKeys.ROLES);
         return role;
+    }
+
+    async getId() : Promise<string> {
+        const id = await this.storage.getItem(StorageKeys.ID);
+        return id;
     }
 
     async isOwner(): Promise<boolean> {

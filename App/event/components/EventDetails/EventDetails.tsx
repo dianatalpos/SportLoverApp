@@ -43,7 +43,6 @@ const EventDetails = (props) => {
                     <Text numberOfLines={1} style={styles.primaryText}>{event.locationFieldName}</Text>
                     <Text numberOfLines={1} style={styles.primaryText}>{displayEventDate}</Text>
                     <Text style={styles.primaryText}>{event.duration} min</Text>
-                    <Text></Text>
                 </View>
                 <View>
                     <MaterialCommunityIcons
@@ -57,14 +56,14 @@ const EventDetails = (props) => {
             </View>
 
 
-            <ParticipantsList participants={event.participants}></ParticipantsList>
+            <ParticipantsList style={styles.content} participants={event.participants}></ParticipantsList>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
     view: {
-        height: "100%",
+        height: "95%",
         width: "100%",
         justifyContent: "flex-start",
         alignItems: "center",
@@ -101,7 +100,7 @@ const styles = StyleSheet.create({
         borderTopRightRadius: 5,
     },
     content: {
-        padding: 12,
+        padding: 10,
         flexDirection: 'row',
         justifyContent: 'space-between',
         width: '100%',

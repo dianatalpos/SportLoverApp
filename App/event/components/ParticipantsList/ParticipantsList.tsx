@@ -1,6 +1,7 @@
-import { Text, View } from "react-native";
+import { ScrollView, ScrollViewBase, StyleSheet, Text, View } from "react-native";
 import React from "react"
 import ParticipantItem from "../ParticipantItem";
+import { Colors } from "../../../theme/colors";
 
 
 const ParticipantsList = (props) => {
@@ -10,12 +11,33 @@ const ParticipantsList = (props) => {
 
 
     return (
-        <View>
-            <Text>Participants List</Text>
-            <View>{items}</View>
+        <View style={styles.content}> 
+            <Text style={styles.primaryText}>Participants List</Text>
+            <ScrollView  style={styles.scrollView}>{items}</ScrollView>
         </View>
     )
 
 }
+
+const styles= StyleSheet.create({
+    content: {
+        padding: 12,
+        justifyContent: 'space-between',
+        width: '100%',
+        marginTop: 10,
+    },
+    primaryText: {
+        color: Colors.colorTextBlack,
+        fontWeight: '600',
+        fontSize: 16,
+        marginBottom: 8,
+    },
+    scrollView: {
+        height: 90,
+        borderRadius: 15,
+        borderColor: Colors.colorGrey,
+        borderWidth: 1,
+        }
+})
 
 export default ParticipantsList;

@@ -1,3 +1,4 @@
 import ProfileTab from "./ProfileTab";
+import CompleteProfileScreen from "./CompleteProfileScreen";
 
-export { ProfileTab };
+export { ProfileTab, CompleteProfileScreen };
