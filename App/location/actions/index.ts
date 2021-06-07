@@ -1,3 +1,4 @@
-import { getLocations } from "./location.effects";
+import { getLocations, setLocation } from "./location.effects";
+import { getFields } from "./fields.effects"
 
-export { getLocations };
+export { getLocations, getFields, setLocation };

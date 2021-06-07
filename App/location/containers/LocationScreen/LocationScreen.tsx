@@ -5,11 +5,13 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { connect } from "react-redux";
 import { AuthService } from "../../../auth";
 import { Colors } from "../../../theme/colors";
-import { getLocations } from "../../actions";
+import { getLocations, setLocation } from "../../actions";
 import { LocationList } from "../../components";
+import { Location } from "../../types";
 
-const LocationScreen = ({ state, getLocations }) => {
-    const { locations, isFetching } = state;
+const LocationScreen = (props) => {
+    const { navigation, state, getLocations, setLocation} = props;
+    const { locations, isFetching} = state
 
     const [userId, setUserId] = useState(null);
     const [isIdLoaded, setIsIdLoaded] = useState(false);
@@ -39,9 +41,9 @@ const LocationScreen = ({ state, getLocations }) => {
     }
 
 
-    const onItemPressed = (event: Event) => {
-        // setEvent(event);
-        // navigation.navigate("EventDetails");
+    const onItemPressed = (location: Location) => {
+        setLocation(location);
+        navigation.navigate("LocationDetails");
     }
 
 
@@ -69,6 +71,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
     getLocations,
+    setLocation
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LocationScreen);

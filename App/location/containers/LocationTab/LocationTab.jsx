@@ -1,6 +1,7 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import LocationScreen from "../LocationScreen";
+import LocationDetailsScreen from "../LocationDetailsScreen";
 
 const Stack = createStackNavigator();
 
@@ -16,6 +17,11 @@ const LocationTab = () => {
                 name="Add Location"
                 component={}
             /> */}
+            <Stack.Screen
+                name="LocationDetails"
+                options={{ header: () => null }}
+                component={LocationDetailsScreen}
+            />
         </Stack.Navigator>
     );
 };

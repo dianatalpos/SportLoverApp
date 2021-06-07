@@ -1,3 +1,3 @@
 import { LocationTab } from "./containers";
-import LocationReducer from "./reducers"
-export { LocationTab, LocationReducer };
+import {LocationReducer, FieldsReducer}  from "./reducers"
+export { LocationTab, LocationReducer, FieldsReducer };

@@ -19,7 +19,6 @@ const EventScreen = (props) => {
     const [isInEvent, setIsInEvent] = useState(false);
 
     const [userId, setUserId] = useState(null);
-
     const [isIdLoaded, setIsIdLoaded] = useState(false); 
     const loading = isFetching || areFetching || !isIdLoaded;
 

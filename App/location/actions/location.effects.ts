@@ -5,6 +5,7 @@ import {
     LOCATIONS_FETCH_ERROR,
     LOCATIONS_ARE_FETCHED,
     LOCATIONS_ARE_FETCHING,
+    SET_LOCATION,
 } from "./types";
 
 // export const getLocation = (locationId: string, id: string) => (dispatch) => {
@@ -34,11 +35,18 @@ export const getLocations = (userId: string) => (dispatch) => {
     return locationService
         .get(userId)
         .then((response: any) => {
-             dispatch(locationsFetched(response));
+            dispatch(locationsFetched(response));
         })
         .catch((err: Error) => dispatch(locationsFetchError(err.message)));
 };
 
+
+export const setLocation = (location: Location): Action => {
+    return {
+        type: SET_LOCATION,
+        payload: location,
+    };
+};
 
 const locationsFetching = (): Action => {
     return {

@@ -1,8 +1,10 @@
+import { LOGOUT } from "../../auth/actions/types";
 import { Action } from "../../shared";
 import {
     LOCATIONS_FETCH_ERROR,
     LOCATIONS_ARE_FETCHED,
     LOCATIONS_ARE_FETCHING,
+    SET_LOCATION,
 } from "../actions/types";
 
 const INITIAL_STATE = {
@@ -35,6 +37,16 @@ const LocationReducer = (state = INITIAL_STATE, action: Action) => {
                 hasError: true,
                 errorMessage: payload,
             };
+        case SET_LOCATION:
+            return {
+                ...state,
+                location: payload,
+            }
+        case LOGOUT:
+            return {
+                ...state,
+                ...INITIAL_STATE,
+            }
         default:
             return state;
     }

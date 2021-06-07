@@ -9,7 +9,7 @@ import { SplashScreen } from "./core";
 import { ProfileReducer } from "./profile";
 import { EventReducer } from "./event";
 import { MainScreen } from "./core/containers";
-import { LocationReducer } from "./location";
+import { FieldsReducer, LocationReducer } from "./location";
 import { CompleteProfileScreen } from "./profile";
 import { StatusBar, StyleSheet, View } from "react-native";
 
@@ -19,6 +19,7 @@ const reducers = combineReducers({
     profile: ProfileReducer,
     events: EventReducer,
     locations: LocationReducer,
+    fields: FieldsReducer,
 });
 const store = createStore(reducers, applyMiddleware(thunk));
 
