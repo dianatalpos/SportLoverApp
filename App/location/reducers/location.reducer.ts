@@ -1,42 +1,43 @@
 import { Action } from "../../shared";
 import {
-    LOCATION_FETCH_ERROR,
-    LOCATION_IS_FETCHED,
-    LOCATION_IS_FETCHING,
+    LOCATIONS_FETCH_ERROR,
+    LOCATIONS_ARE_FETCHED,
+    LOCATIONS_ARE_FETCHING,
 } from "../actions/types";
 
 const INITIAL_STATE = {
-    profile: null,
+    location: null,
+    locations: null,
     isFetching: false,
     isFetched: false,
     hasError: false,
     errorMessage: null,
 };
 
-const EventReducer = (state = INITIAL_STATE, action: Action) => {
+const LocationReducer = (state = INITIAL_STATE, action: Action) => {
     const { type, payload } = action;
 
     switch (type) {
-        case LOCATION_IS_FETCHING:
+        case LOCATIONS_ARE_FETCHING:
             return { ...state, isFetching: true };
-        case LOCATION_IS_FETCHED:
+        case LOCATIONS_ARE_FETCHED:
             return {
                 ...state,
-                profile: payload.profile,
+                locations: payload,
                 isFetching: false,
                 isFetched: true,
             };
-        case LOCATION_FETCH_ERROR:
+        case LOCATIONS_FETCH_ERROR:
             return {
                 ...state,
                 isFetching: false,
                 isFetched: false,
                 hasError: true,
-                errorMessage: payload.message,
+                errorMessage: payload,
             };
         default:
             return state;
     }
 };
 
-export default EventReducer;
+export default LocationReducer;

@@ -8,7 +8,7 @@ export enum ActivityType {
     CHESS = "Chess",
     JOGGING = "Jogging",
     SWIMMING = "Swimming",
-    CROSSFIT = "Crossfit",
+    FOOTBALL = "Football",
 }
 
 export const activityTypes = [
@@ -21,7 +21,7 @@ export const activityTypes = [
     ActivityType.CHESS,
     ActivityType.JOGGING,
     ActivityType.SWIMMING,
-    ActivityType.CROSSFIT,
+    ActivityType.FOOTBALL,
 ];
 
 export const activityIcons = {
@@ -34,5 +34,5 @@ export const activityIcons = {
     [ActivityType.CHESS]: "chess-knight",
     [ActivityType.JOGGING]: "run",
     [ActivityType.SWIMMING]: "pool",
-    [ActivityType.CROSSFIT]: "weight-lifter",
+    [ActivityType.FOOTBALL]: "soccer",
 };

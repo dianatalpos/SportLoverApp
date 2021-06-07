@@ -1,3 +1,3 @@
-import { getLocation } from "./location.effects";
+import { getLocations } from "./location.effects";
 
-export { getLocation };
+export { getLocations };

@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 import { Colors } from "../../../theme/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { LocationScreen } from "../../../location";
+import { LocationTab } from "../../../location";
 import { ProfileTab } from "../../../profile/containers";
 import { EventsTab, MyEventsTab } from "../../../event";
 import { getProfile } from "../../../profile"
@@ -41,9 +41,10 @@ const MainScreen = (props) => {
         >
             {isOwner ? (
                 <Tab.Screen
-                    name="My Location"
-                    component={LocationScreen}
+                    name="MyLocation"
+                    component={LocationTab}
                     options={{
+                        unmountOnBlur: true,
                         tabBarLabel: "Location",
                         tabBarIcon: ({ color, size }) => (
                             <MaterialCommunityIcons

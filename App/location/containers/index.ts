@@ -1,3 +1,3 @@
-import LocationScreen from "./LocationScreen";
+import LocationTab from "./LocationTab";
 
-export { LocationScreen };
+export { LocationTab };

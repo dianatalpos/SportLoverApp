@@ -1,3 +1,3 @@
-import { LocationScreen } from "./containers";
+import { LocationTab } from "./containers";
 import LocationReducer from "./reducers"
-export { LocationScreen, LocationReducer };
+export { LocationTab, LocationReducer };
