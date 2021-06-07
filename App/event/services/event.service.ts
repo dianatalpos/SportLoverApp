@@ -29,4 +29,11 @@ export default class EventService extends CrudRepository<Event, Event> {
         )
     }
 
+    getPastEvents(userId: string): Promise<any> {
+        return this.apiService.performRequest(
+            this.endpoint() + "/past/" + userId,
+            HttpMethod.GET
+        )
+    }
+
 }

@@ -4,22 +4,21 @@ import { ScrollView } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { connect, useStore } from "react-redux";
 import { EventList } from "../../components";
-import { getEvents, setEvent, getNextEvents } from "../../actions";
-import { getProfile } from "../../../profile";
+import { setEvent, getPastEvents } from "../../actions";
 import { Spinner } from "native-base";
 import { Colors } from "../../../theme/colors";
 import { AuthService } from "../../../auth";
 
 
-const NextEventsScreen = (props) => {
-    const { navigation, state, getEvents, getProfile, setEvent, getNextEvents } = props
+const PastEventScreen = (props) => {
+    const { navigation, state, getProfile, setEvent, getPastEvents } = props
     const { eventsRed, profileRed } = state;
-    const { events, areFetching, hasError: eventsErr, areFetched } = eventsRed;
+    const { pastEvents, areFetching, hasError: eventsErr, areFetched } = eventsRed;
     const { isFetched, isFetching, hasError: profileError } = profileRed
 
     const [userId, setUserId] = useState(null);
     const [isIdLoaded, setIsIdLoaded] = useState(false);
-    const loading = isFetching || areFetching;
+    const loading = isFetching || areFetching || !isIdLoaded;
 
     useEffect(() => {
         loadId();
@@ -35,18 +34,10 @@ const NextEventsScreen = (props) => {
 
     useEffect(() => {
         if (isIdLoaded) {
-            console.log("In Events Screen, getting events", userId)
-            getNextEvents(userId);
+            console.log("In My Past Events Screen, getting events", userId)
+            getPastEvents(userId);
         }
     }, [userId, isIdLoaded]);
-
-    useEffect(() => {
-        if (isIdLoaded) {
-            console.log("In Events Screen, getting profile", userId)
-            getProfile(userId);
-        }
-    }, [userId, isIdLoaded])
-
 
     const onAddEvent = () => {
         navigation.navigate("AddEvent");
@@ -64,11 +55,12 @@ const NextEventsScreen = (props) => {
             <SafeAreaView style={{ alignItems: "center" }}>
                 {loading ? <Spinner color={Colors.gradientPrimary} /> : <EventList
                     loading={areFetching}
-                    events={events}
+                    events={pastEvents}
                     onAdd={onAddEvent}
                     onItemPressed={onItemPressed}
-                    title={"My Events"}
+                    title={"My Past Events"}
                     message={"Click on one event to chat with your team!"}
+                    shouldShowAddButton={false}
                 ></EventList>}
             </SafeAreaView>
         </ScrollView>
@@ -82,5 +74,5 @@ const mapStateToProps = (state) => ({
     },
 });
 
-const mapDispatchToProps = { getEvents, setEvent, getProfile, getNextEvents }
-export default connect(mapStateToProps, mapDispatchToProps)(NextEventsScreen);
+const mapDispatchToProps = { setEvent, getPastEvents }
+export default connect(mapStateToProps, mapDispatchToProps)(PastEventScreen);

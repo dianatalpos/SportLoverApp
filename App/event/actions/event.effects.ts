@@ -10,6 +10,8 @@ import {
     EVENTS_ARE_FETCHING,
     SET_EVENT,
     JOIN_EVENT,
+    PAST_EVENTS_FETCHED,
+    NEXT_EVENTS_FETCHED,
 } from "./types";
 
 export const getEvent = (id: string) => (dispatch) => {
@@ -45,7 +47,23 @@ export const getNextEvents = (userId: string) => (dispatch) => {
     return eventService
         .getNextEvents(userId)
         .then((response: any) => {
-            dispatch(eventsFetched(response));
+            dispatch(nextEventsFetched(response));
+        })
+        .catch((err: Error) => {
+            console.log(err, 'er');
+
+            dispatch(eventsFetchError(err.message))
+        });
+}
+
+
+export const getPastEvents = (userId: string) => (dispatch) => {
+    dispatch(eventsFetching());
+    const eventService = new EventService();
+    return eventService
+        .getPastEvents(userId)
+        .then((response: any) => {
+            dispatch(pastEventsFetched(response));
         })
         .catch((err: Error) => {
             console.log(err, 'er');
@@ -121,5 +139,20 @@ export const joinEventAction = (event: Event): Action => {
     return {
         type: JOIN_EVENT,
         payload: event,
+    };
+};
+
+const pastEventsFetched = (events: Event[]): Action => {
+    return {
+        type: PAST_EVENTS_FETCHED,
+        payload: events,
+    };
+};
+
+
+const nextEventsFetched = (events: Event[]): Action => {
+    return {
+        type: NEXT_EVENTS_FETCHED,
+        payload: events,
     };
 };

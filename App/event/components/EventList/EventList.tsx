@@ -21,12 +21,12 @@ const EventList = (props) => {
             <View style={styles.container}>
                 <View style={{ flexDirection: 'row', width: '80%', justifyContent: 'space-between' }}>
                     <Text style={styles.text}>{title}</Text>
-                    <TouchableOpacity
+                    {shouldShowAddButton ? (<TouchableOpacity
                         style={styles.actionBtn}
                         onPress={onAdd}
                     >
                         <MaterialCommunityIcons name="plus" color={Colors.colorGrey} size={26} />
-                    </TouchableOpacity>
+                    </TouchableOpacity>) : null}
                 </View>
                 <Text style={{ color: Colors.colorGrey, letterSpacing: 3, fontWeight: 'bold', marginBottom: 20, marginTop: 10 }}>{message}</Text>
 
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         height: '100%',
         width: '100%',
-        paddingTop: 30,
+        paddingTop: 10,
     },
     text: {
         color: Colors.colorTextBlack,

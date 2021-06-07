@@ -73,7 +73,7 @@ const MainScreen = (props) => {
 
             <Tab.Screen
                 name="MyEvents"
-                component={EventsTab}
+                component={MyEventsTab}
                 options={{
                     unmountOnBlur: true,
                     tabBarLabel: "My Events",

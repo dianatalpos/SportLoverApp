@@ -11,6 +11,7 @@ import { EventReducer } from "./event";
 import { MainScreen } from "./core/containers";
 import { LocationReducer } from "./location";
 import { CompleteProfileScreen } from "./profile";
+import { StatusBar, StyleSheet, View } from "react-native";
 
 const Stack = createStackNavigator();
 const reducers = combineReducers({
@@ -28,25 +29,41 @@ const SplashScreenOptions = {
 
 const App = () => {
     return (
-        <NavigationContainer>
-            <Stack.Navigator
-                screenOptions={{
-                    headerShown: false,
-                }}
-            >
-                <Stack.Screen
-                    options={SplashScreenOptions}
-                    name="Splash"
-                    component={SplashScreen}
-                />
-                <Stack.Screen name="Main" component={MainScreen} />
-                <Stack.Screen name="Login" component={LoginScreen}/>
-                <Stack.Screen name="Register" component={RegisterScreen}/>
-                <Stack.Screen name="CompleteProfile" component={CompleteProfileScreen}/>
-            </Stack.Navigator>
-        </NavigationContainer>
+
+        <View style = {styles.container}>  
+                <StatusBar  
+                    backgroundColor = "#b3e6ff"  
+                    barStyle = "dark-content"   
+                    hidden = {false}    
+                    translucent = {true}  
+                />  
+
+            <NavigationContainer>
+                <Stack.Navigator
+                    screenOptions={{
+                        headerShown: false,
+                    }}
+                >
+                    <Stack.Screen
+                        options={SplashScreenOptions}
+                        name="Splash"
+                        component={SplashScreen}
+                    />
+                    <Stack.Screen name="Main" component={MainScreen} />
+                    <Stack.Screen name="Login" component={LoginScreen} />
+                    <Stack.Screen name="Register" component={RegisterScreen} />
+                    <Stack.Screen name="CompleteProfile" component={CompleteProfileScreen} />
+                </Stack.Navigator>
+            </NavigationContainer>
+        </View>
     );
 };
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+    }
+})
 
 const AppWithReduxProvider = () => (
     <Provider store={store}>

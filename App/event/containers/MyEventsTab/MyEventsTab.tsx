@@ -7,30 +7,31 @@ import { Button } from "react-native";
 import PastEventScreen from "../PastEventsScreen";
 import NextEventsScreen from "../NextEventsScreen";
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { Colors } from "../../../theme/colors";
 
 
 const Tab = createMaterialTopTabNavigator();
 
 const MyEventsTab = () => {
     return (
-        // <Stack.Navigator>
-        //     <Stack.Screen
-        //         name="NextEvents"
-        //         component={NextEventsScreen}
-        //         options={{ header: () => null }}
-        //     />
-
-        //     <Stack.Screen name="PastEvents" component={PastEventScreen} />
-
-        // </Stack.Navigator>
-        <Tab.Navigator>
+        <Tab.Navigator
+            tabBarOptions={{
+                showLabel: true,
+                activeTintColor: Colors.gradientPrimary,
+                inactiveTintColor: "grey",
+                style: {
+                    paddingTop: 30,
+                    backgroundColor: Colors.colorWhite,
+                },
+            }
+            }>
             <Tab.Screen name="NextEvents" component={NextEventsScreen}
                 options={{
-                    tabBarLabel: "NextEvents",
+                    tabBarLabel: "Next Events",
                 }} />
             <Tab.Screen name="PastEvents" component={PastEventScreen}
                 options={{
-                    tabBarLabel: "NextEvents",
+                    tabBarLabel: "Past Events",
                 }} />
         </Tab.Navigator>
     );

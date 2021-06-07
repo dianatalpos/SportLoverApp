@@ -9,12 +9,16 @@ import {
     EVENTS_ARE_FETCHING,
     SET_EVENT,
     JOIN_EVENT,
+    PAST_EVENTS_FETCHED,
+    NEXT_EVENTS_FETCHED,
 } from "../actions/types";
 import { LOGOUT } from "../../auth/actions/types";
 
 const INITIAL_STATE = {
     event: null,
     events: null,
+    pastEvents: null,
+    nextEvents: null,
     areFetching: false,
     areFetched: false,
     hasError: false,
@@ -73,6 +77,23 @@ const EventReducer = (state = INITIAL_STATE, action: Action) => {
                 events: state.events.filter((event: Event) => event.id != payload.id),
                 event: payload,
             }
+
+        case NEXT_EVENTS_FETCHED:
+            return {
+                ...state,
+                nextEvents: payload,
+                areFetching: false,
+                areFetchedL: true,
+            }
+
+        case PAST_EVENTS_FETCHED:
+            return {
+                ...state,
+                pastEvents: payload,
+                areFetching: false,
+                areFetchedL: true,
+            }
+
         case LOGOUT:
             return {
                 ...state,

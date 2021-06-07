@@ -68,6 +68,7 @@ const EventsScreen = (props) => {
                     onItemPressed={onItemPressed}
                     title={"Upcomming events"}
                     message={"Help us build a great sport community!"}
+                    shouldShowAddButton={true}
                 ></EventList>}
             </SafeAreaView>
         </ScrollView>
