@@ -11,8 +11,8 @@ import {
     JOIN_EVENT,
     PAST_EVENTS_FETCHED,
     NEXT_EVENTS_FETCHED,
+    REFRESH_DATA,
 } from "../actions/types";
-import { LOGOUT } from "../../auth/actions/types";
 
 const INITIAL_STATE = {
     event: null,
@@ -93,12 +93,8 @@ const EventReducer = (state = INITIAL_STATE, action: Action) => {
                 areFetching: false,
                 areFetchedL: true,
             }
-
-        case LOGOUT:
-            return {
-                ...state,
-                ...INITIAL_STATE,
-            }
+        case REFRESH_DATA: 
+            return INITIAL_STATE;
         default:
             return state;
     }

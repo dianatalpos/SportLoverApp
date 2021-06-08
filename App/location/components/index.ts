@@ -1,3 +1,4 @@
 import LocationList from "./LocationList";
+import AddLocationForm from "./AddLocationForm"
 
-export {LocationList};
+export {LocationList, AddLocationForm};

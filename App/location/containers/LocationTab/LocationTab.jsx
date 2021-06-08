@@ -2,6 +2,8 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import LocationScreen from "../LocationScreen";
 import LocationDetailsScreen from "../LocationDetailsScreen";
+import AddLocationScreen from "../AddLocationScreen";
+import { Colors } from "../../../theme/colors";
 
 const Stack = createStackNavigator();
 
@@ -13,15 +15,23 @@ const LocationTab = () => {
                 options={{ header: () => null }}
                 component={LocationScreen}
             />
-            {/* <Stack.Screen
-                name="Add Location"
-                component={}
-            /> */}
+
+            <Stack.Screen
+                name="AddLocation"
+                options={{
+                    headerBackTitleStyle: { color: Colors.colorGrey }, headerTintColor: Colors.colorGrey,
+                     headerShown: true, headerTitle: false, headerBackTitle: 'Back', headerTransparent: true }}
+                component={AddLocationScreen} />
+
             <Stack.Screen
                 name="LocationDetails"
-                options={{ header: () => null }}
+                options={{
+                    headerBackTitleStyle: { color: Colors.colorGrey }, headerTintColor: Colors.colorGrey,
+                    headerShown: true, headerTitle: true, headerTitle: 'Location Details' , headerBackTitle: 'Back', headerTransparent: true
+                }}
                 component={LocationDetailsScreen}
             />
+
         </Stack.Navigator>
     );
 };

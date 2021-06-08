@@ -4,7 +4,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Colors } from "../../../theme/colors";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-const ActivityItem = ({ activity, icon, isSelected, onSelect }) => {
+const ActivityItem = ({ activity, icon, isSelected, onSelect, isSmallIcons }) => {
     const viewStyle = isSelected
         ? styles.selectedBubble
         : styles.unselectedBubble;
@@ -15,10 +15,23 @@ const ActivityItem = ({ activity, icon, isSelected, onSelect }) => {
         ? styles.selectedTitle
         : styles.unselectedTitle;
 
+    let iconSize = 50;
+
+    const additionalStyle = {
+        height: 100,
+        width: 100,
+        fontSize: 16,
+    };
+    if (isSmallIcons) {
+        additionalStyle.width = 50;
+        additionalStyle.height = 50;
+        iconSize=25
+    }
+
     return (
-        <TouchableOpacity onPress={() => onSelect(activity)} style={viewStyle}>
-            <MaterialCommunityIcons name={icon} color={iconStyle} size={50} />
-            <Text style={textStyle}>{activity}</Text>
+        <TouchableOpacity onPress={() => onSelect(activity)} style={{ ...viewStyle, ...additionalStyle }}>
+            <MaterialCommunityIcons name={icon} color={iconStyle} size={iconSize} />
+            { !isSmallIcons ? <Text style={{...textStyle}}>{activity}</Text> : null}
         </TouchableOpacity>
     );
 };
@@ -60,6 +73,6 @@ ActivityItem.defaultProps = {
     activity: "N/A",
     icon: null,
     isSelected: false,
-    onSelect: () => {},
+    onSelect: () => { },
 };
 export default ActivityItem;

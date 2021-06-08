@@ -1,9 +1,9 @@
-import { LOGOUT } from "../../auth/actions/types";
 import { Action } from "../../shared";
 import {
     FIELDS_ARE_FETCHED,
     FIELDS_ARE_FETCHING,
     FIELDS_FETCH_ERROR,
+    REFRESH_DATA,
     SET_LOCATION,
 } from "../actions/types";
 
@@ -36,11 +36,8 @@ const FieldsReducer = (state = INITIAL_STATE, action: Action) => {
                 hasError: true,
                 errorMessage: payload,
             };
-        case LOGOUT:
-            return {
-                ...state,
-                ...INITIAL_STATE,
-            }
+        case REFRESH_DATA:
+            return INITIAL_STATE;
         default:
             return state;
     }

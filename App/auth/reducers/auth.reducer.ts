@@ -46,10 +46,7 @@ const AuthReducer = (
                 errorMessage: payload.message,
             };
         case LOGOUT: {
-            return {
-                ...state,
-                ...INITIAL_STATE,
-            };
+            return INITIAL_STATE;
         }
         default:
             return state;

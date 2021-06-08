@@ -8,6 +8,7 @@ import {
     PROFILE_FETCH_ERROR,
     PROFILE_IS_FETCHED,
     PROFILE_IS_FETCHING,
+    REFRESH_DATA
 } from "./types";
 
 export const getProfile = (userId: string) => (dispatch) => {
@@ -38,6 +39,16 @@ export const editProfile =
             })
             .catch((err: Error) => dispatch(errorEditProfile(err.message)));
     };
+
+export const refreshProfileData = () => (dispatch) => {
+    dispatch(refreshData());
+}
+
+const refreshData = () : Action => {
+    return {
+        type: REFRESH_DATA,
+    }
+}
 
 const profileFetching = (): Action => {
     return {

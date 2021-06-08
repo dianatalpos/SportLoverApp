@@ -14,6 +14,7 @@ const SelectEventActivityStep = ({ selectedType, onSelect }) => {
             isSelected={activity === selectedType}
             onSelect={onSelect}
             icon={getIconByType(activity)}
+            isSmallIcons={false}
         />
     ));
     return <View style={styles.grid}>{activities}</View>;

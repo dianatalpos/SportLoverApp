@@ -1,3 +1,3 @@
-import { getProfile, editProfile } from "./profile.effects";
+import { getProfile, editProfile, refreshProfileData } from "./profile.effects";
 
-export { getProfile, editProfile };
+export { getProfile, editProfile, refreshProfileData };

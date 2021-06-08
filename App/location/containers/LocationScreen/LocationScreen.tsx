@@ -30,19 +30,21 @@ const LocationScreen = (props) => {
 
     useEffect(() => {
         if (isIdLoaded) {
-            console.log("In Locations Screen", userId)
             getLocations(userId);
         }
     }, [userId, isIdLoaded]);
 
 
-    const onAddEvent = () => {
-        //navigation.navigate("AddEvent");
+    const onAddLocation = () => {
+        navigation.navigate("AddLocation");
     }
 
 
     const onItemPressed = (location: Location) => {
         setLocation(location);
+
+        console.log(location, "ber=fore details")
+
         navigation.navigate("LocationDetails");
     }
 
@@ -55,7 +57,7 @@ const LocationScreen = (props) => {
                 {isLoading ? <Spinner color={Colors.gradientPrimary} /> : <LocationList
                     loading={isFetching}
                     locations={locations}
-                    onAdd={onAddEvent}
+                    onAdd={onAddLocation}
                     onItemPressed={onItemPressed}
                 ></LocationList>}
             </SafeAreaView>

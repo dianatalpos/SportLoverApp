@@ -93,6 +93,7 @@ const MainScreen = (props) => {
                 name="My Profile"
                 component={ProfileTab}
                 options={{
+                    unmountOnBlur: true,
                     tabBarLabel: "Profile",
                     tabBarIcon: ({ color, size }) => (
                         <MaterialCommunityIcons

@@ -5,6 +5,7 @@ import {
     FIELDS_FETCH_ERROR,
     FIELDS_ARE_FETCHING,
     FIELDS_ARE_FETCHED,
+    REFRESH_DATA
 } from "./types";
 
 export const getFields = (locationId: string) => (dispatch) => {
@@ -17,6 +18,10 @@ export const getFields = (locationId: string) => (dispatch) => {
         })
         .catch((err: Error) => dispatch(fieldsFetchError(err.message)));
 };
+
+export const refreshFieldsData = () => (dispatch) => {
+    dispatch(refreshData());
+}
 
 
 const fieldsFetching = (): Action => {
@@ -38,3 +43,9 @@ const fieldsFetchError = (message: string): Action => {
         payload: message,
     };
 };
+
+const refreshData = (): Action => {
+    return {
+        type: REFRESH_DATA,
+    }
+}

@@ -6,6 +6,10 @@ import {
     LOCATIONS_ARE_FETCHED,
     LOCATIONS_ARE_FETCHING,
     SET_LOCATION,
+    REFRESH_DATA,
+    LOCATION_ADD,
+    LOCATION_ADD_ERROR,
+    LOCATION_ADD_SUCCESS,
 } from "./types";
 
 // export const getLocation = (locationId: string, id: string) => (dispatch) => {
@@ -40,6 +44,25 @@ export const getLocations = (userId: string) => (dispatch) => {
         .catch((err: Error) => dispatch(locationsFetchError(err.message)));
 };
 
+export const addLocation = (userId: string, location: Location) => (dispatch) => {
+console.log("AddLocation")
+    dispatch(startAddLocation());
+    const locationService = new LocationService();
+    return locationService
+        .post(userId, location)
+        .then((response) => {
+            console.log(response, "After getting response from be")
+
+            dispatch(successAddLocation(response));
+        })
+        .catch((err: Error) => dispatch(errorAddLocation(err.message)));
+}
+
+export const refreshLocationData = () => (dispatch) => {
+    dispatch(refreshData());
+}
+
+
 
 export const setLocation = (location: Location): Action => {
     return {
@@ -64,6 +87,32 @@ const locationsFetched = (locations: Location[]): Action => {
 const locationsFetchError = (message: string): Action => {
     return {
         type: LOCATIONS_FETCH_ERROR,
+        payload: message,
+    };
+};
+
+const refreshData = () : Action => {
+    return {
+        type: REFRESH_DATA,
+    }
+}
+
+const startAddLocation = (): Action => {
+    return {
+        type: LOCATION_ADD,
+    };
+};
+
+const successAddLocation = (location: Location): Action => {
+    return {
+        type: LOCATION_ADD_SUCCESS,
+        payload: location,
+    };
+};
+
+const errorAddLocation = (message: string): Action => {
+    return {
+        type: LOCATION_ADD_ERROR,
         payload: message,
     };
 };

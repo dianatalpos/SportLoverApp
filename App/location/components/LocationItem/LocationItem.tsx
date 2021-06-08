@@ -25,6 +25,7 @@ const LocationItem = ({ location, onPress }: LocationItemProps) => {
             isSelected={false}
             onSelect={() => {}}
             icon={getIconByType(activity)}
+            isSmallIcons={true}
         />
     ));
     

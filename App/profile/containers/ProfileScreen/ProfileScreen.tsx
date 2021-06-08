@@ -2,13 +2,17 @@ import React, { useEffect, useState } from "react";
 import { ScrollView } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { connect } from "react-redux";
-import { getProfile } from "../../actions";
+import { getProfile, refreshProfileData } from "../../actions";
 import { ProfileActivitiesList, ProfileDetails } from "../../components";
 import AuthService from "../../../auth/services";
 import { Text, View } from "react-native";
+import { refreshEventData } from "../../../event/actions/event.effects"
+import { refreshLocationData, refreshFieldsData } from "../../../location/actions"
+
 
 const ProfileScreen = (props) => {
-    const { navigation, state, getProfile } = props;
+    console.log(props)
+    const { navigation, state, getProfile, refreshProfileData, refreshEventData, refreshLocationData, refreshFieldsData} = props;
     const { profile, isFetched } = state;
 
     const [userId, setUserId] = useState(null);
@@ -47,6 +51,10 @@ const ProfileScreen = (props) => {
     const onLogout = () => {
         const auth = new AuthService();
         auth.logout();
+        refreshEventData();
+        refreshFieldsData();
+        refreshLocationData();
+        refreshProfileData();
         navigation.navigate("Login");
     };
 
@@ -77,5 +85,9 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
     getProfile,
+    refreshProfileData,
+    refreshEventData,
+    refreshLocationData,
+    refreshFieldsData
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileScreen);

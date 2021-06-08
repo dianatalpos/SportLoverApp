@@ -1,3 +1,5 @@
 import { LocationTab } from "./containers";
 import {LocationReducer, FieldsReducer}  from "./reducers"
-export { LocationTab, LocationReducer, FieldsReducer };
+import {refreshFieldsData, refreshLocationData} from "./actions"
+
+export { LocationTab, LocationReducer, FieldsReducer, refreshFieldsData, refreshLocationData };

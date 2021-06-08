@@ -28,7 +28,7 @@ const EventScreen = (props) => {
 
     const loadId = async () => {
         const authService = new AuthService();
-        authService.getId().then((data) => {
+        authService.getId().then((data) => { 
             setUserId(data);
             setIsIdLoaded(true);
         });

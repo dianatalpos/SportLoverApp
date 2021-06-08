@@ -2,7 +2,7 @@ import { HttpMethod } from "../../core/types";
 import { CrudRepository } from "../../shared";
 import { Location, LocationDTO } from "../types";
 
-export default class LocationService extends CrudRepository<Location, LocationDTO> {
+export default class LocationService extends CrudRepository<Location, Location> {
     protected endpoint(): string {
         return `locations`;
     }

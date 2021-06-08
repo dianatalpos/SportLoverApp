@@ -1,10 +1,13 @@
-import { LOGOUT } from "../../auth/actions/types";
 import { Action } from "../../shared";
 import {
     LOCATIONS_FETCH_ERROR,
     LOCATIONS_ARE_FETCHED,
     LOCATIONS_ARE_FETCHING,
     SET_LOCATION,
+    REFRESH_DATA,
+    LOCATION_ADD_SUCCESS,
+    LOCATION_ADD_ERROR,
+    LOCATION_ADD,
 } from "../actions/types";
 
 const INITIAL_STATE = {
@@ -42,11 +45,32 @@ const LocationReducer = (state = INITIAL_STATE, action: Action) => {
                 ...state,
                 location: payload,
             }
-        case LOGOUT:
+            
+        case REFRESH_DATA:
+            return INITIAL_STATE;
+
+        case LOCATION_ADD_SUCCESS:
             return {
                 ...state,
-                ...INITIAL_STATE,
+                locations: [ ...state.locations, payload],
+                isFetching: false,
+                isFetched: true,
+            };
+
+        case LOCATION_ADD:
+            return {
+                ...state,
+                isFetching: true
             }
+
+        case LOCATION_ADD_ERROR:
+            return {
+                ...state,
+                isFetching: false,
+                isFetched: false,
+                hasError: true,
+                errorMessage: payload,
+            };
         default:
             return state;
     }

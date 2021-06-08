@@ -12,6 +12,7 @@ import {
     JOIN_EVENT,
     PAST_EVENTS_FETCHED,
     NEXT_EVENTS_FETCHED,
+    REFRESH_DATA,
 } from "./types";
 
 export const getEvent = (id: string) => (dispatch) => {
@@ -87,9 +88,20 @@ export const joinEvent = (eventId, userId) => (dispatch) => {
         });
 }
 
+export const refreshEventData = () => (dispatch) => {
+    dispatch(refreshData());
+}
+
 const eventFetching = (): Action => {
     return {
         type: EVENT_IS_FETCHING,
+    };
+};
+
+
+const refreshData = (): Action => {
+    return {
+        type: REFRESH_DATA,
     };
 };
 

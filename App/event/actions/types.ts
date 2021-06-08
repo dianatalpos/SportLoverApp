@@ -8,4 +8,4 @@ export const SET_EVENT = "SET_EVENT";
 export const JOIN_EVENT = "JOIN_EVENT";
 export const NEXT_EVENTS_FETCHED = "NEXT_EVENTS_FETCHED";
 export const PAST_EVENTS_FETCHED = "PAST_EVENTS_FETCHED";
-
+export const REFRESH_DATA = "REFRESH_DATA";

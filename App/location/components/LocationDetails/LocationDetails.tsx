@@ -64,10 +64,12 @@ const LocationDetails = (props) => {
 
 const styles = StyleSheet.create({
     view: {
-        height: "95%",
+        height: "100%",
         width: "100%",
         justifyContent: "flex-start",
         alignItems: "center",
+        paddingTop:60,
+        backgroundColor: Colors.colorWhite
     },
     actionBtn: {
         marginVertical: 10,
@@ -94,11 +96,12 @@ const styles = StyleSheet.create({
     },
     map: {
         width: '100%',
-        height: 110,
+        height: 150,
         borderColor: Colors.colorLightGrey,
         borderWidth: 1,
         borderTopLeftRadius: 5,
         borderTopRightRadius: 5,
+        marginTop:30
     },
     content: {
         padding: 10,

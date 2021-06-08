@@ -9,8 +9,6 @@ import LocationItem from "../LocationItem";
 const LocationList = (props) => {
     const { loading, locations, onAdd, onItemPressed } = props
 
-    console.log(locations);
-
     const renderListItem = (flatListProp) => {
         const { item } = flatListProp;
         return <LocationItem location={item} onPress={() => onItemPressed(item)} />;

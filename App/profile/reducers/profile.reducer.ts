@@ -6,7 +6,8 @@ import {
     PROFILE_IS_FETCHING,
     PROFILE_EDIT,
     PROFILE_EDIT_ERROR,
-    PROFILE_EDIT_SUCCESS
+    PROFILE_EDIT_SUCCESS,
+    REFRESH_DATA
 } from "../actions/types";
 
 const INITIAL_STATE = {
@@ -58,11 +59,8 @@ const ProfileReducer = (state = INITIAL_STATE, action: Action) => {
                 hasError: true,
                 errorMessage: payload,
             };
-        case LOGOUT:
-            return {
-                ...state,
-                ...INITIAL_STATE,
-            }
+        case REFRESH_DATA:
+            return INITIAL_STATE;
         default:
             return state;
     }

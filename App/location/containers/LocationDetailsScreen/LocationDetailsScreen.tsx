@@ -1,16 +1,19 @@
+import { Spinner } from "native-base";
 import React from "react";
 import { useEffect } from "react";
 import { StyleSheet } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { connect } from "react-redux";
+import { Colors } from "../../../theme/colors";
 import { getFields } from "../../actions"
 import LocationDetails from "../../components/LocationDetails/LocationDetails";
 
 
 
 const LocationDetailsScreen = (props) => {
-    const { navigation, location, isFetched, getFields } = props;
+    const { state,  getFields } = props;
 
+    const {location, isFetching, isFetched} = state;
 
     useEffect(() => {
         if (isFetched) {
@@ -36,7 +39,8 @@ const LocationDetailsScreen = (props) => {
         getFields(location.id);
     }
 
-    return (<LocationDetails
+    return isFetching ? <Spinner color={Colors.gradientPrimary} /> :
+     (<LocationDetails
         location={location}
         onClickFields={onClickFields}
         onDeleteLocation={onDeleteLocation}
@@ -47,7 +51,7 @@ const LocationDetailsScreen = (props) => {
 
 const styles = StyleSheet.create({
 
-})
+})   
 
 const mapStateToProps = (state) => ({
     state: state.locations
