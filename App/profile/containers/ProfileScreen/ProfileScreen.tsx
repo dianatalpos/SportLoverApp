@@ -8,11 +8,12 @@ import AuthService from "../../../auth/services";
 import { Text, View } from "react-native";
 import { refreshEventData } from "../../../event/actions/event.effects"
 import { refreshLocationData, refreshFieldsData } from "../../../location/actions"
+import {refreshFriendsData} from "../../../friends/actions"
 
 
 const ProfileScreen = (props) => {
     console.log(props)
-    const { navigation, state, getProfile, refreshProfileData, refreshEventData, refreshLocationData, refreshFieldsData} = props;
+    const { navigation, state, getProfile, refreshProfileData, refreshEventData, refreshLocationData, refreshFieldsData, refreshFriendsData} = props;
     const { profile, isFetched } = state;
 
     const [userId, setUserId] = useState(null);
@@ -49,12 +50,15 @@ const ProfileScreen = (props) => {
     const onAvatarChange = () => { };
 
     const onLogout = () => {
-        const auth = new AuthService();
-        auth.logout();
         refreshEventData();
         refreshFieldsData();
         refreshLocationData();
         refreshProfileData();
+        refreshFriendsData();
+
+        const auth = new AuthService();
+        auth.logout();
+
         navigation.navigate("Login");
     };
 
@@ -88,6 +92,7 @@ const mapDispatchToProps = {
     refreshProfileData,
     refreshEventData,
     refreshLocationData,
-    refreshFieldsData
+    refreshFieldsData,
+    refreshFriendsData
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileScreen);

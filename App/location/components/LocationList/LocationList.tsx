@@ -19,7 +19,7 @@ const LocationList = (props) => {
             <View style={styles.container}>
                 <View style={{ flexDirection: 'row', width: '90%', justifyContent: 'space-evenly' }}>
                     <Text style={styles.text}>My Locations</Text>
-                    
+
                     <TouchableOpacity
                         style={styles.actionBtn}
                         onPress={onAdd}
@@ -30,8 +30,8 @@ const LocationList = (props) => {
                 <Text style={{ color: Colors.colorGrey, letterSpacing: 3, fontWeight: 'bold', marginBottom: 20, marginTop: 10 }}>An alternative to promote your location!</Text>
 
                 {loading ?
-                    <Spinner color={Colors.gradientPrimary} /> 
-                    :(locations && locations.length !== 0 ? <FlatList
+                    <Spinner color={Colors.gradientPrimary} />
+                    : (locations && locations.length !== 0 ? <FlatList
                         data={locations}
                         renderItem={renderListItem}
                         keyExtractor={location => location.id}
@@ -40,7 +40,7 @@ const LocationList = (props) => {
                         <View style={styles.addContainer}>
                             <MaterialCommunityIcons
                                 style={{}}
-                                name="home-search"
+                                name="magnify-remove-outline"
                                 color={Colors.colorTextBlack}
                                 size={80}
                             />

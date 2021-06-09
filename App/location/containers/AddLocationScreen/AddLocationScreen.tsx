@@ -28,11 +28,9 @@ const AddLocationScreen = (props) => {
     };
 
     const onAdd = (location: Location) => {
-        console.log("Pressed Add")
         addLocation(userId, location);
 
         navigation.navigate("Location")
-        console.log("after navigate")
     }
 
 

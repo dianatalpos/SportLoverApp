@@ -35,7 +35,6 @@ const CompleteProfileScreen = ({ navigation, state, editProfile }) => {
 
         editProfile(userId, profile);
 
-        console.log("Right after edit")
         navigation.navigate("Main");
     };
 

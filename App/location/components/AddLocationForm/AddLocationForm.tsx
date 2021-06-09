@@ -132,7 +132,6 @@ const AddLocationForm = ({ location, onAdd }) => {
     }
 
     const submit = () => {
-        console.log("submit")
 
         const nameError = generalValidation({ name }, schema);
         setNameError(nameError);

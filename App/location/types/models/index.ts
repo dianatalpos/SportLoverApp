@@ -1,3 +1,5 @@
 import Location from "./location.class";
 
-export { Location };
+import Field from "./field.class";
+
+export { Location, Field };

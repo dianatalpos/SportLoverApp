@@ -8,8 +8,6 @@ type ProfileActivitiesListProps = {
 
 const ProfileActivitiesList = ({ activities }: ProfileActivitiesListProps) => {
 
-    console.log(activities)
-
     const activitiesComponents = activities.map((activity) => (
         <ProfileActivityItem
             key={activity}

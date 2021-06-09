@@ -8,9 +8,11 @@ import PastEventScreen from "../PastEventsScreen";
 import NextEventsScreen from "../NextEventsScreen";
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { Colors } from "../../../theme/colors";
+import { ChatScreen } from "../../../chat";
 
 
 const Tab = createMaterialTopTabNavigator();
+const Stack = createStackNavigator();
 
 const MyEventsTab = () => {
     return (
@@ -33,6 +35,7 @@ const MyEventsTab = () => {
                 options={{
                     tabBarLabel: "Past Events",
                 }} />
+                
         </Tab.Navigator>
     );
 };

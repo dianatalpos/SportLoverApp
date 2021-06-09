@@ -13,7 +13,6 @@ import {
 } from "./types";
 
 export const performLogin = (credentials: AuthCredentials) => (dispatch) => {
-    console.log(credentials)
     dispatch(startLogin());
     const authService = new AuthService();
     const authCreds = new AuthCredentials();
@@ -22,7 +21,6 @@ export const performLogin = (credentials: AuthCredentials) => (dispatch) => {
     return authService
         .login(credentials)
         .then((response: any) => {
-            console.log("After call")
             dispatch(successLogin(response.token, response.role, response.id));
             return response;
         })

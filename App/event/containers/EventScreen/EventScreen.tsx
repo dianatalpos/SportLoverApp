@@ -37,14 +37,11 @@ const EventScreen = (props) => {
 
     useEffect(() => {
         if (!(isFetching || areFetching)) {
-            console.log("In use effect to set participants")
-            console.log(event);
             setIsInEvent(! event.participants.find((participant) => participant.id === profile?.id))
         }
     }, [isFetching, areFetching])
 
     const onJoin = () => {
-        console.log(event.id, userId, "In event Details");
         joinEvent(event.id, userId);
     }
 

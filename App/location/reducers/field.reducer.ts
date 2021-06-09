@@ -4,7 +4,9 @@ import {
     FIELDS_ARE_FETCHING,
     FIELDS_FETCH_ERROR,
     REFRESH_DATA,
-    SET_LOCATION,
+    FIELD_ADD_SUCCESS,
+    FIELD_ADD_ERROR,
+    FIELD_ADD,
 } from "../actions/types";
 
 const INITIAL_STATE = {
@@ -33,6 +35,28 @@ const FieldsReducer = (state = INITIAL_STATE, action: Action) => {
                 ...state,
                 areFetching: false,
                 areFetched: false,
+                hasError: true,
+                errorMessage: payload,
+            };
+        case FIELD_ADD_SUCCESS:
+            return {
+                ...state,
+                fields: [...state.fields, payload],
+                isFetching: false,
+                isFetched: true,
+            };
+
+        case FIELD_ADD:
+            return {
+                ...state,
+                isFetching: true
+            }
+
+        case FIELD_ADD_ERROR:
+            return {
+                ...state,
+                isFetching: false,
+                isFetched: false,
                 hasError: true,
                 errorMessage: payload,
             };

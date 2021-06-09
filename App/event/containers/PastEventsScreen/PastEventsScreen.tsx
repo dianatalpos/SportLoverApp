@@ -34,7 +34,6 @@ const PastEventScreen = (props) => {
 
     useEffect(() => {
         if (isIdLoaded) {
-            console.log("In My Past Events Screen, getting events", userId)
             getPastEvents(userId);
         }
     }, [userId, isIdLoaded]);

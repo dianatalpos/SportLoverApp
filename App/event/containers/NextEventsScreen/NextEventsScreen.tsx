@@ -35,16 +35,15 @@ const NextEventsScreen = (props) => {
 
     useEffect(() => {
         if (isIdLoaded) {
-            console.log("In Next Events Screen, getting next events", userId)
             getNextEvents(userId);
         }
     }, [userId, isIdLoaded]);
 
 
     const onItemPressed = (event: Event) => {
-        //setEvent(event);
+        setEvent(event);
         //navigation.navigate("EventDetails");
-        console.log("Item pressed");
+        navigation.navigate("Chat")
     }
 
     return (

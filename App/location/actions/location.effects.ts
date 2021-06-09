@@ -10,6 +10,9 @@ import {
     LOCATION_ADD,
     LOCATION_ADD_ERROR,
     LOCATION_ADD_SUCCESS,
+    LOCATION_EDIT,
+    LOCATION_EDIT_ERROR,
+    LOCATION_EDIT_SUCCESS,
 } from "./types";
 
 // export const getLocation = (locationId: string, id: string) => (dispatch) => {
@@ -45,17 +48,27 @@ export const getLocations = (userId: string) => (dispatch) => {
 };
 
 export const addLocation = (userId: string, location: Location) => (dispatch) => {
-console.log("AddLocation")
     dispatch(startAddLocation());
     const locationService = new LocationService();
     return locationService
         .post(userId, location)
         .then((response) => {
-            console.log(response, "After getting response from be")
 
             dispatch(successAddLocation(response));
         })
         .catch((err: Error) => dispatch(errorAddLocation(err.message)));
+}
+
+export const editLocation = (locationId: string, location: Location) => (dispatch) => {
+    dispatch(startEditLocation());
+    const locationService = new LocationService();
+    return locationService
+        .put(locationId, location)
+        .then((response) => {
+
+            dispatch(successEditLocation(response));
+        })
+        .catch((err: Error) => dispatch(errorEditLocation(err.message)));
 }
 
 export const refreshLocationData = () => (dispatch) => {
@@ -113,6 +126,26 @@ const successAddLocation = (location: Location): Action => {
 const errorAddLocation = (message: string): Action => {
     return {
         type: LOCATION_ADD_ERROR,
+        payload: message,
+    };
+};
+
+const startEditLocation = (): Action => {
+    return {
+        type: LOCATION_EDIT,
+    };
+};
+
+const successEditLocation = (location: Location): Action => {
+    return {
+        type: LOCATION_EDIT_SUCCESS,
+        payload: location,
+    };
+};
+
+const errorEditLocation = (message: string): Action => {
+    return {
+        type: LOCATION_EDIT_ERROR,
         payload: message,
     };
 };

@@ -8,7 +8,6 @@ import { getProfile } from "../../../profile/actions";
 
 const LoginScreen = ({ navigation, state, performLogin, getProfile }) => {
     const onLogin = (credentials: AuthCredentials) => {
-        console.log(credentials , "Before Login")
         performLogin(credentials)
             .then(async (data) => {
                 const storage = new StorageService();

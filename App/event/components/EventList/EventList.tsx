@@ -41,7 +41,7 @@ const EventList = (props) => {
                         <View style={styles.addContainer}>
                             <MaterialCommunityIcons
                                 style={{}}
-                                name="home-search"
+                                name="magnify-remove-outline"
                                 color={Colors.colorTextBlack}
                                 size={80}
                             />

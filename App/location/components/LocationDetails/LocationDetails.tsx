@@ -1,15 +1,21 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { FlatList, StyleSheet, Text, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Location } from "../../types";
 import { Colors } from "../../../theme/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import moment from "moment";
 import MapView, { Marker } from 'react-native-maps';
+import FieldDetails from "../FieldsDetails";
 
 
 const LocationDetails = (props) => {
-    const { location, onEditLocation, onDeleteLocation, onClickFields } = props;
+    const { location, fields, onEditLocation, onDeleteLocation, onClickFields } = props;
+
+    const renderListItem = (flatListProp) => {
+        const { item } = flatListProp;
+        return <FieldDetails field={item} />;
+    };
 
     return (
         <View style={styles.view}>
@@ -40,7 +46,13 @@ const LocationDetails = (props) => {
                     <Text numberOfLines={1} style={styles.secondaryText}>{`End time: ${location.endTime}`}</Text>
                 </View>
             </View>
-
+            
+            <FlatList
+                data={fields}
+                renderItem={renderListItem}
+                keyExtractor={field => field.id}
+                style={styles.listStyle}
+            />
 
             <View>
                 <TouchableOpacity
@@ -51,7 +63,7 @@ const LocationDetails = (props) => {
                 </TouchableOpacity>
 
                 <TouchableOpacity style={styles.actionBtn} onPress={onClickFields}>
-                    <Text style={styles.addFriend}>See Fields details</Text>
+                    <Text style={styles.addFriend}>Add Fields</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity style={styles.actionBtn} onPress={onDeleteLocation}>
@@ -63,6 +75,10 @@ const LocationDetails = (props) => {
 };
 
 const styles = StyleSheet.create({
+    listStyle: {
+        width: '90%',
+        padding: 12,
+    },
     view: {
         height: "100%",
         width: "100%",

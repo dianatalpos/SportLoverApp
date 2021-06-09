@@ -1,6 +1,6 @@
 import { HttpMethod } from "../../core/types";
 import { CrudRepository } from "../../shared";
-import { Location, LocationDTO } from "../types";
+import { Field, Location, LocationDTO } from "../types";
 
 export default class LocationService extends CrudRepository<Location, Location> {
     protected endpoint(): string {
@@ -11,6 +11,14 @@ export default class LocationService extends CrudRepository<Location, Location> 
         return this.apiService.performRequest(
             this.urlDetails(locationId) + "/fields",
             HttpMethod.GET
+        )
+    }
+
+    addField(locationId: string, field: Field): Promise<any> {
+        return this.apiService.performRequest(
+            this.urlDetails(locationId) + "/fields",
+            HttpMethod.POST,
+            field
         )
     }
 }

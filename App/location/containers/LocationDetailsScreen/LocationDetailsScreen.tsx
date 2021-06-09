@@ -1,32 +1,39 @@
 import { Spinner } from "native-base";
-import React from "react";
+import React, { useState } from "react";
 import { useEffect } from "react";
-import { StyleSheet } from "react-native";
-import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { View } from "react-native";
 import { connect } from "react-redux";
 import { Colors } from "../../../theme/colors";
-import { getFields } from "../../actions"
+import { getFields, addField } from "../../actions"
+import FieldDialog from "../../components/FieldDialog";
 import LocationDetails from "../../components/LocationDetails/LocationDetails";
+import { Field } from "../../types";
 
 
 
 const LocationDetailsScreen = (props) => {
-    const { state,  getFields } = props;
+    const { navigation, state, getFields, addField } = props;
+    const { locationRed, fieldsRed } = state
+    const { location, isFetching, isFetched } = locationRed;
+    const { fields, areFetching } = fieldsRed
+    const [
+        dialogShow, setDialogShow
+    ] = useState(false);
 
-    const {location, isFetching, isFetched} = state;
+    const [sports, setSports] = useState([])
+    const isLoading = isFetching && areFetching;
 
     useEffect(() => {
         if (isFetched) {
-            console.log("In use effect to set participants")
-            console.log(location);
             getFields(location.id);
+            setSports(location.sports)
         }
     }, [isFetched])
 
-
+    const sportData = location.sports.map((sport) => { return { value: sport } })
+    
     const onEditLocation = () => {
-        console.log("Edit Location pressed")
-        // navigation.navigate("EditLocation");
+        navigation.navigate("EditLocation");
     }
 
     const onDeleteLocation = () => {
@@ -34,27 +41,45 @@ const LocationDetailsScreen = (props) => {
         // A new action 
     }
 
-    const onClickFields = () => {
-        console.log()
-        getFields(location.id);
+    const onAddField = (field: Field) => {
+        addField(location.id, field)
+
+        setDialogShow(false)
     }
 
-    return isFetching ? <Spinner color={Colors.gradientPrimary} /> :
-     (<LocationDetails
-        location={location}
-        onClickFields={onClickFields}
-        onDeleteLocation={onDeleteLocation}
-        onEditLocation={onEditLocation}
-    />)
+    const onClickFields = () => {
+        setDialogShow(true)
+    }
+
+    const onDismiss = () => {
+        setDialogShow(false);
+    }
+
+    return isLoading ? <Spinner color={Colors.gradientPrimary} /> :
+        (<View>
+            <LocationDetails
+                location={location}
+                fields={fields}
+                onClickFields={onClickFields}
+                onDeleteLocation={onDeleteLocation}
+                onEditLocation={onEditLocation}
+            />
+
+            <FieldDialog
+                sports={sportData}
+                onAdd={onAddField}
+                show={dialogShow}
+                onDismiss={onDismiss}
+            > </FieldDialog>
+        </View>
+        )
 }
 
-
-const styles = StyleSheet.create({
-
-})   
-
 const mapStateToProps = (state) => ({
-    state: state.locations
+    state: {
+        locationRed: state.locations,
+        fieldsRed: state.fields,
+    }
 });
 
-export default connect(mapStateToProps, { getFields })(LocationDetailsScreen);
+export default connect(mapStateToProps, { getFields, addField })(LocationDetailsScreen);

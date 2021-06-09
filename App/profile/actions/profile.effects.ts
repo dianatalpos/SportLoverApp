@@ -26,14 +26,12 @@ export const getProfile = (userId: string) => (dispatch) => {
 
 export const editProfile =
     (userId: string, profile: Profile) => (dispatch) => {
-        console.log(profile, "From editProfile action")
 
         dispatch(startEditProfile());
         const profileService = new ProfileService();
         return profileService
             .put(userId, profile)
             .then((response) => {
-                console.log(profile, "After getting response from be")
 
                 dispatch(successEditProfile(response));
             })

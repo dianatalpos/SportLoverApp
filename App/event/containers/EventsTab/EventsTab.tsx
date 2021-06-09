@@ -7,6 +7,7 @@ import { Button } from "react-native";
 import AddEventScreen from "../AddEventScreen";
 import EventsScreen from "../EventsScreen";
 import EventScreen from "../EventScreen";
+import {ChatScreen} from "../../../chat"
 
 const Stack = createStackNavigator();
 
@@ -22,6 +23,7 @@ const EventsTab = () => {
             <Stack.Screen name="EventDetails" component={EventScreen} />
 
             <Stack.Screen name="AddEvent" component={AddEventScreen} />
+
         </Stack.Navigator>
     );
 };

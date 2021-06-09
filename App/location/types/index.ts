@@ -1,4 +1,4 @@
-import { Location } from "./models";
+import { Location, Field } from "./models";
 import { LocationDTO } from "./dtos";
 
-export { Location, LocationDTO };
+export { Location, LocationDTO, Field };

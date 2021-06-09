@@ -40,14 +40,6 @@ const EventsScreen = (props) => {
         }
     }, [userId, isIdLoaded]);
 
-    // useEffect(() => {
-    //     if (isIdLoaded) {
-    //         console.log("In Events Screen, getting profile", userId)
-    //         getProfile(userId);
-    //     }
-    // }, [userId, isIdLoaded])
-
-
     const onAddEvent = () => {
         navigation.navigate("AddEvent");
     }

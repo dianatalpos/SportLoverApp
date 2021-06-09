@@ -43,8 +43,6 @@ const LocationScreen = (props) => {
     const onItemPressed = (location: Location) => {
         setLocation(location);
 
-        console.log(location, "ber=fore details")
-
         navigation.navigate("LocationDetails");
     }
 
