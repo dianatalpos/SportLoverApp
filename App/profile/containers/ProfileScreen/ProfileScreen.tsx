@@ -8,36 +8,32 @@ import AuthService from "../../../auth/services";
 import { Text, View } from "react-native";
 import { refreshEventData } from "../../../event/actions/event.effects"
 import { refreshLocationData, refreshFieldsData } from "../../../location/actions"
-import {refreshFriendsData} from "../../../friends/actions"
+import { refreshFriendsData } from "../../../friends/actions"
+import { Spinner } from "native-base";
+import { Colors } from "../../../theme/colors";
 
 
 const ProfileScreen = (props) => {
-    console.log(props)
-    const { navigation, state, getProfile, refreshProfileData, refreshEventData, refreshLocationData, refreshFieldsData, refreshFriendsData} = props;
-    const { profile, isFetched } = state;
+    const { navigation, state, getProfile, refreshProfileData, refreshEventData, refreshLocationData, refreshFieldsData, refreshFriendsData } = props;
+    const { profile, isFetched, hasError, isFetching } = state;
 
     const [userId, setUserId] = useState(null);
     const [isIdLoaded, setIsIdLoaded] = useState(false);
 
+    const isLoading = isFetching && !isIdLoaded;
 
-    useEffect(() => {
-        loadId();
-    }, []);
+    navigation.addListener('focus', () => {
+       loadProfile();
+    });
 
-    const loadId = async () => {
+    const loadProfile = async () => {
         const authService = new AuthService();
-        authService.getId().then((data) => {
-            setUserId(data);
-            setIsIdLoaded(true);
-        });
-    };
-
-    useEffect(() => {
-        console.log("Get profile from Profile screen")
-        if (isIdLoaded) {
-            getProfile(userId);
+        const id = await authService.getId();
+        console.log(id, 'PROFILE ID');
+        if (id) {
+            getProfile(id);
         }
-    }, [userId, isIdLoaded]);
+    }
 
     const onAddFriend = () => {
         navigation.navigate("Add Friend");
@@ -57,9 +53,10 @@ const ProfileScreen = (props) => {
         refreshFriendsData();
 
         const auth = new AuthService();
-        auth.logout();
+        auth.logout().then(() => {
+            navigation.push("Login");
+        });
 
-        navigation.navigate("Login");
     };
 
     return (
@@ -76,7 +73,7 @@ const ProfileScreen = (props) => {
                         ></ProfileDetails>
                     </View>
                 ) : (
-                    <Text>No profile</Text>
+                    <Spinner color={Colors.gradientPrimary} />
                 )}
             </SafeAreaView>
         </ScrollView>

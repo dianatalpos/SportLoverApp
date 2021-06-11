@@ -11,7 +11,8 @@ export default class ProfileService extends CrudRepository<
     }
 
     searchProfile(email: string): Promise<Profile> {
-        return this.apiService.performRequest(this.urlDetails(email));
+        return this.apiService.performRequest(
+            this.endpoint() + "?email=" + email);
     }
 
     addFriend(profile: Profile): Promise<any> {

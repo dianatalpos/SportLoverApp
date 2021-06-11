@@ -6,6 +6,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const ProfileCard = ({ profile, onAdd }) => {
     const handleOnAdd = () => {
+        console.log("Add profile in Profile card", profile)
         onAdd(profile);
     };
 

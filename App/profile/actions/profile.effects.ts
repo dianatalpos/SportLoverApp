@@ -17,6 +17,7 @@ export const getProfile = (userId: string) => (dispatch) => {
     return profileService
         .get(userId)
         .then((response: any) => {
+            console.log("Get response be for profile", response);
             dispatch(profileFetched(response));
         })
         .catch((err: Error) => {

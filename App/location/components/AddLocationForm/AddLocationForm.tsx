@@ -41,7 +41,6 @@ const AddLocationForm = ({ location, onAdd }) => {
             ]
             setTypes(list)
         }
-        console.log(types)
     };
 
     const activities = activityTypes.map((activity) => (
