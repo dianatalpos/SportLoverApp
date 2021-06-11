@@ -20,6 +20,7 @@ export default class ProfileService extends CrudRepository<
         };
         return this.apiService.performRequest(
             this.urlDetails(),
+            null,
             HttpMethod.PUT,
             payload
         );

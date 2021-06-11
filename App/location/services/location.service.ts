@@ -10,6 +10,7 @@ export default class LocationService extends CrudRepository<Location, Location> 
     getFields(locationId: string): Promise<any> {
         return this.apiService.performRequest(
             this.urlDetails(locationId) + "/fields",
+            null,
             HttpMethod.GET
         )
     }
@@ -17,6 +18,7 @@ export default class LocationService extends CrudRepository<Location, Location> 
     addField(locationId: string, field: Field): Promise<any> {
         return this.apiService.performRequest(
             this.urlDetails(locationId) + "/fields",
+            null,
             HttpMethod.POST,
             field
         )

@@ -10,6 +10,7 @@ export default class FriendService extends CrudRepository<Event, Event> {
     getFriendsRequests(userId: string): Promise<any> {
         return this.apiService.performRequest(
             this.urlDetails(userId) + "/all",
+            null,
             HttpMethod.POST
         );
     }

@@ -14,6 +14,7 @@ export default class AuthService {
         const url = `login`;
         return this.apiService.performRequest(
             url,
+            null,
             HttpMethod.POST,
             credentials,
             false
@@ -24,6 +25,7 @@ export default class AuthService {
         const url = `register`;
         return this.apiService.performRequest(
             url,
+            null,
             HttpMethod.POST,
             credentials,
             false

@@ -16,7 +16,7 @@ const SelectLocationStep = ({ locations, selectedItem, onSelect }) => {
 
     const getItemCount = (data) => 50;
 
-    const isSelected = (item: Location) => selectedItem?.id === item.id;
+    const isSelected = (item: Location) => selectedItem?.title === item.title;
     
     return (
         <View style={styles.view}>

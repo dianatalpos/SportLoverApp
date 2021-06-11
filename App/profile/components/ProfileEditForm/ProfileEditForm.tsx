@@ -125,7 +125,7 @@ const ProfileEditForm = ({ profile, onEdit }) => {
 
                         <View>
                             <Datepicker
-                                date={values.birthday}
+                                value={values.birthday}
                                 onChange={handleChange("birthday")}
                                 placeholder={"Select birth day"}
                             />

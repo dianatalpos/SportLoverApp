@@ -8,7 +8,10 @@ import { getProfile } from "../../../profile/actions";
 
 const LoginScreen = ({ navigation, state, performLogin, getProfile }) => {
     const onLogin = (credentials: AuthCredentials) => {
-        performLogin(credentials)
+        const authCreds = new AuthCredentials();
+        authCreds.email = credentials.email.toLowerCase();
+        authCreds.password = credentials.password;
+        performLogin(authCreds)
             .then(async (data) => {
                 const storage = new StorageService();
                 await storage.setItem(StorageKeys.TOKEN, data.token);
