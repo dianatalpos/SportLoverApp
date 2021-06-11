@@ -11,6 +11,7 @@ export default class EventService extends CrudRepository<Event, Event> {
     getEvents(userId: string): Promise<any> {
         return this.apiService.performRequest(
             this.urlDetails(userId) + "/all",
+            null,
             HttpMethod.POST
         );
     }
@@ -18,6 +19,7 @@ export default class EventService extends CrudRepository<Event, Event> {
     joinEvent(eventId:  string, userId: string) {
         return this.apiService.performRequest(
             this.urlDetails(eventId) + "/join/" + userId,
+            null,
             HttpMethod.POST 
         );
     }
@@ -25,6 +27,7 @@ export default class EventService extends CrudRepository<Event, Event> {
     getNextEvents(userId: string): Promise<any> {
         return this.apiService.performRequest(
             this.endpoint() + "/next/" + userId,
+            null,
             HttpMethod.GET
         )
     }
@@ -32,6 +35,7 @@ export default class EventService extends CrudRepository<Event, Event> {
     getPastEvents(userId: string): Promise<any> {
         return this.apiService.performRequest(
             this.endpoint() + "/past/" + userId,
+            null,
             HttpMethod.GET
         )
     }

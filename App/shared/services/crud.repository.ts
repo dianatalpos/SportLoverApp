@@ -21,18 +21,22 @@ export default abstract class CrudRepository<M, D, C = D, U = C> {
     protected abstract endpoint(): string;
 
     protected urlDetails(resourceId?: string): string {
-        return resourceId ? `${this.endpoint()}/${resourceId}` : this.endpoint();
+        return resourceId
+            ? `${this.endpoint()}/${resourceId}`
+            : this.endpoint();
     }
 
-    get(resourceId?: string): Promise<any> {
+    get(resourceId?: string, queryParams?: any): Promise<any> {
         return this.apiService.performRequest(
-            this.urlDetails(resourceId)
+            this.urlDetails(resourceId),
+            queryParams
         );
     }
 
     post(resourceId: string, dto: D): Promise<any> {
         return this.apiService.performRequest(
             this.urlDetails(resourceId),
+            null,
             HttpMethod.POST,
             dto
         );
@@ -41,6 +45,7 @@ export default abstract class CrudRepository<M, D, C = D, U = C> {
     put(resourceId: string, dto: D): Promise<any> {
         return this.apiService.performRequest(
             this.urlDetails(resourceId),
+            null,
             HttpMethod.PUT,
             dto
         );
@@ -49,6 +54,7 @@ export default abstract class CrudRepository<M, D, C = D, U = C> {
     delete(resourceId: string): Promise<any> {
         return this.apiService.performRequest(
             this.urlDetails(resourceId),
+            null,
             HttpMethod.DELETE
         );
     }

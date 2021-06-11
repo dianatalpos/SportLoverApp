@@ -1,3 +1,4 @@
+import { ActivityType } from "../../event";
 import { Action } from "../../shared";
 import { LocationService } from "../services";
 import { Location } from "../types";
@@ -36,46 +37,45 @@ import {
 //         .catch((err: Error) => dispatch(locationFetchError(err.message)));
 // };
 
-export const getLocations = (userId: string) => (dispatch) => {
-    dispatch(locationsFetching());
-    const locationService = new LocationService();
-    return locationService
-        .get(userId)
-        .then((response: any) => {
-            dispatch(locationsFetched(response));
-        })
-        .catch((err: Error) => dispatch(locationsFetchError(err.message)));
-};
+export const getLocations =
+    (userId: string, type?: ActivityType) => (dispatch) => {
+        dispatch(locationsFetching());
+        const locationService = new LocationService();
+        return locationService
+            .get(userId, { type })
+            .then((response: any) => {
+                dispatch(locationsFetched(response));
+            })
+            .catch((err: Error) => dispatch(locationsFetchError(err.message)));
+    };
 
-export const addLocation = (userId: string, location: Location) => (dispatch) => {
-    dispatch(startAddLocation());
-    const locationService = new LocationService();
-    return locationService
-        .post(userId, location)
-        .then((response) => {
+export const addLocation =
+    (userId: string, location: Location) => (dispatch) => {
+        dispatch(startAddLocation());
+        const locationService = new LocationService();
+        return locationService
+            .post(userId, location)
+            .then((response) => {
+                dispatch(successAddLocation(response));
+            })
+            .catch((err: Error) => dispatch(errorAddLocation(err.message)));
+    };
 
-            dispatch(successAddLocation(response));
-        })
-        .catch((err: Error) => dispatch(errorAddLocation(err.message)));
-}
-
-export const editLocation = (locationId: string, location: Location) => (dispatch) => {
-    dispatch(startEditLocation());
-    const locationService = new LocationService();
-    return locationService
-        .put(locationId, location)
-        .then((response) => {
-
-            dispatch(successEditLocation(response));
-        })
-        .catch((err: Error) => dispatch(errorEditLocation(err.message)));
-}
+export const editLocation =
+    (locationId: string, location: Location) => (dispatch) => {
+        dispatch(startEditLocation());
+        const locationService = new LocationService();
+        return locationService
+            .put(locationId, location)
+            .then((response) => {
+                dispatch(successEditLocation(response));
+            })
+            .catch((err: Error) => dispatch(errorEditLocation(err.message)));
+    };
 
 export const refreshLocationData = () => (dispatch) => {
     dispatch(refreshData());
-}
-
-
+};
 
 export const setLocation = (location: Location): Action => {
     return {
@@ -104,11 +104,11 @@ const locationsFetchError = (message: string): Action => {
     };
 };
 
-const refreshData = () : Action => {
+const refreshData = (): Action => {
     return {
         type: REFRESH_DATA,
-    }
-}
+    };
+};
 
 const startAddLocation = (): Action => {
     return {
