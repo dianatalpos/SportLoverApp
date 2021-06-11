@@ -30,6 +30,8 @@ const LocationItem = ({ location, onPress }: LocationItemProps) => {
 
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
+      <Text style={styles.title}>{location.name}</Text>
+
       <Map
         markerName={location.name}
         longitude={location.longitude}
@@ -37,17 +39,12 @@ const LocationItem = ({ location, onPress }: LocationItemProps) => {
       />
 
       <View style={styles.content}>
-        <View style={styles.leftContent}>
-          <Text style={styles.primaryText}>{location.name}</Text>
-          <Text
-            numberOfLines={1}
-            style={styles.secondaryText}
-          >{`Start time: ${location.startTime}`}</Text>
-          <Text
-            numberOfLines={1}
-            style={styles.secondaryText}
-          >{`End time: ${location.endTime}`}</Text>
-        </View>
+        <Text
+          style={styles.secondaryText}
+        >{`Start time: ${location.startTime}`}</Text>
+        <Text
+          style={styles.secondaryText}
+        >{`End time: ${location.endTime}`}</Text>
         <View style={styles.grid}>{activities}</View>
       </View>
     </TouchableOpacity>
@@ -73,6 +70,8 @@ const styles = StyleSheet.create({
     width: "100%",
     marginBottom: 25,
     borderRadius: 5,
+    borderWidth: 1,
+    borderColor: Colors.colorLightGrey,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -81,14 +80,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.23,
     shadowRadius: 7,
     backgroundColor: Colors.colorCard,
-  },
-  map: {
-    width: "100%",
-    height: 150,
-    borderColor: Colors.colorLightGrey,
-    borderWidth: 1,
-    borderTopLeftRadius: 5,
-    borderTopRightRadius: 5,
   },
   content: {
     padding: 12,
@@ -102,11 +93,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
   },
-  primaryText: {
+  title: {
     color: Colors.colorTextBlack,
     fontWeight: "600",
     fontSize: 16,
-    marginBottom: 8,
+    padding: 20,
   },
   secondaryText: {
     color: Colors.colorText,
