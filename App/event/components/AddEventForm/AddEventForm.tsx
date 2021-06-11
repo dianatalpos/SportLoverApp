@@ -1,24 +1,47 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { ProgressSteps, ProgressStep } from "react-native-progress-steps";
-import { SelectEventActivityStep } from "..";
+import {
+    SelectEventActivityStep,
+    SelectLocationFieldStep,
+    SelectLocationStep,
+} from "..";
+import { Field, Location } from "../../../location/types";
 import { Colors } from "../../../theme/colors";
 import { ActivityType } from "../../types";
 
-const AddEventForm = ({ locations, onLoadLocations, onCreate }) => {
+const AddEventForm = ({
+    locations,
+    fields,
+    onLoadLocations,
+    onLoadFields,
+    onCreate,
+}) => {
     const [type, setType] = useState(ActivityType.VOLLEYBALL);
+    const [location, setLocation] = useState(null);
+    const [field, setField] = useState(null);
 
     const onTypeSelect = (type: ActivityType): void => {
         setType(type);
         onLoadLocations(type);
     };
+
+    const onLocationSelect = (place: Location): void => {
+        setLocation(place);
+        onLoadFields(place);
+    };
+
+    const onFieldSelect = (field: Field): void => {
+        setField(field);
+    };
+
     return (
         <View style={styles.view}>
             <ProgressSteps>
                 <ProgressStep
                     label="Select Activity"
                     nextBtnTextStyle={styles.nextBtn}
-                    previousBtnTextStyle={styles.prevBtn}
+                    // previousBtnTextStyle={styles.prevBtn}
                 >
                     <SelectEventActivityStep
                         selectedType={type}
@@ -30,9 +53,11 @@ const AddEventForm = ({ locations, onLoadLocations, onCreate }) => {
                     nextBtnTextStyle={styles.nextBtn}
                     previousBtnTextStyle={styles.prevBtn}
                 >
-                    <View style={{ alignItems: "center" }}>
-                        <Text>This is the content within step 2!</Text>
-                    </View>
+                    <SelectLocationStep
+                        locations={locations}
+                        selectedItem={location}
+                        onSelect={onLocationSelect}
+                    />
                 </ProgressStep>
                 <ProgressStep
                     borderStyle={"solid"}
@@ -40,9 +65,10 @@ const AddEventForm = ({ locations, onLoadLocations, onCreate }) => {
                     nextBtnTextStyle={styles.nextBtn}
                     previousBtnTextStyle={styles.prevBtn}
                 >
-                    <View style={{ alignItems: "center" }}>
-                        <Text>This is the content within step 3!</Text>
-                    </View>
+                    <SelectLocationFieldStep
+                        fields={fields}
+                        onSelect={onFieldSelect}
+                    />
                 </ProgressStep>
             </ProgressSteps>
         </View>
@@ -50,26 +76,27 @@ const AddEventForm = ({ locations, onLoadLocations, onCreate }) => {
 };
 
 const styles = StyleSheet.create({
-    view: { backgroundColor: "#fff" },
+    view: { backgroundColor: "#fff", width: 400, height: 650 },
     nextBtn: {
         backgroundColor: Colors.colorTextBlack,
         color: "#fff",
-        borderRadius: 10,
         borderWidth: 1,
-        paddingVertical: 10,
-        marginLeft: 50,
+        padding: 10,
+        width: 80,
+        textAlign: "center",
     },
     prevBtn: {
         borderColor: Colors.gradientPrimary,
         color: Colors.gradientPrimary,
-        borderRadius: 10,
         borderWidth: 1,
-        paddingVertical: 10,
-        marginRight: 50,
+        padding: 10,
+        textAlign: "center",
     },
 });
 AddEventForm.defaultProps = {
     locations: null,
+    fields: [],
+    onLoadFields: () => {},
     onLoadLocations: () => {},
     onCreate: () => {},
 };

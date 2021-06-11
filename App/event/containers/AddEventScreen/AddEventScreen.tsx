@@ -1,23 +1,21 @@
-import React, { useEffect } from "react";
-import { Text, View } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
+import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { connect } from "react-redux";
 import { AddEventForm } from "../../components";
 import { ActivityType } from "../../types";
+// import { getLocations } from "../../../location";
 
 const AddEventScreen = (props) => {
-    const { locations } = props;
-    useEffect(() => {
-        const profileId = "12";
-    }, []);
+    const { locations } = props.state;
+    // const { getLocations } = props;
 
     const onCreate = () => {
         console.log("create event");
     };
 
-    const onLoadLocations = (type: ActivityType) => {
-        console.log("load", type);
+    const onLoadLocations = (type: ActivityType) => {        
+        const profileId = "12";
+        // getLocations(profileId, type);
     };
 
     return (
@@ -35,4 +33,8 @@ const mapStateToProps = (state) => ({
     state: state.locations,
 });
 
-export default connect(mapStateToProps)(AddEventScreen);
+const mapDispatchToProps = {
+    // getLocations,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddEventScreen);
