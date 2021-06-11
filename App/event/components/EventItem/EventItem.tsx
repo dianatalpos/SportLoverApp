@@ -6,6 +6,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Event } from "../../types";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import moment from "moment";
+import { Map } from "../../../shared";
 
 type EventItemProps = {
   event: Event;
@@ -16,23 +17,11 @@ const EventItem = ({ event, onPress }: EventItemProps) => {
   const displayEventDate = moment(event.dateTime).format("LL");
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
-      <MapView
-        initialRegion={{
-          latitude: event.locationLatitude,
-          longitude: event.locationLongitude,
-          latitudeDelta: 0.01,
-          longitudeDelta: 0.01,
-        }}
-        style={styles.map}
-      >
-        <Marker
-          coordinate={{
-            latitude: event.locationLatitude,
-            longitude: event.locationLongitude,
-          }}
-          title={event.location}
-        />
-      </MapView>
+      <Map
+        markerName={event.location}
+        longitude={event.locationLongitude}
+        latitude={event.locationLatitude}
+      />
 
       <View style={styles.content}>
         <View style={styles.leftContent}>
