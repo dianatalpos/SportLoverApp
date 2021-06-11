@@ -1,6 +1,6 @@
 export default class Location {
     id: string;
-    title: string;
+    name: string;
     latitude?: number;
     longitude?: number;
     startTime?: string;

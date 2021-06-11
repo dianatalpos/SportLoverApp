@@ -23,10 +23,21 @@ export default class ApiService {
       options["body"] = JSON.stringify(body);
     }
     if (queryParams) {
-      const params = encodeURIComponent(queryParams);
+      const params = this.parseParams(queryParams);
+      console.log(params, "PARAM");
       requestUrl = requestUrl + params;
     }
+    console.log(requestUrl, "REQQQQ");
     return fetch(requestUrl, options).then(this.handleRequestStatus);
+  }
+
+  private parseParams(queryParams: any): string {
+    const queryKeys = Object.keys(queryParams);
+    if (queryKeys.length > 0) {
+      const params = queryKeys.map((key) => `${key}=${queryParams[key]}`);
+      return `?${params.join("&")}`;
+    }
+    return "";
   }
 
   private getHeaders(
@@ -44,7 +55,6 @@ export default class ApiService {
     if (withToken) {
       headers["Authorization"] = `Bearer ${token}`;
     }
-    console.log(headers, "HEADERS");
     return headers;
   }
 
@@ -55,12 +65,16 @@ export default class ApiService {
     };
   }
 
-  private handleRequestStatus(response: Response) {
+  private async handleRequestStatus(response: Response) {
     if (response.ok) {
       return response.json();
     }
 
     if ([401, 403].includes(response.status)) {
+      const storage = new StorageService();
+      await storage.removeItem(StorageKeys.ID)
+      await storage.removeItem(StorageKeys.TOKEN)
+      await storage.removeItem(StorageKeys.ROLES)
       return response.json().then((error) => Promise.reject(error));
     }
   }

@@ -8,16 +8,19 @@ const SelectLocationFieldStep = ({
   date,
   duration,
   field,
+  nrParticipants,
   fields,
   onDateSelect,
+  onNrParticipantsSelect,
   onDurationSelect,
   onFieldSelect,
 }) => {
-  const components = fields.map((field: Field) => (
-    <Picker.Item key={field.id} label={field.id} value={field.name} />
-  ));
+  const createComponents = () =>
+    fields.map((field: Field) => (
+      <Picker.Item key={field.id} label={field.name} value={field.id} />
+    ));
 
-  const hasFields = fields?.length > 0;
+  const hasFields = fields ? fields.length > 0 : false;
 
   return (
     <View style={styles.view}>
@@ -46,17 +49,35 @@ const SelectLocationFieldStep = ({
           <Picker.Item label="3 hr" value={180} />
         </Picker>
       </View>
+      
+      <View style={styles.container}>
+        <Text style={styles.title}>Select max participants {nrParticipants}</Text>
+        <Picker
+          selectedValue={nrParticipants}
+          style={styles.picker}
+          itemStyle={styles.pickerItem}
+          onValueChange={onNrParticipantsSelect}
+        >
+          <Picker.Item key="2" label="2" value={2} />
+          <Picker.Item key="4" label="4" value={4} />
+          <Picker.Item key="10" label="10" value={10} />
+          <Picker.Item key="15" label="15" value={15} />
+          <Picker.Item key="20" label="20" value={20} />
+          <Picker.Item key="30" label="30" value={30} />
+          <Picker.Item key="50" label="50" value={50} />
+        </Picker>
+      </View>
 
       <View style={styles.container}>
         <Text style={styles.title}>Select Field</Text>
-        {hasFields ? (
+        {hasFields && !!field ? (
           <Picker
             selectedValue={field.name}
             style={styles.picker}
             itemStyle={styles.pickerItem}
             onValueChange={onFieldSelect}
           >
-            {components}
+            {createComponents()}
           </Picker>
         ) : (
           <Text>No fields.</Text>
@@ -70,7 +91,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
   },
   container: {
-    marginVertical: 20
+    marginVertical: 20,
   },
   title: {
     fontWeight: "bold",
@@ -85,10 +106,12 @@ const styles = StyleSheet.create({
 
 SelectLocationFieldStep.defaultProps = {
   date: null,
+  nrParticipants: 2,
   duration: 1,
   field: null,
   fields: [],
   onDateSelect: () => {},
+  onNrParticipantsSelect: () => {},
   onDurationSelect: () => {},
   onFieldSelect: () => {},
 };

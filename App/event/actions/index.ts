@@ -1,3 +1,21 @@
-import { getEvent, getEvents, setEvent, joinEvent, getNextEvents, getPastEvents, refreshEventData } from "./event.effects";
+import {
+  getEvent,
+  getEvents,
+  setEvent,
+  joinEvent,
+  getNextEvents,
+  getPastEvents,
+  refreshEventData,
+  createEvent,
+} from "./event.effects";
 
-export { getEvent, getEvents, setEvent, joinEvent, getNextEvents, getPastEvents, refreshEventData};
+export {
+  getEvent,
+  getEvents,
+  setEvent,
+  joinEvent,
+  getNextEvents,
+  getPastEvents,
+  refreshEventData,
+  createEvent,
+};

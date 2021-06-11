@@ -2,10 +2,10 @@ import { Location } from "../../../location/types";
 import Participant from "./participant.class";
 
 export default class Event {
-    id: string;
+    id?: string;
     sport: string;
     level: string;
-    location: Location;
+    location: string;
     locationFieldName: string;
     locationId: string;
     locationFieldId: string;
