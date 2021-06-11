@@ -24,17 +24,19 @@ export default class ApiService {
     }
     if (queryParams) {
       const params = this.parseParams(queryParams);
-      console.log(params, "PARAM");
       requestUrl = requestUrl + params;
     }
-    console.log(requestUrl, "REQQQQ");
     return fetch(requestUrl, options).then(this.handleRequestStatus);
   }
 
   private parseParams(queryParams: any): string {
     const queryKeys = Object.keys(queryParams);
     if (queryKeys.length > 0) {
-      const params = queryKeys.map((key) => `${key}=${queryParams[key]}`);
+      const params = queryKeys
+        .map((key) =>
+          !!queryParams[key] ? `${key}=${queryParams[key]}` : null
+        )
+        .filter((param) => !!param);
       return `?${params.join("&")}`;
     }
     return "";
@@ -72,9 +74,9 @@ export default class ApiService {
 
     if ([401, 403].includes(response.status)) {
       const storage = new StorageService();
-      await storage.removeItem(StorageKeys.ID)
-      await storage.removeItem(StorageKeys.TOKEN)
-      await storage.removeItem(StorageKeys.ROLES)
+      await storage.removeItem(StorageKeys.ID);
+      await storage.removeItem(StorageKeys.TOKEN);
+      await storage.removeItem(StorageKeys.ROLES);
       return response.json().then((error) => Promise.reject(error));
     }
   }
