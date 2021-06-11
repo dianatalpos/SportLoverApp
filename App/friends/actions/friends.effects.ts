@@ -21,8 +21,6 @@ export const getFriends = (userId: string) => (dispatch) => {
     return friendsService
         .get(userId)
         .then((response: any) => {
-            console.log("Getting response from be")
-            console.log(response)
             dispatch(friendsFetched(response));
         })
         .catch((err: Error) => {
@@ -38,8 +36,6 @@ export const getFriendsRequests = (userId: string) => (dispatch) => {
     return friendsService
         .getFriendsRequests(userId)
         .then((response: any) => {
-            console.log("Getting response from be")
-            console.log(response)
             dispatch(friendsRequestsFetched(response));
         })
         .catch((err: Error) => {
