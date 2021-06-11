@@ -1,3 +1,5 @@
-import FriendsTab from "./FriendsTab"
+import FriendsTab from "./FriendsTab";
+import GeneralFriendsTab from "./GeneralFriendsTab";
 
-export { FriendsTab };
+
+export { GeneralFriendsTab, FriendsTab };

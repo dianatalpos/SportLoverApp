@@ -9,13 +9,13 @@ import { EventsTab, MyEventsTab } from "../../../event";
 import { getProfile } from "../../../profile"
 import { connect } from "react-redux";
 import { AuthService } from "../../../auth";
-import {ChatScreen} from "../../../chat"
-import { FriendsTab } from "../../../friends";
+import { ChatScreen } from "../../../chat"
+import { GeneralFriendsTab } from "../../../friends";
 
 const Tab = createBottomTabNavigator();
 
 const MainScreen = (props) => {
-    const {state, getProfile}  = props;
+    const { state, getProfile } = props;
     const { profile, isFetched, isFetching, hasError } = state;
 
     const [isOwner, setIsOwner] = useState(false);
@@ -39,7 +39,7 @@ const MainScreen = (props) => {
                     backgroundColor: Colors.colorWhite,
                 },
             }
-        }
+            }
         >
             {isOwner ? (
                 <Tab.Screen
@@ -92,7 +92,7 @@ const MainScreen = (props) => {
 
             <Tab.Screen
                 name="Friends"
-                component={FriendsTab}
+                component={GeneralFriendsTab}
                 options={{
                     unmountOnBlur: true,
                     tabBarLabel: "Friends",
@@ -110,6 +110,7 @@ const MainScreen = (props) => {
                 name="My Profile"
                 component={ProfileTab}
                 options={{
+                    unmountOnBlur: true,
                     tabBarLabel: "Profile",
                     tabBarIcon: ({ color, size }) => (
                         <MaterialCommunityIcons

@@ -4,16 +4,33 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { ProfileAddFriendForm } from "../../components";
 import { ProfileService } from "../../services";
 import { Profile } from "../../types";
+import { FriendService } from "../../../friends"
+import { connect } from "react-redux";
+
 
 const ProfileAddFriendScreen = (props) => {
+
+    const { navigation, state } = props;
+    const { profile } = state
+
     const profileService = new ProfileService();
-    const [profile, setProfile] = useState(null);
+    const friendService = new FriendService();
+    const [profileSearched, setProfileSearched] = useState(null);
     const [shouldSearch, setShouldSearch] = useState(false);
     const [isSearching, setIsSearching] = useState(false);
 
-    const onAdd = (profile) => {
-        profileService.addFriend(profile)
-        console.log(profile, "profile to add");
+    const onAdd = (profileRequest) => {
+        const friend = {
+            id: profileRequest.id,
+            firstName: profileRequest.firstName,
+            lastName: profileRequest.lastName,
+            image: profileRequest.image,
+        }
+
+        friendService.sendFriendRequest(profile.id, friend)
+            .then((response) => {
+                navigation.goBack();
+            });
     };
 
     const onSearch = (email: string) => {
@@ -24,16 +41,16 @@ const ProfileAddFriendScreen = (props) => {
         profileService
             .searchProfile(formattedEmail)
             .then((profile: Profile) => {
-                const mockProfile: Profile = {
-                    activities: ["Basket"],
-                    image: "https://i.pinimg.com/736x/4d/8e/cc/4d8ecc6967b4a3d475be5c4d881c4d9c.jpg",
-                    birthday:new Date("2000-01-01"),
-                    shortDescription: "aaaaaaaaaa aaaaa aaaaa aaaaaaaaaaaaaaaaaaaa aaaaaaaaaa aaaaaaaaaa aaaaa",
-                    firstName:"Marus",
-                    id:'sss',
-                    lastName:"Martus"
-                }
-                setProfile(mockProfile)
+                // const mockProfile: Profile = {
+                //     activities: ["Basket"],
+                //     image: "https://i.pinimg.com/736x/4d/8e/cc/4d8ecc6967b4a3d475be5c4d881c4d9c.jpg",
+                //     birthday: new Date("2000-01-01"),
+                //     shortDescription: "aaaaaaaaaa aaaaa aaaaa aaaaaaaaaaaaaaaaaaaa aaaaaaaaaa aaaaaaaaaa aaaaa",
+                //     firstName: "Marus",
+                //     id: 'sss',
+                //     lastName: "Martus"
+                // }
+                setProfileSearched(profile)
                 // if (profile) {
                 //     setProfile(profile);
                 //     console.log(profile, "PROFILE");
@@ -51,7 +68,7 @@ const ProfileAddFriendScreen = (props) => {
             <ProfileAddFriendForm
                 shouldSearch={shouldSearch}
                 searching={isSearching}
-                profile={profile}
+                profile={profileSearched}
                 onSearch={onSearch}
                 onAdd={onAdd}
             ></ProfileAddFriendForm>
@@ -63,4 +80,9 @@ const styles = StyleSheet.create({
     view: { alignItems: "center", backgroundColor: "#fff", height: "100%" },
 });
 
-export default ProfileAddFriendScreen;
+
+const mapStateToProps = (state) => ({
+    state: state.profile,
+});
+
+export default connect(mapStateToProps, null)(ProfileAddFriendScreen);

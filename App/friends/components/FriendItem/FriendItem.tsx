@@ -3,8 +3,11 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Colors } from "../../../theme/colors";
 
 
-const FriendItem  = ({friend}) => {
+const FriendItem = ({ friend, shouldDisplayButton, onAccept, onDecline }) => {
 
+    const onAcceptRequest= () => {
+        onAccept(friend);
+    }
 
     return (
         <View style={styles.card}>
@@ -12,6 +15,26 @@ const FriendItem  = ({friend}) => {
                 <Image source={{ uri: friend.image }} style={styles.avatar} />
                 <Text>{`${friend.lastName} ${friend.firstName}`}</Text>
             </View>
+
+            {shouldDisplayButton ?
+                <View style={styles.details}>
+                    <TouchableOpacity
+                        style={styles.acceptBtn}
+                        onPress={onAcceptRequest}
+                    >
+                        <Text>Accept</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                        style={styles.declineBtn}
+                        onPress={onDecline}
+                    >
+                        <Text>Decline</Text>
+                    </TouchableOpacity>
+                </View>
+                : null
+            }
+
         </View>
     );
 }
@@ -42,6 +65,24 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
     },
+    actionBtn: {
+
+    },
+    acceptBtn: {
+        backgroundColor: Colors.gradientPrimary,
+        color: "#fff",
+        paddingVertical: 10,
+        paddingHorizontal: 30,
+        borderRadius: 40,
+    },
+    declineBtn: {
+        backgroundColor: Colors.colorLightGrey,
+        color: "#fff",
+        paddingVertical: 10,
+        paddingHorizontal: 30,
+        borderRadius: 40,
+    }
+
 });
 
 FriendItem.defaultProps = {

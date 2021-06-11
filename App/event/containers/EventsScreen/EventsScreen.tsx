@@ -35,7 +35,6 @@ const EventsScreen = (props) => {
 
     useEffect(() => {
         if (isIdLoaded) {
-            console.log("In Events Screen, getting events", userId)
             getEvents(userId);
         }
     }, [userId, isIdLoaded]);
@@ -58,7 +57,7 @@ const EventsScreen = (props) => {
                     events={events}
                     onAdd={onAddEvent}
                     onItemPressed={onItemPressed}
-                    title={"Upcomming events"}
+                    title={"Upcoming events"}
                     message={"Help us build a great sport community!"}
                     shouldShowAddButton={true}
                 ></EventList>}

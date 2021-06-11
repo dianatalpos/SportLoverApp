@@ -10,13 +10,19 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const FriendList = (props) => {
 
-    const { loading, friends } = props
+    const { loading, friends, shouldDisplayButton, onAccept, onDecline } = props
 
 
     const renderListItem = (flatListProp) => {
         const { item } = flatListProp;
-        return <FriendItem friend={item}/>;
+        return <FriendItem friend={item}
+            shouldDisplayButton={shouldDisplayButton}
+            onAccept={onAccept}
+            onDecline={onDecline} />;
     };
+
+    console.log(friends, "FRIENDS")
+    console.log(loading, "LOADING")
 
     return <SafeAreaView>
         {
@@ -39,6 +45,7 @@ const FriendList = (props) => {
                             You do not have any friends yet.</Text></View>)
                     : null)
         }
+
     </SafeAreaView>
 }
 

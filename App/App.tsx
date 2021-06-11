@@ -65,19 +65,12 @@ const App = () => {
                         headerShown: false,
                     }}
                 >
-                    <Stack.Screen
-                        options={SplashScreenOptions}
-                        name="Splash"
-                        component={SplashScreen}
-                    />
+                    <Stack.Screen options={SplashScreenOptions} name="Splash" component={SplashScreen}/>
                     <Stack.Screen name="Main" component={MainScreen} />
                     <Stack.Screen name="Login" component={LoginScreen} />
                     <Stack.Screen name="Register" component={RegisterScreen} />
                     <Stack.Screen name="CompleteProfile" component={CompleteProfileScreen} />
-                    <Stack.Screen
-                        name="Chat"
-                        component={ChatScreen}
-
+                    <Stack.Screen name="Chat" component={ChatScreen}
                         options={{
                             headerBackTitleStyle: { color: Colors.colorGrey }, headerTintColor: Colors.colorGrey,
                             headerShown: true, headerBackTitle: 'Back', headerTransparent: true

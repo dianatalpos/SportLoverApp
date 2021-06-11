@@ -20,17 +20,19 @@ const EditProfileScreen = ({ state, getProfile, editProfile }) => {
         authService.getId().then((data) => setUserId(data));
     };
 
-    
+
     useEffect(() => {
-        getProfile(userId);
-    }, []);
+        if (userId) {
+            getProfile(userId);
+        }
+    }, [userId]);
 
     const onEdit = (profile: Profile) => {
         editProfile(userId, profile);
     };
 
     return (
-        <SafeAreaView style={{ alignItems: "center",  backgroundColor:"#fff" }}>
+        <SafeAreaView style={{ alignItems: "center", backgroundColor: "#fff" }}>
             <ProfileEditForm
                 profile={profile}
                 onEdit={onEdit}

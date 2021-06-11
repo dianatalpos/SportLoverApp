@@ -3,7 +3,11 @@ import {
     REFRESH_DATA,
     FRIENDS_ARE_FETCHED,
     FRIENDS_ARE_FETCHING,
-    FRIENDS_FETCH_ERROR
+    FRIENDS_FETCH_ERROR,
+    FRIENDS_REQUESTS_ARE_FETCHED,
+    FRIENDS_REQUESTS_ARE_FETCHING,
+    FRIENDS_REQUESTS_ERROR,
+    ACCEPT_FRIEND_REQUEST,
 } from "./types";
 import FriendsService from "../services"
 import { Friend } from "../types";
@@ -11,15 +15,55 @@ import { Friend } from "../types";
 
 
 export const getFriends = (userId: string) => (dispatch) => {
-    dispatch(locationsFetching());
+    console.log("Start getting Friends")
+    dispatch(friendsFetching());
     const friendsService = new FriendsService();
     return friendsService
         .get(userId)
         .then((response: any) => {
-            dispatch(locationsFetched(response));
+            console.log("Getting response from be")
+            console.log(response)
+            dispatch(friendsFetched(response));
         })
-        .catch((err: Error) => dispatch(locationsFetchError(err.message)));
+        .catch((err: Error) => {
+            console.log("errooor", err)
+            dispatch(friendsFetchError(err.message))
+        });
 };
+
+export const getFriendsRequests = (userId: string) => (dispatch) => {
+    console.log("Start getting Friends requests")
+    dispatch(friendsRequestsFetching());
+    const friendsService = new FriendsService();
+    return friendsService
+        .getFriendsRequests(userId)
+        .then((response: any) => {
+            console.log("Getting response from be")
+            console.log(response)
+            dispatch(friendsRequestsFetched(response));
+        })
+        .catch((err: Error) => {
+            console.log("errooor", err)
+            dispatch(friendsRequestsFetchError(err.message))
+        });
+};
+
+export const acceptFriendRequest = (userId: string, friend: Friend) => (dispatch)=>{
+    console.log("Accept friend request")
+    dispatch(friendsFetching());
+    const friendsService = new FriendsService();
+    return friendsService
+        .acceptFriendRequest(userId, friend)
+        .then((response: any) => {
+            console.log("Getting response from be")
+            console.log(response)
+            dispatch(acceptFriendRequestAction(response));
+        })
+        .catch((err: Error) => {
+            console.log("errooor", err)
+            dispatch(friendsFetchError(err.message))
+        });
+}
 
 // export const addLocation = (userId: string, location: Location) => (dispatch) => {
 //     dispatch(startAddLocation());
@@ -51,25 +95,54 @@ export const refreshFriendsData = () => (dispatch) => {
 
 
 
-const locationsFetching = (): Action => {
+const friendsFetching = (): Action => {
     return {
         type: FRIENDS_ARE_FETCHING,
     };
 };
 
-const locationsFetched = (friends: Friend[]): Action => {
+const friendsRequestsFetching = (): Action => {
+    return {
+        type: FRIENDS_REQUESTS_ARE_FETCHING,
+    };
+};
+
+
+const friendsFetched = (friends: Friend[]): Action => {
     return {
         type: FRIENDS_ARE_FETCHED,
         payload: friends,
     };
 };
 
-const locationsFetchError = (message: string): Action => {
+const friendsRequestsFetched = (friends: Friend[]): Action => {
+    return {
+        type: FRIENDS_REQUESTS_ARE_FETCHED,
+        payload: friends,
+    };
+};
+
+
+const friendsFetchError = (message: string): Action => {
     return {
         type: FRIENDS_FETCH_ERROR,
         payload: message,
     };
 };
+
+const friendsRequestsFetchError = (message: string): Action => {
+    return {
+        type: FRIENDS_REQUESTS_ERROR,
+        payload: message,
+    };
+};
+
+const acceptFriendRequestAction = (friend: Friend): Action => {
+    return {
+        type: ACCEPT_FRIEND_REQUEST,
+        payload: friend,
+    }
+}
 
 const refreshData = (): Action => {
     return {

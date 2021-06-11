@@ -30,8 +30,6 @@ const CompleteProfileScreen = ({ navigation, state, editProfile }) => {
 
 
     const onEdit = (profile: Profile) => {
-        console.log("Edit pressed")
-        console.log(profile)
 
         editProfile(userId, profile);
 
