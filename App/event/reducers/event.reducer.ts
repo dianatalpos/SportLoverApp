@@ -34,7 +34,7 @@ const EventReducer = (state = INITIAL_STATE, action: Action) => {
     case EVENT_CREATED:
       return {
         ...state,
-        events: [...state.events, payload],
+        nextEvents: [...state.events, payload],
         areFetching: false,
         areFetched: true,
       };

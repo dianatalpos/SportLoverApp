@@ -84,6 +84,7 @@ export const joinEvent = (eventId, userId) => (dispatch) => {
     })
     .catch((err: Error) => {
       console.log(err, "er");
+      console.log(err, "Joining event")
 
       dispatch(eventFetchError(err.message));
     });

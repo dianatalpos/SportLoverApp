@@ -14,7 +14,7 @@ type EventItemProps = {
 };
 
 const EventItem = ({ event, onPress }: EventItemProps) => {
-  const displayEventDate = moment(event.dateTime).format("LL");
+  const displayEventDate = moment(event.dateTime).format("LLLL");
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
       <Map
