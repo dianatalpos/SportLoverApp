@@ -17,6 +17,8 @@ import { ChatScreen } from "./chat";
 import { Colors } from "./theme/colors";
 import * as firebase from 'firebase';
 import 'firebase/firestore';
+import Toast from 'react-native-toast-message';
+
 
 const Stack = createStackNavigator();
 const reducers = combineReducers({
@@ -78,6 +80,8 @@ const App = () => {
                     />
                 </Stack.Navigator>
             </NavigationContainer>
+
+            <Toast ref={(ref) => Toast.setRef(ref)} />
         </View>
     );
 };

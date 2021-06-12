@@ -10,6 +10,17 @@ export default class ProfileService extends CrudRepository<
         return `profiles`;
     }
 
+    uploadImage(userId:string, image: any): Promise<any>{
+
+
+        return this.apiService.performRequest(
+            this.endpoint()  + "/upload/" + userId,
+            HttpMethod.POST,
+            image,
+            "multipart/form-data",
+        )
+    } 
+
     searchProfile(email: string, id: string): Promise<Profile> {
         return this.apiService.performRequest(
             this.endpoint() + "?email=" + email + "&id=" + id);
