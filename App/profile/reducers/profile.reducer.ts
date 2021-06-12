@@ -42,7 +42,8 @@ const ProfileReducer = (state = INITIAL_STATE, action: Action) => {
         case PROFILE_EDIT:
             return {
                 ...state,
-                isFetching: true
+                isFetching: true,
+                isFetched: false
             }
         case PROFILE_EDIT_SUCCESS:
             return {

@@ -3,7 +3,7 @@ export default class Profile {
     firstName: string;
     lastName: string;
     id: string;
-    birthday: Date;
+    birthday: string;
     image: string;
     shortDescription: string;
 }

@@ -7,14 +7,13 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import * as ImagePicker from "react-native-image-picker";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { TextInput, TouchableHighlight } from "react-native-gesture-handler";
 import { Colors } from "../../../theme/colors";
 import { Datepicker } from "../../../shared";
-import moment from "moment";
 import { Profile } from "../../types";
+import moment from "moment";
 
 const ProfileEditForm = ({ profile, onEdit }) => {
   const [file, setFile] = useState({
@@ -26,6 +25,10 @@ const ProfileEditForm = ({ profile, onEdit }) => {
     fileUri: null,
   });
 
+  const [birthDay, setBirthDay] = useState(
+    new Date(profile?.birthday) || new Date()
+  );
+
   const schema = Yup.object().shape({
     firstName: Yup.string()
       .required("First Name required!")
@@ -33,7 +36,6 @@ const ProfileEditForm = ({ profile, onEdit }) => {
     lastName: Yup.string()
       .required("Last Name is required!")
       .label("Last Name"),
-    birthday: Yup.date().required("Birth day is required").label("Birthday"),
     image: Yup.string().label("Image"),
     activities: Yup.array().label("Activities"),
   });
@@ -46,12 +48,12 @@ const ProfileEditForm = ({ profile, onEdit }) => {
     const profile = new Profile();
     profile.firstName = values.firstName;
     profile.lastName = values.lastName;
-    profile.birthday = values.birthDay;
+    profile.birthday = moment(birthDay).format("YYYY-MM-DD");
     profile.shortDescription = values.shortDescription;
     profile.image = values.avatar;
     profile.activities = values.activities;
 
-    onEdit(values);
+    onEdit(profile);
   };
 
   const imgUri = file.fileUri || (profile ? profile.avatar : noImg);
@@ -68,9 +70,6 @@ const ProfileEditForm = ({ profile, onEdit }) => {
           activities: profile?.activities || [],
           image: profile?.image || noImg,
           shortDescription: profile?.shortDescription || "",
-          birthday: profile?.birthday
-            ? new Date(profile?.birthday)
-            : new Date(),
         }}
         onSubmit={(values) => handleSubmit(values)}
         validationSchema={schema}
@@ -117,13 +116,10 @@ const ProfileEditForm = ({ profile, onEdit }) => {
 
             <View>
               <Datepicker
-                value={values.birthday}
-                onChange={handleChange("birthday")}
+                value={birthDay}
+                onChange={setBirthDay}
                 placeholder={"Select birth day"}
               />
-              {errors.birthday && touched.birthday ? (
-                <Text style={styles.error}>{errors.birthday}</Text>
-              ) : null}
             </View>
 
             <TouchableHighlight style={styles.button} onPress={handleSubmit}>

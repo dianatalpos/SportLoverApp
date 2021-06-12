@@ -33,7 +33,6 @@ export const editProfile =
         return profileService
             .put(userId, profile)
             .then((response) => {
-
                 dispatch(successEditProfile(response));
             })
             .catch((err: Error) => dispatch(errorEditProfile(err.message)));

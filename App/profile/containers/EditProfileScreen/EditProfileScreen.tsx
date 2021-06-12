@@ -6,47 +6,45 @@ import { getProfile, editProfile } from "../../actions";
 import { ProfileEditForm } from "../../components";
 import { Profile } from "../../types";
 
-const EditProfileScreen = ({ state, getProfile, editProfile }) => {
-    const { profile } = state;
+const EditProfileScreen = ({ navigation, state, getProfile, editProfile }) => {
+  const { profile } = state;
 
-    const [userId, setUserId] = useState(null);
+  const [userId, setUserId] = useState(null);
 
-    useEffect(() => {
-        loadId();
-    }, []);
+  useEffect(() => {
+    loadId();
+  }, []);
 
-    const loadId = async () => {
-        const authService = new AuthService();
-        authService.getId().then((data) => setUserId(data));
-    };
+  const loadId = async () => {
+    const authService = new AuthService();
+    authService.getId().then((data) => setUserId(data));
+  };
 
+  useEffect(() => {
+    if (userId) {
+      getProfile(userId);
+    }
+  }, [userId]);
 
-    useEffect(() => {
-        if (userId) {
-            getProfile(userId);
-        }
-    }, [userId]);
+  const onEdit = (profile: Profile) => {
+    console.log(profile, "PROFILE");
+    editProfile(userId, profile);
+    navigation.navigate("Profile");
+  };
 
-    const onEdit = (profile: Profile) => {
-        editProfile(userId, profile);
-    };
-
-    return (
-        <SafeAreaView style={{ alignItems: "center", backgroundColor: "#fff" }}>
-            <ProfileEditForm
-                profile={profile}
-                onEdit={onEdit}
-            ></ProfileEditForm>
-        </SafeAreaView>
-    );
+  return (
+    <SafeAreaView style={{ alignItems: "center", backgroundColor: "#fff" }}>
+      <ProfileEditForm profile={profile} onEdit={onEdit}></ProfileEditForm>
+    </SafeAreaView>
+  );
 };
 
 const mapStateToProps = (state) => ({
-    state: state.profile,
+  state: state.profile,
 });
 
 const mapDispatchToProps = {
-    getProfile,
-    editProfile,
+  getProfile,
+  editProfile,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(EditProfileScreen);
