@@ -14,6 +14,7 @@ import { Colors } from "../../../theme/colors";
 import { Datepicker } from "../../../shared";
 import { Profile } from "../../types";
 import moment from "moment";
+import { launchImageLibrary, MediaType } from "react-native-image-picker";
 
 const ProfileEditForm = ({ profile, onEdit }) => {
   const [file, setFile] = useState({
@@ -42,7 +43,14 @@ const ProfileEditForm = ({ profile, onEdit }) => {
   const noImg =
     "https://img.wattpad.com/2eb226316e86e00511a618c2d4f352029fc20219/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f776174747061642d6d656469612d736572766963652f53746f7279496d6167652f347a65566a557654543535434c673d3d2d3633342e313538306364613237313331623130653933393935343130373335332e6a7067?s=fit&w=720&h=720";
 
-  const onAvatar = () => {};
+  const onAvatar = () => {
+    // launchImageLibrary(null, (response: any) => {
+    //   console.log(response, "IMAGE RESPONSE");
+    //   if (response.uri) {
+    //     setFile({ ...file, fileUri: response.uri });
+    //   }
+    // });
+  };
 
   const handleSubmit = (values) => {
     const profile = new Profile();
@@ -52,11 +60,10 @@ const ProfileEditForm = ({ profile, onEdit }) => {
     profile.shortDescription = values.shortDescription;
     profile.image = values.avatar;
     profile.activities = values.activities;
-
     onEdit(profile);
   };
 
-  const imgUri = file.fileUri || (profile ? profile.avatar : noImg);
+  const imgUri = file.fileUri || (profile ? profile.image : noImg);
 
   return (
     <SafeAreaView style={styles.view}>
@@ -180,7 +187,13 @@ const styles = StyleSheet.create({
   buttonLabel: {
     color: "#fff",
   },
-  avatar: { width: 150, height: 150, borderRadius: 100 },
+  avatar: {
+    width: 150,
+    height: 150,
+    borderRadius: 100,
+    borderWidth: 1,
+    borderColor: "#000",
+  },
 });
 
 ProfileEditForm.defaultProps = {

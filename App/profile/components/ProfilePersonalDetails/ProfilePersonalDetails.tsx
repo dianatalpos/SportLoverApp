@@ -15,7 +15,7 @@ const ProfilePersonalDetails = (props) => {
             <View style={styles.profileContainer}>
                 <TouchableOpacity onPress={onAvatar}>
                     <Image
-                        source={{ uri: profile ? profile.avatar : noImg }}
+                        source={{ uri: profile ? profile.image : noImg }}
                         style={styles.avatar}
                     ></Image>
                 </TouchableOpacity>

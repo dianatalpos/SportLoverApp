@@ -27,7 +27,6 @@ const EditProfileScreen = ({ navigation, state, getProfile, editProfile }) => {
   }, [userId]);
 
   const onEdit = (profile: Profile) => {
-    console.log(profile, "PROFILE");
     editProfile(userId, profile);
     navigation.navigate("Profile");
   };
