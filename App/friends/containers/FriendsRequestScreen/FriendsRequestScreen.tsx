@@ -26,15 +26,14 @@ const FriendsRequestScreen = (props) => {
         authService.getId().then((data) => {
             setUserId(data)
             setIsIdLoaded(true);
+            getFriendsRequests(data);
         });
     };
 
-    useEffect(() => {
-        if (isIdLoaded) {
-            console.log("getting friends requests from screen")
-            getFriendsRequests(userId);
-        }
-    }, [userId, isIdLoaded]);
+    navigation.addListener('focus', () => {
+        loadId();
+    });
+
 
     const onAccept = (friend: Friend) =>{
         acceptFriendRequest(userId, friend);

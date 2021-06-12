@@ -1,6 +1,8 @@
 import React from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Colors } from "../../../theme/colors";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+
 
 
 const FriendItem = ({ friend, shouldDisplayButton, onAccept, onDecline }) => {
@@ -22,14 +24,14 @@ const FriendItem = ({ friend, shouldDisplayButton, onAccept, onDecline }) => {
                         style={styles.acceptBtn}
                         onPress={onAcceptRequest}
                     >
-                        <Text>Accept</Text>
+                        <MaterialCommunityIcons name="check" color={Colors.colorGrey} size={16} />
                     </TouchableOpacity>
 
                     <TouchableOpacity
                         style={styles.declineBtn}
                         onPress={onDecline}
                     >
-                        <Text>Decline</Text>
+                        <MaterialCommunityIcons name="check" color={Colors.colorGrey} size={16} />
                     </TouchableOpacity>
                 </View>
                 : null
@@ -73,14 +75,14 @@ const styles = StyleSheet.create({
         color: "#fff",
         paddingVertical: 10,
         paddingHorizontal: 30,
-        borderRadius: 40,
+        borderRadius: 30,
     },
     declineBtn: {
         backgroundColor: Colors.colorLightGrey,
         color: "#fff",
         paddingVertical: 10,
         paddingHorizontal: 30,
-        borderRadius: 40,
+        borderRadius: 30,
     }
 
 });
