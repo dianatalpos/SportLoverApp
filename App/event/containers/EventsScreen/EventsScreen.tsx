@@ -50,7 +50,7 @@ const EventsScreen = (props) => {
     }
 
     return (
-        <ScrollView style={{ backgroundColor: "#fff" }}>
+        <View style={{ backgroundColor: "#fff" }}>
             <SafeAreaView style={{ alignItems: "center" }}>
                 {loading ? <Spinner color={Colors.gradientPrimary} /> : <EventList
                     loading={areFetching}
@@ -62,7 +62,7 @@ const EventsScreen = (props) => {
                     shouldShowAddButton={true}
                 ></EventList>}
             </SafeAreaView>
-        </ScrollView>
+        </View>
     );
 };
 

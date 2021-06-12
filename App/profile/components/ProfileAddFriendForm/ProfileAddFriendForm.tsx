@@ -11,6 +11,7 @@ const ProfileAddFriendForm = ({
     searching,
     shouldSearch,
     profile,
+    currentId,
     onAdd,
     onSearch,
 }) => {
@@ -60,7 +61,7 @@ const ProfileAddFriendForm = ({
                 {shouldSearch ? (
                     searching ? (
                         <Spinner color={Colors.gradientPrimary} />
-                    ) : profile ? (
+                    ) : profile  && profile.id != currentId  ? (
                         <View style={styles.card}>
                             <Text style={styles.subtitle}>Profiles found</Text>
                             <ProfileCard profile={profile} onAdd={onAdd} />

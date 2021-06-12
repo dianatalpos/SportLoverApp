@@ -39,7 +39,7 @@ const ProfileAddFriendScreen = (props) => {
 
         const formattedEmail = email.toLowerCase();
         profileService
-            .searchProfile(formattedEmail)
+            .searchProfile(formattedEmail, profile.id)
             .then((profile: Profile) => {
                 // const mockProfile: Profile = {
                 //     activities: ["Basket"],
@@ -69,6 +69,7 @@ const ProfileAddFriendScreen = (props) => {
                 shouldSearch={shouldSearch}
                 searching={isSearching}
                 profile={profileSearched}
+                currentId={profile.id}
                 onSearch={onSearch}
                 onAdd={onAdd}
             ></ProfileAddFriendForm>

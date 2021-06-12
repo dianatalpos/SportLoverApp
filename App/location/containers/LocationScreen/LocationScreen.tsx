@@ -1,6 +1,6 @@
 import { Spinner } from "native-base";
 import React, { useEffect, useState } from "react";
-import { ScrollView, Text } from "react-native";
+import { ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { connect } from "react-redux";
 import { AuthService } from "../../../auth";
@@ -50,7 +50,7 @@ const LocationScreen = (props) => {
     const isLoading = !isIdLoaded || isFetching;
 
     return (
-        <ScrollView style={{ backgroundColor: "#fff" }}>
+        <View style={{ backgroundColor: "#fff" }}>
             <SafeAreaView style={{ alignItems: "center" }}>
                 {isLoading ? <Spinner color={Colors.gradientPrimary} /> : <LocationList
                     loading={isFetching}
@@ -59,7 +59,7 @@ const LocationScreen = (props) => {
                     onItemPressed={onItemPressed}
                 ></LocationList>}
             </SafeAreaView>
-        </ScrollView>
+        </View>
     );
 };
 

@@ -9,7 +9,7 @@ import { Spinner } from "native-base";
 
 
 const EventList = (props) => {
-    const { loading, events, onAdd, onItemPressed, title, message, shouldShowAddButton} = props
+    const { loading, events, onAdd, onItemPressed, title, message, shouldShowAddButton } = props
 
     const renderListItem = (flatListProp) => {
         const { item } = flatListProp;
@@ -21,12 +21,6 @@ const EventList = (props) => {
             <View style={styles.container}>
                 <View style={{ flexDirection: 'row', width: '80%', justifyContent: 'space-between' }}>
                     <Text style={styles.text}>{title}</Text>
-                    {shouldShowAddButton ? (<TouchableOpacity
-                        style={styles.actionBtn}
-                        onPress={onAdd}
-                    >
-                        <MaterialCommunityIcons name="plus" color={Colors.colorGrey} size={26} />
-                    </TouchableOpacity>) : null}
                 </View>
                 <Text style={{ color: Colors.colorGrey, letterSpacing: 3, fontWeight: 'bold', marginBottom: 20, marginTop: 10 }}>{message}</Text>
 
@@ -50,7 +44,12 @@ const EventList = (props) => {
                     </Text>
                         </View>
                     ) : null)}
-
+                {shouldShowAddButton ? (<TouchableOpacity
+                    style={styles.actionBtn}
+                    onPress={onAdd}
+                >
+                    <MaterialCommunityIcons name="plus" color={Colors.colorGrey} size={26} />
+                </TouchableOpacity>) : null}
             </View>
         </SafeAreaView>
     );
@@ -70,6 +69,9 @@ const styles = StyleSheet.create({
         borderRadius: 100,
         justifyContent: 'center',
         alignItems: 'center',
+        position: "absolute",
+        bottom: 15,
+        right: 15,
     },
     container: {
         alignItems: 'center',

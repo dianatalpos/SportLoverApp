@@ -45,7 +45,7 @@ export const getFriendsRequests = (userId: string) => (dispatch) => {
 };
 
 export const acceptFriendRequest = (userId: string, friend: Friend) => (dispatch)=>{
-    console.log("Accept friend request")
+    console.log("Accept friend request", friend)
     dispatch(friendsFetching());
     const friendsService = new FriendsService();
     return friendsService

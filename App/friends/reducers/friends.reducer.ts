@@ -68,6 +68,8 @@ const FriendsReducer = (state = INITIAL_STATE, action: Action) => {
                 ...state,
                 areFetched: true,
                 areFetching: false,
+                requestsAreFetching: false,
+                requestsAreFetched: true,
                 friendsRequest: state.friendsRequests.filter((friend: Friend) => friend.id != payload.id),
                 friends: {
                     ...state.friends,

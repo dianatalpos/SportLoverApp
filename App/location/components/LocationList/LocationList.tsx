@@ -37,13 +37,6 @@ const LocationList = (props) => {
           }}
         >
           <Text style={styles.text}>My Locations</Text>
-          <TouchableOpacity style={styles.actionBtn} onPress={onAdd}>
-            <MaterialCommunityIcons
-              name="plus"
-              color={Colors.colorGrey}
-              size={26}
-            />
-          </TouchableOpacity>
         </View>
         <Text
           style={{
@@ -81,6 +74,13 @@ const LocationList = (props) => {
             </Text>
           </View>
         ) : null}
+
+        <TouchableOpacity
+          style={styles.actionBtn}
+          onPress={onAdd}
+        >
+          <MaterialCommunityIcons name="plus" color={Colors.colorGrey} size={26} />
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
@@ -102,8 +102,11 @@ const styles = StyleSheet.create({
     height: 50,
     backgroundColor: Colors.gradientPrimary,
     borderRadius: 100,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: "absolute",
+    bottom: 15,
+    right: 15,
   },
   container: {
     position: "relative",

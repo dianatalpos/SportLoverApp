@@ -10,9 +10,9 @@ export default class ProfileService extends CrudRepository<
         return `profiles`;
     }
 
-    searchProfile(email: string): Promise<Profile> {
+    searchProfile(email: string, id: string): Promise<Profile> {
         return this.apiService.performRequest(
-            this.endpoint() + "?email=" + email);
+            this.endpoint() + "?email=" + email + "&id=" + id);
     }
 
     addFriend(profile: Profile): Promise<any> {

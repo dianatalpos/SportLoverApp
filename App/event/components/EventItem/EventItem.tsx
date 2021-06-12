@@ -17,6 +17,8 @@ const EventItem = ({ event, onPress }: EventItemProps) => {
   const displayEventDate = moment(event.dateTime).format("LLLL");
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
+      <Text style={styles.title}> {event.sport} Event - {event.level}</Text>
+      
       <Map
         markerName={event.location}
         longitude={event.locationLongitude}
@@ -25,9 +27,6 @@ const EventItem = ({ event, onPress }: EventItemProps) => {
 
       <View style={styles.content}>
         <View style={styles.leftContent}>
-          <Text style={styles.primaryText}>
-            {event.sport} Event - {event.level}
-          </Text>
           <Text numberOfLines={1} style={styles.secondaryText}>
             {event.location}
           </Text>
@@ -121,6 +120,12 @@ const styles = StyleSheet.create({
     color: Colors.colorTextBlack,
     fontSize: 15,
     fontWeight: "700",
+  },
+  title: {
+    color: Colors.colorTextBlack,
+    fontWeight: "600",
+    fontSize: 16,
+    padding: 20,
   },
 });
 

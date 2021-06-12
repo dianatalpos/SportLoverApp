@@ -11,7 +11,7 @@ import { Friend } from "../../types";
 
 const FriendsRequestScreen = (props) => {
 
-    const { navigation, state, getFriendsRequests } = props;
+    const { navigation, state, getFriendsRequests, acceptFriendRequest } = props;
     const { friendsRequests, requestsAreFetching } = state
 
     const [userId, setUserId] = useState(null);
@@ -77,7 +77,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
     getFriendsRequests,
-    acceptFriendRequest
+    acceptFriendRequest,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FriendsRequestScreen);

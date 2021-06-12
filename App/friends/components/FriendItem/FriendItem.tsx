@@ -8,6 +8,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 const FriendItem = ({ friend, shouldDisplayButton, onAccept, onDecline }) => {
 
     const onAcceptRequest= () => {
+        console.log("Accept friendRequest")
         onAccept(friend);
     }
 
@@ -31,7 +32,7 @@ const FriendItem = ({ friend, shouldDisplayButton, onAccept, onDecline }) => {
                         style={styles.declineBtn}
                         onPress={onDecline}
                     >
-                        <MaterialCommunityIcons name="check" color={Colors.colorGrey} size={16} />
+                        <MaterialCommunityIcons name="window-close" color={Colors.colorGrey} size={16} />
                     </TouchableOpacity>
                 </View>
                 : null
