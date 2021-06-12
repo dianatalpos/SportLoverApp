@@ -3,7 +3,7 @@ import { HttpMethod } from "../../core/types/enums";
 import { Friend } from "../types";
 
 
-export default class FriendService extends CrudRepository<Event, Event> {
+export default class FriendService extends CrudRepository<Friend, Friend> {
     protected endpoint(): string {
         return `friendship`;
     }
@@ -18,6 +18,7 @@ export default class FriendService extends CrudRepository<Event, Event> {
     acceptFriendRequest(userId: string, friend: Friend): Promise<any> {
         return this.apiService.performRequest(
             this.urlDetails(userId) + "/accept",
+            null,
             HttpMethod.POST,
             friend
         )
@@ -26,6 +27,7 @@ export default class FriendService extends CrudRepository<Event, Event> {
     sendFriendRequest(userId: string, friend: Friend): Promise<any>{
         return this.apiService.performRequest(
             this.urlDetails(userId),
+            null,
             HttpMethod.POST,
             friend
         )
