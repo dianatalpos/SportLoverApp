@@ -8,6 +8,7 @@ import {
     FRIENDS_REQUESTS_ARE_FETCHING,
     FRIENDS_REQUESTS_ERROR,
     ACCEPT_FRIEND_REQUEST,
+    DECLINE_FRIEND_REQUEST,
 } from "./types";
 import FriendsService from "../services"
 import { Friend } from "../types";
@@ -54,6 +55,23 @@ export const acceptFriendRequest = (userId: string, friend: Friend) => (dispatch
             console.log("Getting response from be")
             console.log(response)
             dispatch(acceptFriendRequestAction(response));
+        })
+        .catch((err: Error) => {
+            console.log("errooor", err)
+            dispatch(friendsFetchError(err.message))
+        });
+}
+
+export const declineFriendRequest = (userId: string, friend: Friend) => (dispatch) => {
+    console.log("Decline friend request", friend)
+    dispatch(friendsFetching());
+    const friendsService = new FriendsService();
+    return friendsService
+        .declineFriendRequest(userId, friend)
+        .then((response: any) => {
+            console.log("Getting response from be")
+            console.log(response)
+            dispatch(declineFriendRequestAction(response));
         })
         .catch((err: Error) => {
             console.log("errooor", err)
@@ -136,6 +154,12 @@ const friendsRequestsFetchError = (message: string): Action => {
 const acceptFriendRequestAction = (friend: Friend): Action => {
     return {
         type: ACCEPT_FRIEND_REQUEST,
+        payload: friend,
+    }
+}
+const declineFriendRequestAction = (friend: Friend): Action => {
+    return {
+        type: DECLINE_FRIEND_REQUEST,
         payload: friend,
     }
 }

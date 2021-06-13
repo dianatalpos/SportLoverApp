@@ -1,25 +1,25 @@
 import { Button, Spinner } from "native-base";
 import React, { useEffect, useState } from "react";
-import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
+import { Text, View, StyleSheet, TouchableOpacity, Alert } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { connect } from "react-redux";
 import { EventDetails } from "../../components";
 import { Colors } from "../../../theme/colors";
-import { joinEvent } from "../../actions"
+import { joinEvent, refreshErrorJoin} from "../../actions"
 import { getProfile } from "../../../profile";
 import { AuthService } from "../../../auth";
 
 const EventScreen = (props) => {
-    const { state, joinEvent } = props
-    const { eventsRed, profileRed } = state;
-    const { profile, isFetched, isFetching, hasError } = profileRed;
-    const { event, areFetching } = eventsRed;
+    const { state, joinEvent, refreshErrorJoin} = props
+    const { eventsRed, profileRed, } = state;
+    const { profile, isFetched, isFetching } = profileRed;
+    const { event, areFetching, hasJoinError } = eventsRed;
 
     const [isInEvent, setIsInEvent] = useState(false);
 
     const [userId, setUserId] = useState(null);
-    const [isIdLoaded, setIsIdLoaded] = useState(false); 
+    const [isIdLoaded, setIsIdLoaded] = useState(false);
     const loading = isFetching || areFetching || !isIdLoaded;
 
     useEffect(() => {
@@ -28,7 +28,7 @@ const EventScreen = (props) => {
 
     const loadId = async () => {
         const authService = new AuthService();
-        authService.getId().then((data) => { 
+        authService.getId().then((data) => {
             setUserId(data);
             setIsIdLoaded(true);
         });
@@ -37,7 +37,7 @@ const EventScreen = (props) => {
 
     useEffect(() => {
         if (!(isFetching || areFetching)) {
-            setIsInEvent(! event.participants.find((participant) => participant.id === profile?.id))
+            setIsInEvent(!event.participants.find((participant) => participant.id === profile?.id))
         }
     }, [isFetching, areFetching])
 
@@ -45,10 +45,17 @@ const EventScreen = (props) => {
         joinEvent(event.id, userId);
     }
 
+    useEffect(() => {
+        if(hasJoinError){
+            Alert.alert("You already have an event at that time!");
+        }
+        refreshErrorJoin();
+    }, [hasJoinError])
+
     const spinner = <Spinner color={Colors.gradientPrimary} />
     const component = <ScrollView style={{ backgroundColor: "#fff" }}>
         <SafeAreaView style={{ alignItems: "center" }}>
-           <EventDetails
+            <EventDetails
                 event={event}
             ></EventDetails>
             {isInEvent ?
@@ -96,4 +103,4 @@ const mapStateToProps = (state) => ({
     }
 });
 
-export default connect(mapStateToProps, { joinEvent, getProfile })(EventScreen);
+export default connect(mapStateToProps, { joinEvent, getProfile, refreshErrorJoin })(EventScreen);

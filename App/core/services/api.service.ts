@@ -79,5 +79,9 @@ export default class ApiService {
       await storage.removeItem(StorageKeys.ROLES);
       return response.json().then((error) => Promise.reject(error));
     }
+
+    if(response.status == 400){
+      return response.json().then((error) => Promise.reject(error));
+    }
   }
 }

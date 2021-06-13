@@ -16,6 +16,8 @@ import {
   EVENT_CREATED,
   EVENT_CREATE_ERROR,
   REFRESH_DATA,
+  EVENTS_JOIN_ERROR,
+  REFRESH_JOIN
 } from "./types";
 
 export const getEvent = (id: string) => (dispatch) => {
@@ -83,10 +85,7 @@ export const joinEvent = (eventId, userId) => (dispatch) => {
       dispatch(joinEventAction(response));
     })
     .catch((err: Error) => {
-      console.log(err, "er");
-      console.log(err, "Joining event")
-
-      dispatch(eventFetchError(err.message));
+      dispatch(eventJoinFetchError(err.message));
     });
 };
 
@@ -101,6 +100,11 @@ export const createEvent = (userId: string, event: Event) => (dispatch) => {
     })
     .catch((err) => dispatch(eventCreateError(err.message)));
 };
+
+export const refreshErrorJoin = () => (dispatch) => {
+    dispatch(refreshJoinError());
+}
+
 
 export const refreshEventData = () => (dispatch) => {
   dispatch(refreshData());
@@ -126,6 +130,12 @@ const eventFetching = (): Action => {
   };
 };
 
+const refreshJoinError = (): Action => {
+  return {
+    type: REFRESH_JOIN,
+  };
+}
+
 const refreshData = (): Action => {
   return {
     type: REFRESH_DATA,
@@ -145,6 +155,14 @@ const eventFetchError = (message: string): Action => {
     payload: message,
   };
 };
+
+const eventJoinFetchError = (message: string): Action => {
+  return {
+    type: EVENTS_JOIN_ERROR,
+    payload: message,
+  };
+};
+
 
 const eventsFetched = (events: Event[]): Action => {
   return {

@@ -4,14 +4,14 @@ import { SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } fr
 import { connect } from "react-redux";
 import { AuthService } from "../../../auth";
 import { Colors } from "../../../theme/colors";
-import { getFriendsRequests, acceptFriendRequest } from "../../actions"
+import { getFriendsRequests, acceptFriendRequest, declineFriendRequest } from "../../actions"
 import { FriendList } from "../../components"
 import { Friend } from "../../types";
 
 
 const FriendsRequestScreen = (props) => {
 
-    const { navigation, state, getFriendsRequests, acceptFriendRequest } = props;
+    const { navigation, state, getFriendsRequests, acceptFriendRequest, declineFriendRequest } = props;
     const { friendsRequests, requestsAreFetching } = state
 
     const [userId, setUserId] = useState(null);
@@ -39,6 +39,10 @@ const FriendsRequestScreen = (props) => {
         acceptFriendRequest(userId, friend);
     }
 
+    const onDecline = (friend: Friend) => {
+        declineFriendRequest(userId, friend);
+    }
+
     const isLoading = !isIdLoaded || requestsAreFetching;
 
     return (
@@ -49,7 +53,7 @@ const FriendsRequestScreen = (props) => {
                     friends={friendsRequests}
                     shouldDisplayButton={true}
                     onAccept={onAccept}
-                    onDecline={null}
+                    onDecline={onDecline}
                 ></FriendList>}
             </SafeAreaView>
         </View>
@@ -78,6 +82,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
     getFriendsRequests,
     acceptFriendRequest,
+    declineFriendRequest,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FriendsRequestScreen);

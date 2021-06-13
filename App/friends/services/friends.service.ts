@@ -24,6 +24,16 @@ export default class FriendService extends CrudRepository<Friend, Friend> {
         )
     }
 
+    declineFriendRequest(userId: string, friend: Friend): Promise<any> {
+        return this.apiService.performRequest(
+            this.urlDetails(userId) + "/decline",
+            null,
+            HttpMethod.POST,
+            friend
+        )
+    }
+
+
     sendFriendRequest(userId: string, friend: Friend): Promise<any>{
         return this.apiService.performRequest(
             this.urlDetails(userId),

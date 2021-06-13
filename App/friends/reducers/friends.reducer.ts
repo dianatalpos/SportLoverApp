@@ -8,7 +8,8 @@ import {
     ACCEPT_FRIEND_REQUEST, 
     FRIENDS_REQUESTS_ARE_FETCHED,
     FRIENDS_REQUESTS_ARE_FETCHING,
-    FRIENDS_REQUESTS_ERROR
+    FRIENDS_REQUESTS_ERROR,
+    DECLINE_FRIEND_REQUEST
 } from "../actions/types";
 
 const INITIAL_STATE = {
@@ -75,6 +76,15 @@ const FriendsReducer = (state = INITIAL_STATE, action: Action) => {
                     ...state.friends,
                     payload
                 }
+            }
+        case DECLINE_FRIEND_REQUEST:
+            return {
+                ...state,
+                areFetched: true,
+                areFetching: false,
+                requestsAreFetching: false,
+                requestsAreFetched: true,
+                friendsRequest: state.friendsRequests.filter((friend: Friend) => friend.id != payload.id),
             }
 
         case REFRESH_DATA:

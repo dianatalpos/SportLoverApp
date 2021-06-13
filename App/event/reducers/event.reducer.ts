@@ -9,11 +9,13 @@ import {
   EVENTS_ARE_FETCHING,
   SET_EVENT,
   JOIN_EVENT,
+  EVENTS_JOIN_ERROR,
   PAST_EVENTS_FETCHED,
   NEXT_EVENTS_FETCHED,
   EVENT_CREATED,
   EVENT_CREATE_ERROR,
   REFRESH_DATA,
+  REFRESH_JOIN
 } from "../actions/types";
 
 const INITIAL_STATE = {
@@ -24,6 +26,7 @@ const INITIAL_STATE = {
   areFetching: false,
   areFetched: false,
   hasError: false,
+  hasJoinError: false,
   errorMessage: null,
 };
 
@@ -57,6 +60,20 @@ const EventReducer = (state = INITIAL_STATE, action: Action) => {
         hasError: true,
         errorMessage: payload,
       };
+
+    case EVENTS_JOIN_ERROR:
+      return {
+        ...state,
+        areFetching: false,
+        areFetched: false,
+        hasJoinError: true,
+        errorMessage: payload,
+      };
+    case REFRESH_JOIN: 
+      return {
+        ...state,
+        hasJoinError: false,
+      }
     case EVENTS_ARE_FETCHING:
       return { ...state, isFetching: true };
     case EVENTS_ARE_FETCHED:

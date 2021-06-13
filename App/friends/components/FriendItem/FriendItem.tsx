@@ -12,6 +12,11 @@ const FriendItem = ({ friend, shouldDisplayButton, onAccept, onDecline }) => {
         onAccept(friend);
     }
 
+    const onDeclineRequest = () =>{
+        console.log("Accept friendRequest")
+        onDecline(friend);
+    }
+
     return (
         <View style={styles.card}>
             <View style={styles.details}>
@@ -30,7 +35,7 @@ const FriendItem = ({ friend, shouldDisplayButton, onAccept, onDecline }) => {
 
                     <TouchableOpacity
                         style={styles.declineBtn}
-                        onPress={onDecline}
+                        onPress={onDeclineRequest}
                     >
                         <MaterialCommunityIcons name="window-close" color={Colors.colorGrey} size={16} />
                     </TouchableOpacity>

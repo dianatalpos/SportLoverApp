@@ -7,6 +7,7 @@ import {
   getPastEvents,
   refreshEventData,
   createEvent,
+  refreshErrorJoin
 } from "./event.effects";
 
 export {
@@ -18,4 +19,5 @@ export {
   getPastEvents,
   refreshEventData,
   createEvent,
+  refreshErrorJoin
 };
