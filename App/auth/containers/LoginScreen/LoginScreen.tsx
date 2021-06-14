@@ -5,6 +5,7 @@ import { performLogin } from "../../actions";
 import { connect } from "react-redux";
 import { StorageKeys, StorageService } from "../../../core";
 import { getProfile } from "../../../profile/actions";
+import { Alert } from "react-native";
 
 const LoginScreen = ({ navigation, state, performLogin, getProfile }) => {
     const onLogin = (credentials: AuthCredentials) => {
@@ -19,7 +20,10 @@ const LoginScreen = ({ navigation, state, performLogin, getProfile }) => {
                 await storage.setItem(StorageKeys.ID, data.id)
                 navigation.navigate("Main");
             })
-            .catch((err: Error) => console.log(err.message, "Login error"));
+            .catch((err: Error) => {
+                console.log(err.message, "Login error");
+                Alert.alert(err.message);
+        }) ;
     };
 
     const redirectTo = () => {

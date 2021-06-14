@@ -7,7 +7,6 @@ import { connect } from "react-redux";
 import { EventDetails } from "../../components";
 import { Colors } from "../../../theme/colors";
 import { joinEvent, refreshErrorJoin} from "../../actions"
-import { getProfile } from "../../../profile";
 import { AuthService } from "../../../auth";
 
 const EventScreen = (props) => {
@@ -103,4 +102,4 @@ const mapStateToProps = (state) => ({
     }
 });
 
-export default connect(mapStateToProps, { joinEvent, getProfile, refreshErrorJoin })(EventScreen);
+export default connect(mapStateToProps, { joinEvent, refreshErrorJoin })(EventScreen);

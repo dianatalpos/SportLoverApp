@@ -5,14 +5,13 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { connect, useStore } from "react-redux";
 import { EventList } from "../../components";
 import { getEvents, setEvent } from "../../actions";
-import { getProfile } from "../../../profile";
 import { Spinner } from "native-base";
 import { Colors } from "../../../theme/colors";
 import { AuthService } from "../../../auth";
 
 
 const EventsScreen = (props) => {
-    const { navigation, state, getEvents, getProfile, setEvent } = props
+    const { navigation, state, getEvents, setEvent } = props
     const { eventsRed, profileRed } = state;
     const { events, areFetching, hasError: eventsErr, areFetched } = eventsRed;
     const { isFetched, isFetching, hasError: profileError } = profileRed
@@ -73,5 +72,5 @@ const mapStateToProps = (state) => ({
     },
 });
 
-const mapDispatchToProps = { getEvents, setEvent, getProfile }
+const mapDispatchToProps = { getEvents, setEvent }
 export default connect(mapStateToProps, mapDispatchToProps)(EventsScreen);

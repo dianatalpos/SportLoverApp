@@ -5,7 +5,6 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { connect, useStore } from "react-redux";
 import { EventList } from "../../components";
 import { getEvents, setEvent, getNextEvents } from "../../actions";
-import { getProfile } from "../../../profile";
 import { Spinner } from "native-base";
 import { Colors } from "../../../theme/colors";
 import { AuthService } from "../../../auth";

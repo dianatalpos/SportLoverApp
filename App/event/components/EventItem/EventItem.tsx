@@ -17,7 +17,7 @@ const EventItem = ({ event, onPress }: EventItemProps) => {
   const displayEventDate = moment(event.dateTime).format("LLLL");
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
-      <Text style={styles.title}> {event.sport} Event - {event.level}</Text>
+      <Text style={styles.title}> {event.sport} Event</Text>
       
       <Map
         markerName={event.location}

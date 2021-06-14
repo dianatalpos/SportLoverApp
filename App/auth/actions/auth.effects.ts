@@ -25,7 +25,9 @@ export const performLogin = (credentials: AuthCredentials) => (dispatch) => {
       dispatch(successLogin(response.token, response.role, response.id));
       return response;
     })
-    .catch((err: string) => {
+    .catch((err) => {
+      console.log("Caught an error", err)
+
       dispatch(errorLogin(err));
     });
 };
@@ -43,7 +45,10 @@ export const performRegister = (credentials: AuthCredentials) => (dispatch) => {
       dispatch(successRegister(response.token, response.role, response.id));
       return response;
     })
-    .catch((err: Error) => dispatch(errorRegister(err.message)));
+    .catch((err: Error) => {
+      dispatch(errorRegister(err.message))
+      console.log("Caught an error", err)
+    });
 };
 
 export const performLogout = () => (dispatch) => {

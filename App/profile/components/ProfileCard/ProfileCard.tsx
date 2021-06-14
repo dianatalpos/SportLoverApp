@@ -13,7 +13,7 @@ const ProfileCard = ({ profile, onAdd }) => {
     return (
         <View style={styles.card}>
             <View style={styles.details}>
-                <Image source={{ uri: profile.avatar }} style={styles.avatar} />
+                <Image source={{ uri: profile.image }} style={styles.avatar} />
                 <Text>{`${profile.lastName} ${profile.firstName}`}</Text>
             </View>
             <View>

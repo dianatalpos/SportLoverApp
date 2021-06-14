@@ -19,6 +19,8 @@ const MainScreen = (props) => {
     const { profile, isFetched, isFetching, hasError } = state;
 
     const [isOwner, setIsOwner] = useState(false);
+    const [id, setId] = useState(null);
+    const [isIdLoaded, setIsIdLoaded] = useState(false);
 
 
     useEffect(() => {
@@ -28,7 +30,15 @@ const MainScreen = (props) => {
     const loadRole = async () => {
         const authService = new AuthService();
         authService.isOwner().then((data) => setIsOwner(data));
+        authService.getId().then((id) => {
+            setId(id)
+            setIsIdLoaded(true)
+        })
     };
+
+    useEffect(() => {
+        getProfile(id);
+    }, [id, isIdLoaded])
 
     return (
         <Tab.Navigator initialRouteName="Events"

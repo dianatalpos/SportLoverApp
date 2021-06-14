@@ -25,10 +25,7 @@ const ProfilePersonalDetails = (props) => {
                         : "N/A"}
                 </Text>
                 <Text>{`${yearsDisplay} yrs`}</Text>
-            </View>
-            <View style={styles.detailContainer}>
-                <Text style={styles.detailValue}>0</Text>
-                <Text style={styles.detail}>Friends</Text>
+                <Text> {`${profile.shortDescription}`}</Text>
             </View>
         </View>
     );

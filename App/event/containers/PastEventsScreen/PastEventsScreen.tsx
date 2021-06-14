@@ -11,7 +11,7 @@ import { AuthService } from "../../../auth";
 
 
 const PastEventScreen = (props) => {
-    const { navigation, state, getProfile, setEvent, getPastEvents } = props
+    const { navigation, state, setEvent, getPastEvents } = props
     const { eventsRed, profileRed } = state;
     const { pastEvents, areFetching, hasError: eventsErr, areFetched } = eventsRed;
     const { isFetched, isFetching, hasError: profileError } = profileRed

@@ -52,10 +52,6 @@ const LocationDetails = (props) => {
         <TouchableOpacity style={styles.actionBtn} onPress={onClickFields}>
           <Text style={styles.addFriend}>Add Fields</Text>
         </TouchableOpacity>
-
-        <TouchableOpacity style={styles.actionBtn} onPress={onDeleteLocation}>
-          <Text style={styles.addFriend}>Delete Location</Text>
-        </TouchableOpacity>
       </View>
     </View>
   );

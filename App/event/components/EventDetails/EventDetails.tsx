@@ -23,7 +23,7 @@ const EventDetails = (props) => {
       <View style={styles.content}>
         <View>
           <Text style={styles.titleText}>
-            {event.sport} Event - {event.level}
+            {event.sport} Event
           </Text>
           <Text numberOfLines={1} style={styles.primaryText}>
             {event.location}
