@@ -20,14 +20,16 @@ export const performLogin = (credentials: AuthCredentials) => (dispatch) => {
   authCreds.password = credentials.password;
   return authService
     .login(credentials)
-    .then((response: any) => {
+    .then(async (response: any) => {
       console.log(response, "LOGIN RESPONSE");
       dispatch(successLogin(response.token, response.role, response.id));
+      const storage = new StorageService();
+      await storage.setItem(StorageKeys.TOKEN, response.token);
+      await storage.setItem(StorageKeys.ROLES, response.role);
+      await storage.setItem(StorageKeys.ID, response.id)
       return response;
     })
     .catch((err) => {
-      console.log("Caught an error", err)
-
       dispatch(errorLogin(err));
     });
 };

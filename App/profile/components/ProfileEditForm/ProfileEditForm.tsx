@@ -26,12 +26,13 @@ import { activityIcons, ActivityItem, ActivityType, activityTypes } from "../../
 
 const ProfileEditForm = ({ profile, onEdit }) => {
 
-  const [types, setTypes] = useState([]);
+  const [types, setTypes] = useState(profile.activities);
   const [typesError, setTypesError] = useState('');
 
   const getIconByType = (type: ActivityType): string => {
     return activityIcons[type];
   };
+  
 
   const onTypeSelect = (type: ActivityType): void => {
     const isInList = types.includes(type)

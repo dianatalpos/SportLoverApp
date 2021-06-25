@@ -68,10 +68,6 @@ export default class ApiService {
   }
 
   private async handleRequestStatus(response: Response) {
-    console.log(response, "HANDLE RESPONSE")
-    if (response.ok) {
-      return response.json();
-    }
 
     if (response.status == 401){
       // const storage = new StorageService();
@@ -79,8 +75,8 @@ export default class ApiService {
       // await storage.removeItem(StorageKeys.TOKEN);
       // await storage.removeItem(StorageKeys.ROLES);
       return response.json().then((error) => {
-        Promise.reject(error)
         console.log(error, "EROARE LA LOGIN")
+        return Promise.reject(error)
       });
     }
 
@@ -90,12 +86,15 @@ export default class ApiService {
       await storage.removeItem(StorageKeys.TOKEN);
       await storage.removeItem(StorageKeys.ROLES);
       return response.json().then((error) => {
-        Promise.reject(error)
-        console.log(error)
+        return Promise.reject(error)
       });
     }
     if(response.status == 400){
       return response.json().then((error) => Promise.reject(error));
+    }
+
+    if (response.ok) {
+      return response.json();
     }
   }
 }

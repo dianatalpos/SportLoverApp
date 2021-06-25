@@ -53,7 +53,7 @@ const LocationList = (props) => {
         {loading ? (
           <Spinner color={Colors.gradientPrimary} />
         ) : locations && locations.length !== 0 ? (
-          <View>
+          <View style={{marginBottom: 100}}>
             <FlatList
               data={locations}
               renderItem={renderListItem}
@@ -143,6 +143,7 @@ const styles = StyleSheet.create({
   listStyle: {
     width: "90%",
     padding: 12,
+
   },
   emptyListIcon: {},
 });

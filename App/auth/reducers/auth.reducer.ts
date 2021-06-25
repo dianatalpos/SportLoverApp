@@ -43,7 +43,7 @@ const AuthReducer = (
                 isFetching: false,
                 isFetched: false,
                 hasError: true,
-                errorMessage: payload.message,
+                errorMessage: payload,
             };
         case LOGOUT: {
             return INITIAL_STATE;
