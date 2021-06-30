@@ -15,8 +15,12 @@ type EventItemProps = {
 
 const EventItem = ({ event, onPress }: EventItemProps) => {
   const displayEventDate = moment(event.dateTime).format("LLLL");
+  const isEventFull = event.maxNoPlayers === event.participants.length;
+  const border = isEventFull ? { shadowColor : Colors.error } : {};
+  const styleMembers = isEventFull ? {
+    color: Colors.error} : {}
   return (
-    <TouchableOpacity style={styles.container} onPress={onPress}>
+    <TouchableOpacity style={{...styles.container,  ...border }} onPress={onPress}>
       <Text style={styles.title}> {event.sport} Event</Text>
       
       <Map
@@ -42,7 +46,7 @@ const EventItem = ({ event, onPress }: EventItemProps) => {
             color={Colors.colorGrey}
             size={24}
           />
-          <Text style={styles.peopleNumber}>
+          <Text style={{...styles.peopleNumber, ...styleMembers}}>
             {event.participants.length}/{event.maxNoPlayers}
           </Text>
         </View>

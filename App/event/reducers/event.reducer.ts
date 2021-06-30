@@ -75,13 +75,13 @@ const EventReducer = (state = INITIAL_STATE, action: Action) => {
         hasJoinError: false,
       }
     case EVENTS_ARE_FETCHING:
-      return { ...state, isFetching: true };
+      return { ...state, areFetching: true };
     case EVENTS_ARE_FETCHED:
       return {
         ...state,
         events: payload,
         areFetching: false,
-        areFetchedL: true,
+        areFetched: true,
       };
     case SET_EVENT:
       return {

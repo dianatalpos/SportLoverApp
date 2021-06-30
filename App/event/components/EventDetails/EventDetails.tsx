@@ -59,7 +59,7 @@ const EventDetails = (props) => {
 
 const styles = StyleSheet.create({
   view: {
-    height: "95%",
+    height: "90%",
     width: "100%",
     justifyContent: "flex-start",
     alignItems: "center",
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 5,
   },
   content: {
-    padding: 10,
+    padding: 5,
     flexDirection: "row",
     justifyContent: "space-between",
     width: "100%",

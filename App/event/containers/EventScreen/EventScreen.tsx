@@ -20,6 +20,8 @@ const EventScreen = (props) => {
     const [userId, setUserId] = useState(null);
     const [isIdLoaded, setIsIdLoaded] = useState(false);
     const loading = isFetching || areFetching || !isIdLoaded;
+    const isEventFull = event.maxNoPlayers === event.participants.length;
+    console.log(isEventFull, "iseventFull")
 
     useEffect(() => {
         loadId();
@@ -52,18 +54,18 @@ const EventScreen = (props) => {
     }, [hasJoinError])
 
     const spinner = <Spinner color={Colors.gradientPrimary} />
-    const component = <ScrollView style={{ backgroundColor: "#fff" }}>
-        <SafeAreaView style={{ alignItems: "center" }}>
+    const component = <ScrollView contentContainerStyle={{alignItems:"center"}} style={{ backgroundColor: "#fff"}}>
             <EventDetails
                 event={event}
             ></EventDetails>
-            {isInEvent ?
+            {!isEventFull ? 
+            (isInEvent ?
                 <TouchableOpacity style={styles.actionBtn} onPress={onJoin}>
                     <Text style={styles.joinEvent}>Join Event</Text>
                 </TouchableOpacity>
                 : null
-            }
-        </SafeAreaView>
+             ) : null
+        }
     </ScrollView>
     return loading ? spinner : component
 

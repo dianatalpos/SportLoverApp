@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     },
     addContainer: {
         display: 'flex',
-        height: '100%',
+        height: '60%',
         justifyContent: 'center',
         alignItems: 'center',
         width: '70%',

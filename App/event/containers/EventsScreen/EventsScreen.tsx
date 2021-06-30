@@ -20,6 +20,8 @@ const EventsScreen = (props) => {
     const [isIdLoaded, setIsIdLoaded] = useState(false);
     const loading = isFetching || areFetching;
 
+    console.log(loading, "LOADING EVENTS")
+
     useEffect(() => {
         loadId();
     }, []);
