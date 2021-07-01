@@ -15,6 +15,7 @@ const SelectLocationFieldStep = ({
   onDurationSelect,
   onFieldSelect,
 }) => {
+  console.log(fields)
   const createComponents = () =>
     fields.map((field: Field) => (
       <Picker.Item key={field.id} label={field.name} value={field.id} />
@@ -61,8 +62,10 @@ const SelectLocationFieldStep = ({
           <Picker.Item key="2" label="2" value={2} />
           <Picker.Item key="4" label="4" value={4} />
           <Picker.Item key="10" label="10" value={10} />
+          <Picker.Item key="12" label="12" value={12} />
           <Picker.Item key="15" label="15" value={15} />
           <Picker.Item key="20" label="20" value={20} />
+          <Picker.Item key="22" label="22" value={22} />
           <Picker.Item key="30" label="30" value={30} />
           <Picker.Item key="50" label="50" value={50} />
         </Picker>
